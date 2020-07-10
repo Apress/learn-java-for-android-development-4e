@@ -1,0 +1,49 @@
+public class Point {
+   private int x, y;
+
+   public Point(int x, int y) {
+      this.x = x;
+      this.y = y;
+   }
+
+   public int getX() {
+      return x;
+   }
+
+   public int getY() {
+      return y;
+   }
+
+   @Override
+   public String toString() {
+      return "(" + x + ", " + y + ")";
+   }
+
+   public void draw() {
+      System.out.println("Point drawn at " + toString());
+   }
+}
+
+public class Circle extends Point {
+   private int radius;
+
+   public Circle(int x, int y, int radius) {
+      super(x, y);
+      this.radius = radius;
+   }
+
+   public int getRadius() {
+      return radius;
+   }
+
+   @Override
+   public String toString() {
+      return "" + radius;
+   }
+
+   @Override
+   public void draw() {
+      System.out.println("Circle drawn at " + super.toString() +
+                         " with radius " + toString());
+   }
+}

@@ -1,0 +1,5 @@
+public class Car extends Vehicle {
+   private Engine engine; // bicycles don't have engines
+   private Wheel[] wheels; // boats don't have wheels
+   private SteeringWheel steeringWheel; // hang gliders don't have steering wheels
+}

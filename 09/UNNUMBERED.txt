@@ -1,0 +1,366 @@
+// ----- UNNUMBERED LISTING ------------------------------
+ss: [ apples, bananas, grapes, kiwis, pears ]
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+97 72 70 70 67 64 56 43 36 22 9 5 3 2 1
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+{wood=2, could=2, how=1, if=1, chuck=2, a=2, woodchuck=2, much=1}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+ Collection<String> col = Arrays.asList("John", "Linda"); // Some way to create a collection
+Iterator iter = col.iterator();
+while (iter.hasNext())
+   System.out.println(iter.next());
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+     Collection<String> col = Arrays.asList("John", "Linda"); // Some way to create a collection
+for (String s: col)
+   System.out.println(s);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    Collection<Integer> col = new ArrayList<>(); // Some way to create an empty collection
+int x = 27;
+    col.add(new Integer(x)); // Indirectly store int value 27 via an Integer object.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+List<Integer> l = new ArrayList<>(); // or some other implementation // Initializing with some other collection: // List<Integer> l = new ArrayList<>(someOtherColl); l.add(42); l.add(-37_498);
+    for(Integer i : l) { System.out.println(i); }
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class ArrayListDemo {
+                 public static void main(String[] args) { // We must wrap the "Arrays.asList()" into a "new ArrayList()", otherwiae // the remove() below won’t work.
+                List<String> ls = new ArrayList( Arrays.asList("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat") );
+      System.out.println(“ls: “ + ls);
+      ls.set(ls.indexOf("Wed"), "Wednesday");
+      System.out.println(“ls: “ + ls);
+     ls.remove(ls.lastIndexOf("Fri"));
+      System.out.println(“ls: “ + ls);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+ls: [ Sun, Mon, Tue, Wed, Thu, Fri, Sat ]
+ls: [ Sun, Mon, Tue, Wednesday, Thu, Fri, Sat ]
+ls: [ Sun, Mon, Tue, Wednesday, Thu, Sat ]
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Arrays;
+
+public class TreeSetDemo {
+  public static void main(String[] args) {
+     Set<String> ss = new TreeSet<>(Arrays.asList(
+          "apples", "pears", "grapes", "bananas", "kiwis"
+     ));
+     System.out.println("ss: " + ss);
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.Set;
+
+enum Weekday {
+  SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY
+}
+
+public class EnumSetDemo {
+   public static void main(String[] args) {
+     Set<Weekday> daysOff = EnumSet.of(Weekday.SUNDAY, Weekday.MONDAY);
+      for(Weekday wd : daysOff)
+         System.out.println(wd);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.SortedSet;
+import java.util.TreeSet; import java.util.Arrays;
+
+public class SortedSetDemo {
+   public static void main(String[] args) {
+      SortedSet<String> sss = new TreeSet<String>();
+      String[] fruitAndVeg = {
+         "apple", "potato", "turnip", "banana", "corn", "carrot", "cherry",
+         "pear", "mango", "strawberry", "cucumber", "grape", "banana",
+         "kiwi", "radish", "blueberry", "tomato", "onion", "raspberry",
+         "lemon", "pepper", "squash", "melon", "zucchini", "peach", "plum",
+         "turnip", "onion", "nectarine"
+      };
+     System.out.println("Array size = " + fruitAndVeg.length);
+      
+      sss.addAll(Arrays.asList(fruitAndVeg));
+      System.out.println("sss: " + sss);
+     System.out.println("Sorted set size = " + sss.size());
+     System.out.println("First element = " + sss.first());
+     System.out.println("Last element = " + sss.last());
+      System.out.println("Comparator = " + sss.comparator());
+      System.out.println("hs: " + sss.headSet("n"));
+      System.out.println("ts: " + sss.tailSet("n"));
+     System.out.println("Count of p-named fruits & vegetables = " +
+                        sss.subSet("p", "q").size());
+     System.out.println("Incorrect count of c-named fruits & vegetables = " +
+                        sss.subSet("carrot", "cucumber").size());
+     System.out.println("Correct count of c-named fruits & vegetables = " +
+                        sss.subSet("carrot", "cucumber\0").size());
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Array size = 29
+sss: [ apple, banana, blueberry, carrot, cherry, corn, cucumber, grape, kiwi, lemon, mango, melon, nectarine, onion, peach, pear, pepper, plum, potato, radish, raspberry, squash, strawberry, tomato, turnip, zucchini ]
+Sorted set size = 26
+First element = apple
+Last element = zucchini
+Comparator = null
+hs: [ apple, banana, blueberry, carrot, cherry, corn, cucumber, grape, kiwi, lemon, mango, melon ]
+ts: [ nectarine, onion, peach, pear, pepper, plum, potato, radish, raspberry, squash, strawberry, tomato, turnip, zucchini ]
+Count of p-named fruits & vegetables = 5
+Incorrect count of c-named fruits & vegetables = 3
+Correct count of c-named fruits & vegetables = 4
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.Iterator;
+import java.util.NavigableSet;
+import java.util.TreeSet;
+import java.util.Arrays;
+
+public class NavigableSetDemo {
+   public static void main(String[] args) {
+      NavigableSet<Integer> ns = new TreeSet<Integer>(
+          Arrays.asList( 82, -13, 4, 0, 11, -6, 9 ) );
+      System.out.print("Ascending order: ");
+      Iterator iter = ns.iterator();
+      while (iter.hasNext())
+         System.out.print(iter.next() + " ");
+      System.out.println();
+      System.out.print("Descending order: ");
+      iter = ns.descendingIterator();
+      while (iter.hasNext())
+         System.out.print(iter.next() + " ");
+      System.out.println("\n");
+      outputClosestMatches(ns, 4);
+      outputClosestMatches(ns.descendingSet(), 12);
+   }
+
+    static void outputClosestMatches(NavigableSet<Integer> ns, int i) {
+      System.out.println("Element < " + i + " is " + ns.lower(i));
+      System.out.println("Element <= " + i + " is " + ns.floor(i));
+      System.out.println("Element > " + i + " is " + ns.higher(i));
+      System.out.println("Element >= " + i +" is " + ns.ceiling(i));
+      System.out.println();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Ascending order: -13 -6 0 4 9 11 82
+Descending order: 82 11 9 4 0 -6 -13
+
+Element < 4 is 0
+Element <= 4 is 4
+Element > 4 is 9
+Element >= 4 is 4
+
+Element < 12 is 82
+Element <= 12 is 82
+Element > 12 is 11
+Element >= 12 is 11
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+public class PriorityQueueDemo {
+  public static void main(String[] args) {
+     Queue<Integer> qi = new PriorityQueue<Integer>();
+     for (int i = 0; i < 15; i++)
+         qi.add((int) (Math.random() * 100));
+     while (!qi.isEmpty())
+         System.out.print(qi.poll() + " ");
+     System.out.println();
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+30 43 53 61 61 66 66 67 76 78 80 83 87 90 97
+
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+public class PriorityQueueDemo {
+   final static int NELEM = 15;
+
+   public static void main(String[] args) {
+      Comparator<Integer> cmp;
+      cmp = new Comparator<Integer>() {
+               @Override
+               public int compare(Integer e1, Integer e2) {
+                  return e2 - e1;
+               }
+            };
+      Queue<Integer> qi = new PriorityQueue<Integer>(NELEM, cmp);
+      for (int i = 0; i < NELEM; i++)
+         qi.add((int) (Math.random() * 100));
+      while (!qi.isEmpty())
+        System.out.print(qi.poll() + " ");
+      System.out.println();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.ArrayDeque;
+import java.util.Deque; import java.util.Arrays;
+
+public class ArrayDequeDemo {
+   public static void main(String[] args) {
+
+      Deque<String> stack = new ArrayDeque<>( Arrays.asList(
+           "Sunday", "Monday", "Tuesday", "Wednesday",
+           "Thursday", "Friday", "Saturday" ) );
+      while (stack.peek() != null)
+         System.out.println(stack.pop());
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Saturday
+Friday
+Thursday
+Wednesday
+Tuesday
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+enum Color {
+  RED(255, 0, 0),
+  GREEN(0, 255, 0),
+  BLUE(0, 0, 255);
+
+  private int r, g, b;
+
+  private Color(int r, int g, int b) {
+     this.r = r;
+     this.g = g;
+     this.b = b;
+  }
+
+  @Override
+  public String toString() {
+     return "r = " + r + ", g = " + g + ", b = " + b;
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    Map<String, Color> colorMap = new HashMap<>(); // an exanpke of a Map implementation
+colorMap.put("red", Color.RED);
+colorMap.put("blue", Color.BLUE);
+colorMap.put("green", Color.GREEN);
+colorMap.put("RED", Color.RED);
+for (String colorKey: colorMap.keySet())
+  System.out.println(colorKey);
+Collection<Color> colorValues = colorMap.values();
+for (Iterator<Color> it = colorValues.iterator(); it.hasNext();)
+  System.out.println(it.next());
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+red
+blue
+green
+RED
+r = 255, g = 0, b = 0
+r = 0, g = 0, b = 255
+r = 0, g = 255, b = 0
+r = 255, g = 0, b = 0
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+for (Map.Entry<String, Color> colorEntry: colorMap.entrySet())
+  System.out.println(colorEntry.getKey() + ": " + colorEntry.getValue());
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+red: r = 255, g = 0, b = 0
+blue: r = 0, g = 0, b = 255
+green: r = 0, g = 255, b = 0
+RED: r = 255, g = 0, b = 0
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.HashMap;
+import java.util.Map;
+
+public class HashMapDemo {
+   public static void main(String[] args) {
+      Map<String, Integer> argMap = new HashMap<>();
+      for (String arg: args) {
+         argMap.merge(arg, 1, Integer::sum);
+      }
+      System.out.println(argMap);
+      System.out.println("Number of distinct arguments = " + argMap.size());
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Enumeration e = vector.elements();
+while (e.hasMoreElements())
+   System.out.println(e.nextElement();
+
+
+

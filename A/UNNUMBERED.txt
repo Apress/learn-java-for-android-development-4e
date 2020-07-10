@@ -1,0 +1,1416 @@
+// ----- UNNUMBERED LISTING ------------------------------
+public class Compass {
+   public static void main(String[] args){
+      int direction = 1;
+      switch (direction) {
+          case 0: System.out.println("You are travelling north."); break;
+          case 1: System.out.println("You are travelling east."); break;
+          case 2: System.out.println("You are travelling south."); break;
+          case 3: System.out.println("You are travelling west."); break;
+         default: System.out.println("You are lost.");
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Triangle {
+   public static void main(String[] args){
+      for (int row = 1; row < 20; row += 2){
+         for (int col = 0; col < 19 - row / 2; col++)
+            System.out.print(" ");
+         for (int col = 0; col < row; col++)
+            System.out.print("*");
+         System.out.print('\n');
+      }
+   }
+}
+
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Image {
+   public Image() {
+      System.out.println("Image() called");
+   }
+
+   public Image(String filename) {
+      this(filename, null);
+      System.out.println("Image(String filename) called");
+   }
+
+   public Image(String filename, String imageType) {
+      System.out.println("Image(String filename, String imageType) called");
+      if (filename != null){
+         System.out.println("reading " + filename);
+         if (imageType != null)
+           System.out.println("interpreting " + filename + " as storing a " +
+                               imageType + " image");
+      }
+      // Perform other initialization here.
+   }
+
+   public static void main(String[] args){
+      Image image = new Image();
+      System.out.println();
+      image = new Image("image.png");
+      System.out.println();
+      image = new Image("image.png", "PNG");
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Conversions {
+   public static double c2f(double degrees) {
+      return degrees * 9.0 / 5.0 + 32;
+   }
+
+   public static double f2c(double degrees) {
+      return (degrees - 32) * 5.0 / 9.0;
+   }
+
+   public static void main(String[] args) {
+      System.out.println("Fahrenheit equivalent of 100 degrees Celsius is " +
+                         Conversions.c2f(100));
+      System.out.println("Celsius equivalent of 98.6 degrees Fahrenheit is " +
+                        Conversions.f2c(98.6));
+      System.out.println("Celsius equivalent of 32 degrees Fahrenheit is " +
+                         f2c(32));
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Utilities {
+   public static int factorial1(int n) {
+      int product = 1;
+      for (int i = 2; i <= n; i++)
+         product *= i;
+      return product;
+   }
+
+   public static int factorial2(int n) {
+      if (n == 0 || n == 1)
+         return 1; // base problem
+      else
+         return n * factorial2(n - 1);
+   }
+
+   public static double sum(double... values) {
+      int total = 0;
+      for (int i = 0; i < values.length; i++)
+         total += values[i];
+      return total;
+   }
+
+   public static void main(String[] args) {
+      System.out.println(factorial1(4));
+      System.out.println(factorial2(4));
+      System.out.println(factorial2(0));
+      System.out.println(factorial2(1));
+      System.out.println(sum(10.0, 20.0));
+     System.out.println(sum(30.0, 40.0, 50.0));
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class GCD {
+   public static int gcd(int a, int b) {
+      // The greatest common divisor is the largest positive integer that
+      // divides evenly into two positive integers a and b. For example,
+      // GCD(12, 18) is 6.
+      
+      if (b == 0) // Base problem
+         return a;
+      else
+         return gcd(b, a % b);
+   }
+
+   public static void main(String[] args) {
+      System.out.println(gcd(12, 18));
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Book {
+   private String name;
+   private String author;
+   private String isbn;
+
+   public Book(String name, String author, String isbn) {
+      this.name = name;
+      this.author = author;
+      this.isbn = isbn;
+   }
+
+   public String getName(){
+      return name;
+   }
+
+   public String getAuthor(){
+      return author;
+   }
+
+   public String getISBN(){
+      return isbn;
+   }
+
+   public static void main(String[] args) {
+      Book[] books = new Book[] {
+                new Book("Jane Eyre",
+                         "Charlotte Brontë",
+                        "0895772000"),
+                new Book("A Kick in the Seat of the Pants",
+                         "Roger von Oech",
+                        "0060155280"),
+                new Book("The Prince and the Pilgrim",
+                         "Mary Stewart",
+                        "0340649925")
+             };
+      for (int i = 0; i < books.length; i++)
+         System.out.println(books[i].getName() + " - " +
+                            books[i].getAuthor() + " - " +
+                           books[i].getISBN());
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public abstract class Animal {
+   private String kind;
+   private String appearance;
+
+   public Animal(String kind, String appearance) {
+      this.kind = kind;
+      this.appearance = appearance;
+   }
+
+   public abstract void eat();
+
+   public abstract void move();
+
+   @Override
+   public String toString() {
+      return kind + " -- " + appearance;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public abstract class Bird extends Animal {
+   public Bird(String kind, String appearance){
+      super(kind, appearance);
+   }
+
+   @Override
+   public void eat() {
+      System.out.println("eats seeds and insects");
+   }
+
+   @Override
+   public void move() {
+      System.out.println("flies through the air");
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public abstract class Fish extends Animal {
+   public Fish(String kind, String appearance) {
+      super(kind, appearance);
+   }
+
+   @Override
+   public void eat() {
+      System.out.println("eats krill, algae, and insects");
+   }
+
+   @Override
+   public void move() {
+      System.out.println("swims through the water");
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class AmericanRobin extends Bird {
+   public AmericanRobin() {
+      super("americanrobin", "red breast");
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class DomesticCanary extends Bird {
+   public DomesticCanary() {
+      super("domestic canary", "yellow, orange, black, brown, white, red");
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class RainbowTrout extends Fish {
+   public RainbowTrout() {
+      super("rainbowtrout", "bands of brilliant speckled multicolored " +
+            "stripes running nearly the whole length of its body");
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class SockeyeSalmon extends Fish {
+   public SockeyeSalmon() {
+      super("sockeyesalmon", "bright red with a green head");
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Animals {
+   public static void main(String[] args) {
+      Animal[] animals = { new AmericanRobin(), new RainbowTrout(),
+                           new DomesticCanary(), new SockeyeSalmon() };
+      for (int i = 0; i < animals.length; i++) {
+         System.out.println(animals[i]);
+         animals[i].eat();
+         animals[i].move();
+         System.out.println();
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public interface Countable {
+   String getID();
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public abstract class Animal implements Countable {
+   private String kind;
+   private String appearance;
+
+   public Animal(String kind, String appearance) {
+      this.kind = kind;
+      this.appearance = appearance;
+   }
+
+   public abstract void eat();
+
+   public abstract void move();
+
+   @Override
+   public String toString() {
+      return kind + " -- " + appearance;
+   }
+
+   @Override
+   public String getID() {
+      return kind;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Animals {
+   public static void main(String[] args) {
+      Animal[] animals = { new AmericanRobin(), new RainbowTrout(),
+                           new DomesticCanary(), new SockeyeSalmon(),
+                           new RainbowTrout(), new AmericanRobin() };
+      for (int i = 0; i < animals.length; i++) {
+         System.out.println(animals[i]);
+         animals[i].eat();
+         animals[i].move();
+         System.out.println();
+      }
+
+      Census census = new Census();
+      Countable[] countables = (Countable[]) animals;
+      for (int i = 0; i < countables.length; i++)
+         census.update(countables[i].getID());
+
+      for (int i = 0; i < Census.SIZE; i++)
+         System.out.println(census.get(i));
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class G2D {
+   private Matrix xform;
+
+   public G2D(){
+      xform = new Matrix();
+      xform.a = 1.0;
+      xform.e = 1.0;
+      xform.i = 1.0;
+   }
+
+   private class Matrix {
+      double a, b, c;
+      double d, e, f;
+      double g, h, i;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+package logging;
+
+public class NullDevice implements Logger {
+   private String dstName;
+
+   public NullDevice(String dstName) {
+   }
+
+   public boolean connect() {
+      return true;
+   }
+
+   public boolean disconnect(){
+      return true;
+   }
+
+   public boolean log(String msg){
+      return true;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+package logging;
+
+public abstract class LoggerFactory {
+   public final static int CONSOLE = 0;
+   public final static int FILE = 1;
+   public final static int NULLDEVICE = 2;
+
+   public static Logger newLogger(int dstType, String...dstName){
+      switch (dstType) {
+                         case CONSOLE : return new Console(dstName.length == 0 ? null : dstName[0]);
+                            case FILE : return new File(dstName.length == 0 ? null : dstName[0]);
+         case NULLDEVICE: return new NullDevice(null);
+                 default : return null;
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+package logging;
+
+public interface Logger {
+   void connect() throws CannotConnectException;
+   void disconnect() throws NotConnectedException;
+   void log(String msg) throws NotConnectedException;
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+package logging;
+
+public class CannotConnectException extends Exception {
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+package logging;
+
+public class Console implements Logger {
+   private String dstName;
+
+   public Console(String dstName) {
+      this.dstName = dstName;
+   }
+
+   public void connect() throws CannotConnectException {
+   }
+
+   public void disconnect() throws NotConnectedException {
+   }
+
+   public void log(String msg) throws NotConnectedException {
+      System.out.println(msg);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+package logging;
+
+public class File implements Logger {
+   private String dstName;
+
+   public File(String dstName) {
+      this.dstName = dstName;
+   }
+
+   public void connect() throws CannotConnectException {
+      if (dstName == null)
+          throw new CannotConnectException();
+   }
+
+   public void disconnect() throws NotConnectedException {
+      if (dstName == null)
+          throw new NotConnectedException();
+   }
+
+   public void log(String msg) throws NotConnectedException {
+      if (dstName == null)
+          throw new NotConnectedException();
+      System.out.println("writing " + msg + " to file " + dstName);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import logging.*;
+
+public class TestLogger {
+   public static void main(String[] args) {
+      try {
+         Logger logger = LoggerFactory.newLogger(LoggerFactory.CONSOLE);
+         logger.connect();
+         logger.log("test message #1");
+         logger.disconnect();
+      } catch (CannotConnectException cce) {
+         System.err.println("cannot connect to console-based logger");
+      } catch (NotConnectedException nce) {
+         System.err.println("not connected to console-based logger");
+      }
+
+      try {
+         Logger logger = LoggerFactory.newLogger(LoggerFactory.FILE, "x.txt");
+         logger.connect();
+         logger.log("test message #2");
+         logger.disconnect();
+      } catch (CannotConnectException cce) {
+         System.err.println("cannot connect to file-based logger");
+      } catch (NotConnectedException nce) {
+         System.err.println("not connected to file-based logger");
+      }
+   
+      try {
+         Logger logger = LoggerFactory.newLogger(LoggerFactory.FILE);
+         logger.connect();
+         logger.log("test message #3");
+         logger.disconnect();
+      } catch (CannotConnectException cce) {
+         System.err.println("cannot connect to file-based logger");
+      } catch (NotConnectedException nce) {
+         System.err.println("not connected to file-based logger");
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public static void methodCaller(Object t) {
+   someOverloadedMethod(t);
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
+
+@Target(ElementType.TYPE)
+public @interface ToDo {
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.lang.reflect.Method;
+
+public class StubFinder {
+   public static void main(String[] args) throws Exception {
+      if (args.length != 1){
+         System.err.println("usage: java StubFinder classfile");
+         return;
+      }
+      Method[] methods = Class.forName(args[0]).getMethods();
+      for (int i = 0; i < methods.length; i++)
+         if (methods[i].isAnnotationPresent(Stub.class)){
+            Stub stub = methods[i].getAnnotation(Stub.class);
+            System.out.println("Stub ID = " + stub.id());
+            System.out.println("Stub Date = " + stub.dueDate());
+            System.out.println("Stub Developer = " + stub.developer());
+            System.out.println();
+         }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Stack<E> {
+   private E[] elements;
+   private int top;
+
+   @SuppressWarnings("unchecked")
+   public Stack(int size) {
+      if (size < 2)
+         throw new IllegalArgumentException("" + size);
+      elements = (E[]) new Object[size];
+      top = -1;
+   }
+
+   public void push(E element) throws StackFullException {
+      if (top == elements.length - 1)
+         throw new StackFullException();
+      elements[++top] = element;
+   }
+
+   public E pop() throws StackEmptyException {
+      if (isEmpty())
+         throw new StackEmptyException();
+      return elements[top--];
+   }
+
+   public boolean isEmpty() {
+      return top == -1;
+   }
+
+   public static void main(String[] args)
+      throws StackFullException, StackEmptyException
+   {
+      Stack<String> stack = new Stack<String>(5);
+      assert stack.isEmpty();
+      stack.push("A");
+      stack.push("B");
+      stack.push("C");
+      stack.push("D");
+      stack.push("E");
+      // Uncomment the following line to generate a StackFullException.
+      //stack.push("F");
+      while (!stack.isEmpty())
+         System.out.println(stack.pop());
+      // Uncomment the following line to generate a StackEmptyException.
+      //stack.pop();
+      assert stack.isEmpty();
+   }
+}
+
+class StackEmptyException extends Exception {
+}
+
+class StackFullException extends Exception {
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+enum Compass {
+   NORTH, SOUTH, EAST, WEST
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class UseCompass {
+   public static void main(String[] args) {
+      int i = (int) (Math.random() * 4);
+      Compass[] dir = { Compass.NORTH, Compass.EAST, Compass.SOUTH,
+                       Compass.WEST };
+      switch(dir[i]) {
+         case NORTH: System.out.println("heading north"); break;
+         case EAST : System.out.println("heading east"); break;
+         case SOUTH: System.out.println("heading south"); break;
+         case WEST : System.out.println("heading west"); break;
+            default : assert false; // Should never be reached.
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class PrimeNumberTest {
+   public static void main(String[] args) {
+      if (args.length != 1){
+         System.err.println("usage: java PrimeNumberTest integer");
+         System.err.println("integer must be 2 or higher");
+         return;
+      }
+      try {
+         int n = Integer.parseInt(args[0]);
+         if (n < 2) {
+             System.err.println(n + " is invalid because it is less than 2");
+             return;
+         }
+         for (int i = 2; i <= Math.sqrt(n); i++)
+            if (n % i == 0){
+               System.out.println (n + " is not prime");
+               return;
+            }
+         System.out.println(n + " is prime");
+      } catch (NumberFormatException nfe) {
+         System.err.println("unable to parse " + args[0] + " into an int");
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class MultiPrint {
+   public static void main(String[] args) {
+      if (args.length != 2) {
+         System.err.println("usage: java MultiPrint text count");
+         return;
+      }
+      String text = args[0];
+      int count = Integer.parseInt(args[1]);
+      for (int i = 0; i < count; i++)
+         System.out.println(text);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+String[] imageNames = new String[NUM_IMAGES];
+StringBuffer sb = new StringBuffer();
+for (int i = 0; i < imageNames.length; i++) {
+   sb.append("image");
+   sb.append(i);
+   sb.append(".png");
+   imageNames[i] = sb.toString();
+   sb.setLength(0); // Erase previous StringBuffer contents.
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class DigitsToWords {
+   public static void main(String[] args) {
+      if (args.length != 1) {
+         System.err.println("usage: java DigitsToWords integer");
+         return;
+      }
+     System.out.println(convertDigitsToWords(Integer.parseInt(args[0])));
+   }
+
+   public static String convertDigitsToWords(int integer) {
+      if (integer < 0 || integer > 9999)
+          throw new IllegalArgumentException("Out of range: " + integer);
+      if (integer == 0)
+          return "zero";
+      String[] group1 = {
+         "one",
+         "two",
+         "three",
+         "four",
+         "five",
+         "six",
+         "seven",
+         "eight",
+         "nine"
+      };
+      String[] group2 = {
+         "ten",
+         "eleven",
+         "twelve",
+         "thirteen",
+         "fourteen",
+         "fifteen",
+         "sixteen",
+         "seventeen",
+         "eighteen",
+         "nineteen"
+      };
+      String[] group3 = {
+         "twenty",
+         "thirty",
+         "fourty",
+         "fifty",
+         "sixty",
+         "seventy",
+         "eighty",
+         "ninety"
+      };
+      StringBuffer result = new StringBuffer();
+      if (integer >= 1000) {
+          int tmp = integer / 1000;
+          result.append(group1[tmp - 1] + " thousand");
+          integer -= tmp * 1000;
+          if (integer == 0)
+              return result.toString();
+          result.append(" ");
+      }
+      if (integer >= 100) {
+          int tmp = integer / 100;
+          result.append(group1[tmp - 1] + " hundred");
+          integer -= tmp * 100;
+          if (integer == 0)
+              return result.toString();
+          result.append(" and ");
+      }
+      if (integer >= 10 && integer <= 19){
+          result.append(group2[integer - 10]);
+          return result.toString();
+      }
+      if (integer >= 20){
+          int tmp = integer / 10;
+          result.append(group3[tmp - 2]);
+          integer -= tmp * 10;
+          if (integer == 0)
+              return result.toString();
+          result.append("-");
+      }
+      result.append(group1[integer - 1]);
+      return result.toString();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class EVDump {
+   public static void main(String[] args) {
+      System.out.println(System.getenv()); // System.out.println() calls toString()
+                                           // on its object argument and outputs this
+                                           // string
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class CountingThreads {
+   public static void main(String[] args) {
+      Runnable r = new Runnable(){
+              @Override
+              public void run(){
+                 String name = Thread.currentThread().getName();
+                 int count = 0;
+                 while (true)
+                    System.out.println(name + ": " + count++);
+              }
+           };
+      Thread thdA = new Thread(r);
+      thdA.setDaemon(true);
+      Thread thdB = new Thread(r);
+      thdB.setDaemon(true);
+      thdA.start();
+      thdB.start();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.IOException;
+
+public class StopCountingThreads {
+   private static volatile boolean stopped = false;
+
+   public static void main(String[] args) {
+      Runnable r = new Runnable(){
+              @Override
+              public void run(){
+                 String name = Thread.currentThread().getName();
+                 int count = 0;
+                 while (!stopped)
+                    System.out.println(name + ": " + count++);
+              }
+            };
+      Thread thdA = new Thread(r);
+      Thread thdB = new Thread(r);
+      thdA.start();
+      thdB.start();
+      try { System.in.read(); } catch (IOException ioe) {}
+      stopped = true;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.Random;
+
+public class Guess {
+   public static void main(String[] args) throws java.io.IOException{
+      Random r = new Random();
+      int hiddenValue = 'a' + r.nextInt(26);
+
+      while (true){
+         int guess = 0;
+         while (guess < 'a' || guess > 'z'){
+            System.out.print("Guess between a and z inclusive: ");
+            guess = System.in.read();
+            System.out.println();
+
+            // Flush carriage return or carriage return/newline combination
+            // so that each character isn't automatically read during the
+            // next System.in.read() method call.
+
+            int x = 0;
+            while (x != '\n')
+               x = System.in.read();
+         }
+         if (guess < hiddenValue)
+            System.out.println("too low");
+         else
+         if (guess > hiddenValue)
+            System.out.println("too high");
+         else {
+            System.out.println("you got it");
+            break;
+         }
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Classify {
+   public static void main(String[] args) {
+      if (args.length != 1){
+         System.err.println("usage: java Classify pkgAndTypeName");
+         return;
+      }
+
+      try{
+         Class<?> clazz = Class.forName(args[0]);
+         if (clazz.isAnnotation())
+           System.out.println("Annotation");
+         else if (clazz.isEnum())
+           System.out.println("Enum");
+         else if (clazz.isInterface())
+           System.out.println("Interface");
+         else
+           System.out.println("Class");
+      } catch (ClassNotFoundException cnfe) {
+         System.err.println("could not locate " + args[0]);
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.StringTokenizer;
+
+public class Tokenize {
+   public static void main(String[] args) {
+      String date = "03-12-2014 03:05:20";
+      StringTokenizer st = new StringTokenizer(date, "- :");
+      System.out.println("Month = " + st.nextToken());
+     System.out.println("Day = " + st.nextToken());
+      System.out.println("Year = " + st.nextToken());
+      System.out.println("Hour = " + st.nextToken());
+      System.out.println("Minute = " + st.nextToken());
+     System.out.println("Second = " + st.nextToken());
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class BackAndForth {
+   public static enum Direction { FORWARDS, BACKWARDS }
+
+   public static void main(String[] args) {
+
+      TimerTask task = new TimerTask() {
+          final static int MAXSTEPS = 20;
+          Direction direction = Direction.FORWARDS;
+          int steps = 0;
+          @Override
+          public void run() {
+             switch (direction){
+                                    case FORWARDS : System.out.print("\b ");
+                    System.out.print("*");
+                    break;
+                                 
+                                    case BACKWARDS: System.out.print("\b ");
+                   System.out.print("\b\b*");
+             }
+
+             if (++steps == MAXSTEPS) {
+                 direction = (direction == Direction.FORWARDS)
+                             ? Direction.BACKWARDS
+                             : Direction.FORWARDS;
+                 steps = 0;
+             }
+         }
+      };
+      Timer timer = new Timer();
+      timer.schedule(task, 0, 100);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class JavaQuiz {
+   private static class QuizEntry {
+     private String question;
+     private String[] choices;
+     private char answer;
+
+     QuizEntry(String question, String[] choices, char answer){
+        this.question = question;
+        this.choices = choices;
+       this.answer = answer;
+      }
+
+     String[] getChoices(){
+                           // Demonstrate returning a copy of the choices array // to prevent clients from directly manipulating // (and possibly screwing up) the internal
+         // choices array.
+        String[] temp = new String[choices.length];
+        System.arraycopy(choices, 0, temp, 0, choices.length);
+        return temp;
+      }
+
+     String getQuestion() {
+        return question;
+      }
+
+      char getAnswer() {
+        return answer;
+      }
+   }
+
+   static QuizEntry[] quizEntries = {
+      new QuizEntry("What was Java's original name?",
+          new String[] { "Oak", "Duke", "J", "None of the above" },
+         'A'),
+      new QuizEntry("Which of the following reserved words is also a literal?",
+         new String[] { "for", "long", "true", "enum" },
+         'C'),
+      new QuizEntry("The conditional operator (?:) resembles which statement?",
+         new String[] { "switch", "if-else", "if", "while" },
+         'B')
+   };
+
+   public static void main(String[] args) {
+         // Populate the quiz list.
+     List<QuizEntry> quiz = new ArrayList<QuizEntry>();
+      for (QuizEntry entry: quizEntries)
+        quiz.add(entry);
+      // Perform the quiz.
+     System.out.println("Java Quiz");
+     System.out.println("---------\n");
+     Iterator<QuizEntry> iter = quiz.iterator();
+      while (iter.hasNext()) {
+        QuizEntry qe = iter.next();
+        System.out.println(qe.getQuestion());
+        String[] choices = qe.getChoices();
+        for (int i = 0; i < choices.length; i++)
+             System.out.println(" " + (char) ('A' + i) + ": " + choices[i]);
+        int choice = -1;
+        while (choice < 'A' || choice > 'A' + choices.length) {
+           System.out.print("Enter choice letter: ");
+           Try {
+              choice = System.in.read();
+              // Remove trailing characters up to and including the newline
+              // to avoid having these characters automatically returned in
+              // subsequent System.in.read() method calls.
+              while (System.in.read() != '\n');
+              choice = Character.toUpperCase((char) choice);
+           } catch (java.io.IOException ioe){
+           }
+         }
+         if (choice == qe.getAnswer())
+           System.out.println("You are correct!\n");
+        else
+           System.out.println("You are not correct!\n");
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+public class FrequencyDemo {
+   public static void main(String[] args) {
+      List<String> listOfArgs = new LinkedList<String>();
+      String lastArg = (args.length == 0) ? null : args[args.length - 1];
+      for (int i = 0; i < args.length - 1; i++)
+         listOfArgs.add(args[i]);
+      System.out.println("Number of occurrences of " + lastArg + " = " +
+                        Collections.frequency(listOfArgs, lastArg));
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.File;
+
+import java.util.Date;
+
+public class Touch {
+   public static void main(String[] args) {
+      if (args.length != 1) {
+         System.err.println("usage: java Touch pathname");
+         return;
+      }
+      new File(args[0]).setLastModified(new Date().getTime());
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class Copy {
+   public static void main(String[] args) {
+      if (args.length != 2) {
+         System.err.println("usage: java Copy srcfile dstfile");
+         return;
+      }
+      BufferedInputStream bis = null;
+      BufferedOutputStream bos = null;
+      try {
+         FileInputStream fis = new FileInputStream(args[0]);
+         bis = new BufferedInputStream(fis);
+         FileOutputStream fos = new FileOutputStream(args[1]);
+         bos = new BufferedOutputStream(fos);
+         int b; // I chose b instead of byte because byte is a reserved word.
+         while ((b = bis.read()) != -1)
+            bos.write(b);
+      } catch (FileNotFoundException fnfe) {
+         System.err.println(args[0] + " could not be opened for input, or " +
+                            args[1] + " could not be created for output");
+      } catch (IOException ioe){
+         System.err.println("I/O error: " + ioe.getMessage());
+      } finally {
+         if (bis != null)
+            try {
+               bis.close();
+            } catch (IOException ioe){
+            }
+
+         if (bos != null)
+            try {
+               bos.close();
+            } catch (IOException ioe){
+            }
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class Split {
+   private static final int FILESIZE = 1400000;
+   private static byte[] buffer = new byte[FILESIZE];
+
+   public static void main(String[] args){
+      if (args.length != 1) {
+         System.err.println("usage: java Split pathname");
+         return;
+      }
+      File file = new File(args[0]);
+      long length = file.length();
+      int nWholeParts = (int) (length / FILESIZE);
+      int remainder = (int) (length % FILESIZE);
+      System.out.printf("Splitting %s into %d parts%n", args[0],
+                        (remainder == 0) ? nWholeParts : nWholeParts + 1);
+      BufferedInputStream bis = null;
+      BufferedOutputStream bos = null;
+      try {
+         FileInputStream fis = new FileInputStream(args[0]);
+         bis = new BufferedInputStream(fis);
+         for (int i = 0; i < nWholeParts; i++){
+            bis.read(buffer);
+            System.out.println("Writing part " + i);
+                            FileOutputStream fos = new FileOutputStream("part" + i);
+            bos = new BufferedOutputStream(fos);
+            bos.write(buffer);
+           bos.close();
+            bos = null;
+         }
+         if (remainder != 0) {
+            int br = bis.read(buffer);
+            if (br != remainder) {
+                                                 System.err.println("Last part mismatch: expected " + remainder + " bytes");
+               System.exit(0);
+            }
+            System.out.println("Writing part " + nWholeParts);
+            FileOutputStream fos = new FileOutputStream("part" +
+                nWholeParts);
+            bos = new BufferedOutputStream(fos);
+            bos.write(buffer, 0, remainder);
+         }
+      } catch (IOException ioe) {
+         ioe.printStackTrace();
+      } finally {
+         if (bis != null)
+            try {
+               bis.close();
+            } catch (IOException ioe) {
+            }
+         if (bos != null)
+            try {
+               bos.close();
+            } catch (IOException ioe) {
+            }
+      }
+   }
+}
+
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class EchoClient {
+   public static void main(String[] args) {
+      if (args.length != 1) {
+           System.err.println("usage : java EchoClient message");
+         System.err.println("example: java EchoClient \"This is a test.\"");
+         return;
+      }
+      Socket socket = null;
+      try {
+         socket = new Socket("localhost", 9999);
+         OutputStream os = socket.getOutputStream();
+         OutputStreamWriter osw = new OutputStreamWriter(os);
+         PrintWriter pw = new PrintWriter(osw);
+         pw.println(args[0]);
+         pw.flush();
+         InputStream is = socket.getInputStream();
+         InputStreamReader isr = new InputStreamReader(is);
+         BufferedReader br = new BufferedReader(isr);
+         System.out.println(br.readLine());
+      } catch (UnknownHostException uhe) {
+         System.err.println("unknown host: " + uhe.getMessage());
+      } catch (IOException ioe) {
+         System.err.println("I/O error: " + ioe.getMessage());
+      }
+      finally {
+         if (socket != null)
+            try {
+               socket.close();
+            } catch (IOException ioe){
+            }
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class EchoServer {
+   public static void main(String[] args) {
+      System.out.println("Starting echo server...");
+      ServerSocket ss = null;
+      try {
+         ss = new ServerSocket(9999);
+         File file = new File("kill");
+         while (!file.exists()) {
+            Socket s = ss.accept(); // waiting for client request
+            try{
+               InputStream is = s.getInputStream();
+               InputStreamReader isr = new InputStreamReader(is);
+               BufferedReader br = new BufferedReader(isr);
+               String msg = br.readLine();
+               System.out.println(msg);
+               OutputStream os = s.getOutputStream();
+               OutputStreamWriter osw = new OutputStreamWriter(os);
+               PrintWriter pw = new PrintWriter(osw);
+               pw.println(msg);
+               pw.flush();
+            }catch (IOException ioe){
+               System.err.println("I/O error: " + ioe.getMessage());
+            }finally{
+               try {
+                  s.close();
+               } catch (IOException ioe) {
+               }
+            }
+         }
+      }catch (IOException ioe){
+         System.err.println("I/O error: " + ioe.getMessage());
+      } finally {
+         if (ss != null)
+            try {
+               ss.close();
+            }catch (IOException ioe){
+            }
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+FileLock lock = fileChannel.lock();
+try {
+   // interact with the file channel
+} catch (IOException ioe) {
+   // handle the exception
+} finally {
+   lock.release();
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import java.nio.ByteBuffer;
+
+import java.nio.channels.FileChannel;
+
+public class Copy {
+   public static void main(String[] args) {
+      if (args.length != 2){
+         System.err.println("usage: java Copy srcfile dstfile");
+         return;
+      }
+      FileChannel fcSrc = null;
+      FileChannel fcDest = null;
+      try {
+         FileInputStream fis = new FileInputStream(args[0]);
+         fcSrc = fis.getChannel();
+         FileOutputStream fos = new FileOutputStream(args[1]);
+         fcDest = fos.getChannel();
+         ByteBuffer buffer = ByteBuffer.allocateDirect(2048);
+         while ((fcSrc.read(buffer)) != -1){
+            buffer.flip();
+            while (buffer.hasRemaining())
+               fcDest.write(buffer);
+            buffer.clear();
+         }
+      }catch (FileNotFoundException fnfe){
+                      System.err.println(args[0] + " could not be opened for input, or " +
+             args[1] + " could not be created for output");
+      }catch (IOException ioe){
+         System.err.println("I/O error: " + ioe.getMessage());
+      } finally {
+         if (fcSrc != null)
+            try{
+               fcSrc.close();
+            } catch (IOException ioe) {
+            }
+
+         if (fcDest != null)
+            try {
+               fcDest.close();
+            } catch (IOException ioe) {
+            }
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
+public class ReplaceText {
+   public static void main(String[] args) {
+      if (args.length != 3){
+                      System.err.println("usage: " + "java ReplaceText text oldText newText");
+         return;
+      }
+      try {
+         Pattern p = Pattern.compile(args[1]);
+         Matcher m = p.matcher(args[0]);
+         String result = m.replaceAll(args[2]);
+         System.out.println(result);
+      } catch (PatternSyntaxException pse) {
+         System.err.println(pse);
+      }
+   }
+}
+
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+
+
+
+
+

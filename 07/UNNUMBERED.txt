@@ -1,0 +1,872 @@
+// ----- UNNUMBERED LISTING ------------------------------
+Hello, world. 0 argument(s) have been passed to this method.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Thread t = new Thread(r);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class AbsByteShort {
+   static public byte abs(byte b) {
+     return (b < 0) ? (byte) -b : b;
+   }
+
+   static public short abs(short s) {
+     return (s < 0) ? (short) -s : s;
+   }
+
+   public static void main(String[] args) {
+     byte b = -2;
+     System.out.println(abs(b)); // Output: 2
+     short s = -3;
+     System.out.println(abs(s)); // Output: 3
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.text.NumberFormat;
+
+public class InvoiceCalc {
+   public final static double DISCOUNT_PERCENT = 0.1; // 10%
+   public final static double TAX_PERCENT = 0.05; // 5%
+
+   public static void main(String[] args) {
+      double invoiceSubtotal = 285.36;
+      double discount = invoiceSubtotal * DISCOUNT_PERCENT;
+      double subtotalBeforeTax = invoiceSubtotal - discount;
+      double salesTax = subtotalBeforeTax * TAX_PERCENT;
+      double invoiceTotal = subtotalBeforeTax + salesTax;
+      NumberFormat currencyFormat = NumberFormat.getCurrencyInstance();
+      System.out.println("Subtotal: " + currencyFormat.format(invoiceSubtotal));
+      System.out.println("Discount: " + currencyFormat.format(discount));
+      System.out.println("SubTotal after discount: " +
+                        currencyFormat.format(subtotalBeforeTax));
+      System.out.println("Sales Tax: " + currencyFormat.format(salesTax));
+      System.out.println("Total: " + currencyFormat.format(invoiceTotal));
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Subtotal: $285.36
+Discount: $28.54
+SubTotal after discount: $256.82
+Sales Tax: $12.84
+Total: $269.67
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Subtotal: 285.36
+Discount: 28.536
+SubTotal after discount: 256.824
+Sales Tax: 12.8412
+Total: 269.6652
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+public class InvoiceCalc {
+   public static void main(String[] args) {
+      BigDecimal invoiceSubtotal = new BigDecimal("285.36");
+      BigDecimal discountPercent = new BigDecimal("0.10");
+      BigDecimal discount = invoiceSubtotal.multiply(discountPercent);
+      discount = discount.setScale(2, RoundingMode.HALF_UP);
+      BigDecimal subtotalBeforeTax = invoiceSubtotal.subtract(discount);
+      subtotalBeforeTax = subtotalBeforeTax.setScale(2, RoundingMode.HALF_UP);
+      BigDecimal salesTaxPercent = new BigDecimal("0.05");
+      BigDecimal salesTax = subtotalBeforeTax.multiply(salesTaxPercent);
+      salesTax = salesTax.setScale(2, RoundingMode.HALF_UP);
+      BigDecimal invoiceTotal = subtotalBeforeTax.add(salesTax);
+      invoiceTotal = invoiceTotal.setScale(2, RoundingMode.HALF_UP);
+      System.out.println("Subtotal: " + invoiceSubtotal);
+      System.out.println("Discount: " + discount);
+      System.out.println("SubTotal after discount: " + subtotalBeforeTax);
+      System.out.println("Sales Tax: " + salesTax);
+      System.out.println("Total: " + invoiceTotal);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Subtotal: 285.36
+Discount: 28.54
+SubTotal after discount: 256.82
+Sales Tax: 12.84
+Total: 269.66
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.math.BigInteger;
+
+public class FactComp {
+   public static void main(String[] args) {
+      System.out.println(factorial(12));
+      System.out.println();
+      System.out.println(factorial(20L));
+      System.out.println();
+      System.out.println(factorial(170.0));
+      System.out.println();
+      System.out.println(factorial(new BigInteger("170")));
+      System.out.println();
+      System.out.println(factorial(25.0));
+      System.out.println();
+      System.out.println(factorial(new BigInteger("25")));
+   }
+
+   public static int factorial(int n) {
+      if (n == 0)
+         return 1;
+      else
+         return n * factorial(n - 1);
+   }
+
+   public static long factorial(long n) {
+      if (n == 0)
+         return 1;
+      else
+         return n * factorial(n - 1);
+   }
+
+   public static double factorial(double n) {
+      if (n == 1.0)
+        return 1.0;
+      else
+         return n * factorial(n - 1);
+   }
+
+   public static BigInteger factorial(BigInteger n) {
+      if (n.equals(BigInteger.ZERO))
+         return BigInteger.ONE;
+      else
+         return n.multiply(factorial(n.subtract(BigInteger.ONE)));
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+479001600
+
+2432902008176640000
+
+7.257415615307994E306
+
+7257415615307998967396728211129263114716991681296451376543577798900561843401706157852350749242617459511490991237838520776666022565442753025328900773207510902400430280058295603966612599658257104398558294257568966313439612262571094946806711205568880457193340212661452800000000000000000000000000000000000000000
+
+1.5511210043330986E25
+
+15511210043330985984000000
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class FloatDoubleDemo {
+  public static void main(String[] args) {
+     Float f1 = new Float(Float.NaN);
+     System.out.println(f1.floatValue());
+     Float f2 = new Float(Float.NaN);
+     System.out.println(f2.floatValue());
+     System.out.println(f1.equals(f2));
+     System.out.println(Float.NaN == Float.NaN);
+     System.out.println();
+     Double d1 = new Double(+0.0);
+     System.out.println(d1.doubleValue());
+     Double d2 = new Double(-0.0);
+     System.out.println(d2.doubleValue());
+     System.out.println(d1.equals(d2));
+     System.out.println(+0.0 == -0.0);
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+NaN
+NaN
+true
+false
+
+0.0
+-0.0
+false
+true
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Calc {
+  public static void main(String[] args) {
+     if (args.length != 3) {
+         System.err.println("usage: java Calc value1 op value2");
+         System.err.println("op is one of +, -, x, or /");
+         return;
+     }
+     try {
+         double value1 = Double.parseDouble(args[0]);
+         double value2 = Double.parseDouble(args[2]);
+         if (args[1].equals("+"))
+            System.out.println(value1 + value2);
+         else
+         if (args[1].equals("-"))
+            System.out.println(value1 - value2);
+         else if (args[1].equals("x"))
+            System.out.println(value1 * value2);
+         else if (args[1].equals("/"))
+            System.out.println(value1 / value2);
+         else
+            System.err.println("invalid operator: " + args[1]);
+     } catch (NumberFormatException nfe) {
+         System.err.println("Bad number format: " + nfe.getMessage());
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class StringDemo {
+   public static void main(String[] args) {
+     System.out.println("abc".length());
+      System.out.println("abc" instanceof String);
+      System.out.println("abc" == "a" + "bc");
+      System.out.println("abc" == new String("abc"));
+      System.out.println("abc" == new String("abc").intern());
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+3
+true
+true
+false
+true
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class StringDemo {
+   public static void main(String[] args) {
+      String s = "abc";
+      for (int i = 0; i < s.length(); i++)
+         System.out.println(s.charAt(i));
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class StringBufferDemo {
+   public static void main(String[] args) {
+      StringBuffer sb = new StringBuffer("Hello,");
+      sb.append(' ');
+      sb.append("world. ");
+      sb.append(args.length);
+      sb.append(" argument(s) have been passed to this method.");
+      String s = sb.toString();
+            System.out.println(s);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+int numLeadingSpaces = 3; // default value
+String spacesPrefix = "";
+for (int j = 0; j < numLeadingSpaces; j++)
+   spacesPrefix += "0";
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+int numLeadingSpaces = 3; // default value
+String spacesPrefix = "";
+for (int j = 0; j < numLeadingSpaces; j++)
+   spacesPrefix = new StringBuilder().append(spacesPrefix).append("0").toString();
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+int numLeadingSpaces = 3; // default value
+StringBuilder sb = new StringBuilder();
+for (int j = 0; j < numLeadingSpaces; j++)
+   sb.append('0');
+String spacesPrefix = sb.toString();
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class SystemDemo {
+  public static void main(String[] args) {
+     int[] grades = { 86, 92, 78, 65, 52, 43, 72, 98, 81 };
+     int[] gradesBackup = new int[grades.length];
+     System.arraycopy(grades, 0, gradesBackup, 0, grades.length);
+     for (int i = 0; i < gradesBackup.length; i++)
+         System.out.println(gradesBackup[i]);
+     System.out.println("Current time: " + System.currentTimeMillis());
+     String[] propNames = {
+         "file.separator",
+         "java.class.path",
+         "java.home",
+         "java.io.tmpdir",
+         "java.library.path",
+         "line.separator",
+         "os.arch",
+         "os.name",
+         "path.separator",
+         "user.dir"
+     };
+     for (int i = 0; i < propNames.length; i++)
+         System.out.println(propNames[i] + ": " +
+                            System.getProperty(propNames[i]));
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+86
+92
+78
+65
+52
+43
+72
+98
+81
+Current time: 1353115138889
+file.separator: \
+java.class.path: .;C:\Program Files (x86)\QuickTime\QTSystem\QTJava.zip
+java.home: C:\Program Files\Java\jre11
+java.io.tmpdir: C:\Users\Owner\AppData\Local\Temp\
+java.library.path: C:\Windows\system32;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;c:\Program Files (x86)\AMD APP\bin\x86_64;c:\Program Files (x86)\AMD APP\bin\x86;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\java\jdk1.11.0_06\bin;C:\Program Files (x86)\Borland\BCC55\bin;C:\android;C:\android\tools;C:\android\platform-tools;C:\Program Files (x86)\apache-ant-1.9.14\bin;C:\Program Files (x86)\QuickTime\QTSystem\;.
+line.separator:
+
+os.arch: amd64
+os.name: Windows 10
+path.separator: ;
+user.dir: C:\prj\dev\ljfad2\ch08\code\SystemDemo
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+  Runnable r = new Runnable() {
+                @Override
+                public void run() {
+                   // perform some work
+                }
+             };
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+class MyThread extends Thread {
+   @Override
+   public void run() {
+      }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class CountingThreads {
+   public static void main(String[] args) {
+     Runnable r = new Runnable() {
+                      @Override
+                      public void run() {
+                         String name = Thread.currentThread().getName();
+                         int count = 0;
+                         while (true)
+                           System.out.println(name + ": " + count++);
+                      }
+                   };
+     Thread thdA = new Thread(r);
+     Thread thdB = new Thread(r);
+      thdA.start();
+     thdB.start();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Thread-0: 0
+Thread-0: 1
+Thread-1: 0
+Thread-0: 2
+Thread-1: 1
+Thread-0: 3
+Thread-1: 2
+Thread-0: 4
+Thread-1: 3
+Thread-0: 5
+Thread-1: 4
+Thread-0: 6
+Thread-1: 5
+Thread-0: 7
+Thread-1: 6
+Thread-1: 7
+Thread-1: 8
+Thread-1: 9
+Thread-1: 10
+Thread-1: 11
+Thread-1: 12
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class CountingThreads {
+   public static void main(String[] args) {
+      Runnable r = new Runnable() {
+                      @Override
+                      public void run() {
+                         String name = Thread.currentThread().getName();
+                         int count = 0;
+                         while (true) {
+                            System.out.println(name + ": " + count++);
+                            try {
+                              Thread.sleep(100);
+                            } catch (InterruptedException ie) {
+                            }
+                         }
+                      }
+                   };
+      Thread thdA = new Thread(r);
+      thdA.setName("A");
+      Thread thdB = new Thread(r);
+      thdB.setName("B");
+      thdA.start();
+      thdB.start();
+   }
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+A: 0
+B: 0
+A: 1
+B: 1
+B: 2
+A: 2
+B: 3
+A: 3
+B: 4
+A: 4
+B: 5
+A: 5
+B: 6
+A: 6
+B: 7
+A: 7
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class JoinDemo {
+   public static void main(String[] args) {
+      Runnable r = new Runnable() {
+                      @Override
+                      public void run() {
+                        System.out.println("Worker thread is simulating " +
+                                           "work by sleeping for 5 seconds.");
+                         try {
+                            Thread.sleep(5000);
+                         } catch (InterruptedException ie) {
+                         }
+                        System.out.println("Worker thread is dying");
+                      }
+                   };
+      Thread thd = new Thread(r);
+      thd.start();
+      System.out.println("Default main thread is doing work.");
+      try {
+         Thread.sleep(2000);
+      } catch (InterruptedException ie) {
+      }
+      System.out.println("Default main thread has finished its work.");
+      System.out.println("Default main thread is waiting for worker thread " +
+                         "to die.");
+      try {
+         thd.join();
+      } catch (InterruptedException ie) {
+      }
+      System.out.println("Main thread is dying");
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Default main thread is doing work.
+Worker thread is simulating work by sleeping for 5 seconds.
+Default main thread has finished its work.
+Default main thread is waiting for worker thread to die.
+Worker thread is dying
+Main thread is dying
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class CheckingAccount {
+  private int balance;
+
+  public CheckingAccount(int initialBalance) {
+     balance = initialBalance;
+  }
+
+  public boolean withdraw(int amount) {
+     if (amount <= balance) {
+                                 try { // This is important to show the point; here // the threads interfere
+            Thread.sleep((int) (Math.random() * 200));
+         } catch (InterruptedException ie) {
+         }
+         balance -= amount;
+         return true;
+     }
+     return false;
+  }
+
+  public static void main(String[] args) {
+     final CheckingAccount ca = new CheckingAccount(100);
+     Runnable r = new Runnable() {
+                      public void run() {
+                         String name = Thread.currentThread().getName();
+                        for (int i = 0; i < 10; i++)
+                             System.out.println (name + " withdraws $10: " +
+                                                ca.withdraw(10));
+                      }
+                   };
+     Thread thdHusband = new Thread(r);
+     thdHusband.setName("Husband");
+     Thread thdWife = new Thread(r);
+     thdWife.setName("Wife");
+     thdHusband.start();
+     thdWife.start();
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Wife withdraws $10: true
+Husband withdraws $10: true
+Husband withdraws $10: true
+Wife withdraws $10: true
+Wife withdraws $10: true
+Husband withdraws $10: true
+Wife withdraws $10: true
+Wife withdraws $10: true
+Wife withdraws $10: true
+Husband withdraws $10: true
+Husband withdraws $10: false
+Husband withdraws $10: false
+Husband withdraws $10: false
+Husband withdraws $10: false
+Husband withdraws $10: false
+Husband withdraws $10: false
+Wife withdraws $10: true
+Wife withdraws $10: false
+Wife withdraws $10: false
+Wife withdraws $10: false
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+synchronized(object) {
+   /* statements */
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class ThreadStopping {
+   public static void main(String[] args) {
+     class StoppableThread extends Thread {
+        private volatile boolean stopped = false;
+
+        @Override
+        public void run() {
+           while(!stopped)
+             System.out.println("running");
+        }
+
+        void stopThread() {
+           stopped = true;
+        }
+      }
+     StoppableThread thd = new StoppableThread();
+     thd.start();
+      try {
+        Thread.sleep(1000); // sleep for 1 second
+      } catch (InterruptedException ie) {
+      }
+     thd.stopThread();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class PC {
+   public static void main(String[] args) {
+     Shared s = new Shared();
+      new Producer(s).start();
+      new Consumer(s).start();
+   }
+}
+
+public class Shared {
+  private char c = '\u0000';
+  private boolean writeable = true;
+
+  synchronized public void setSharedChar(char c) {
+     while (!writeable)
+        try {
+           wait();
+        } catch (InterruptedException e) {}
+     this.c = c;
+     writeable = false;
+     notify();
+   }
+
+  synchronized public char getSharedChar() {
+     while (writeable)
+        try {
+           wait();
+        } catch (InterruptedException e) {}
+     writeable = true;
+     notify();
+     return c;
+   }
+}
+
+public class Producer extends Thread {
+  private Shared s;
+
+   public Producer(Shared s) {
+     this.s = s;
+   }
+
+  @Override
+   public void run() {
+      for (char ch = 'A'; ch <= 'Z'; ch++) {
+        s.setSharedChar(ch);
+        System.out.println(ch + " produced by producer.");
+      }
+   }
+}
+public class Consumer extends Thread {
+  private Shared s;
+
+   public Consumer(Shared s) {
+     this.s = s;
+   }
+
+  @Override
+   public void run() {
+     char ch;
+      do {
+        ch = s.getSharedChar();
+        System.out.println(ch + " consumed by consumer.");
+      } while (ch != 'Z');
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class PC {
+   public static void main(String[] args) {
+     Shared s = new Shared();
+      new Producer(s).start();
+      new Consumer(s).start();
+   }
+}
+
+public class Shared {
+  private char c = '\u0000';
+  private boolean writeable = true;
+
+   public synchronized void setSharedChar(char c) {
+     while (!writeable)
+        try {
+           wait();
+        } catch (InterruptedException e) {}
+     this.c = c;
+     writeable = false;
+     notify();
+   }
+
+   public synchronized char getSharedChar() {
+     while (writeable)
+        try {
+           wait();
+        } catch (InterruptedException e) {}
+     writeable = true;
+     notify();
+     return c;
+   }
+}
+
+public class Producer extends Thread {
+  private Shared s;
+
+   public Producer(Shared s){
+     this.s = s;
+   }
+
+  @Override
+   public void run() {
+      for (char ch = 'A'; ch <= 'Z'; ch++) {
+         synchronized(s) {
+             s.setSharedChar(ch);
+             System.out.println(ch + " produced by producer.");
+         }
+      }
+   }
+}
+public class Consumer extends Thread {
+  private Shared s;
+
+   public Consumer(Shared s) {
+     this.s = s;
+   }
+
+  @Override
+   public void run() {
+     char ch;
+      do {
+         synchronized(s) {
+           ch = s.getSharedChar();
+           System.out.println(ch + " consumed by consumer.");
+         }
+      } while (ch != 'Z');
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+A produced by producer.
+A consumed by consumer.
+B produced by producer.
+B consumed by consumer.
+C produced by producer.
+C consumed by consumer.
+D produced by producer.
+D consumed by consumer.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class DeadlockDemo {
+  private Object lock1 = new Object();
+  private Object lock2 = new Object();
+
+   public void instanceMethod1() {
+     synchronized(lock1) {
+        synchronized(lock2) {
+           System.out.println("first thread in instanceMethod1");
+           // critical section guarded first by
+           // lock1 and then by lock2
+        }
+      }
+   }
+
+   public void instanceMethod2() {
+     synchronized(lock2) {
+        synchronized(lock1) {
+           System.out.println("second thread in instanceMethod2");
+           // critical section guarded first by
+           // lock2 and then by lock1
+        }
+      }
+   }
+
+   public static void main(String[] args) {
+     final DeadlockDemo dld = new DeadlockDemo();
+     Runnable r1 = new Runnable() {
+                       @Override
+                       public void run() {
+                          while(true) {
+                            dld.instanceMethod1();
+                             try {
+                               Thread.sleep(50);
+                             } catch (InterruptedException ie){
+                             }
+                          }
+                       }
+                    };
+      Thread thdA = new Thread(r1);
+      Runnable r2 = new Runnable() {
+                       @Override
+                       public void run() {
+                          while(true) {
+                            dld.instanceMethod2();
+                             try {
+                               Thread.sleep(50);
+                             } catch (InterruptedException ie) {
+                             }
+                          }
+                        }
+                    };
+     Thread thdB = new Thread(r2);
+      thdA.start();
+     thdB.start();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class ThreadLocalDemo {
+  private static volatile ThreadLocal<String> userID =
+     new ThreadLocal<String>();
+
+  public static void main(String[] args) {
+     Runnable r = new Runnable() {
+                      @Override
+                      public void run() {
+                         String name = Thread.currentThread().getName();
+                         if (name.equals("A"))
+                           userID.set("foxtrot");
+                         else
+                           userID.set("charlie");
+                        System.out.println(name + " " + userID.get());
+                      }
+                   };
+     Thread thdA = new Thread(r);
+     thdA.setName("A");
+     Thread thdB = new Thread(r);
+     thdB.setName("B");
+     thdA.start();
+     thdB.start();
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+A foxtrot
+B charlie
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+String[] imageNames = new String[NUM_IMAGES];
+for (int i = 0; i < imageNames.length; i++)
+   imageNames[i] = new String("image" + i + ".png");
+
+
+

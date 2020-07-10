@@ -1,0 +1,14 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
+public class ArrayListDemo {
+                 public static void main(String[] args) { // We must wrap the "Arrays.asList()" into a "new ArrayList()", otherwiae // the remove() below won’t work.
+                List<String> ls = new ArrayList( Arrays.asList("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat") );
+      System.out.println(“ls: “ + ls);
+      ls.set(ls.indexOf("Wed"), "Wednesday");
+      System.out.println(“ls: “ + ls);
+     ls.remove(ls.lastIndexOf("Fri"));
+      System.out.println(“ls: “ + ls);
+   }
+}

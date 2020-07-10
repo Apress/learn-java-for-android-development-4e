@@ -1,0 +1,852 @@
+// ----- UNNUMBERED LISTING ------------------------------
+As file name for a public class you choose the same name as the class name.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac App.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+new constructor
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Image image = new Image();
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Image image = new Image();
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Image() called
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac Circle.java Rectangle.java Shapes.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java Shapes
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+static type_name variable_name [ = expression ] ;
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac Car.java Cars.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java Cars
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+type_name variable_name [ = expression ] ;
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac Car.java Cars.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java Cars
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac Car.java Cars.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java Cars
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac Utilities.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java Utilities
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac Car.java Cars.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java Cars
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+return [ expression ] ;
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac Employee.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java Employee
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac SavingsAccount.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java SavingsAccount
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac MO.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java MO
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac PrivateAccess.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java PrivateAccess
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+char[] gradeLetters = { 'A', 'B', 'C', 'D', 'F' };
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+char gradeLetters[] = new char[] { 'A', 'B', 'C', 'D', 'F' };
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+char[] gradeLetters = new char[5];
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Image[] imArray = { new Image("image0.png"), new Image("image1.png"), new Image("image2.png") };
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+System.out.println(imArray[0].getLength());
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Image[] imArray = new Image[3];
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+double[][] temperatures = new double[3][2];
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Image {
+  // various member declarations
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class App {
+   public static void main(String[] args) {
+      // statements to execute
+   }
+}
+
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java App
+
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class_name(parameter_list) {
+   // statements to execute
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Image {
+   public Image() {
+     System.out.println("Image() called");
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Image {
+   public Image(String filename) {
+     this(filename, null);
+     System.out.println("Image(String filename) called");
+   }
+
+   public Image(String filename, String imageType) {
+     System.out.println("Image(String filename, String imageType) called");
+      if (filename != null) {
+        System.out.println("reading " + filename);
+        if (imageType != null)
+           System.out.println("interpreting " + filename + " as storing a " +
+                               imageType + " image");
+      }
+      // Perform other initialization here.
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Image image = new Image("image.png");
+image = new Image("image.png", "PNG");
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Image(String filename, String imageType) called
+reading image.png
+Image(String filename) called
+Image(String filename, String imageType) called
+reading image.png
+interpreting image.png as storing a PNG image
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public Image(String filename, String imageType) {
+  System.out.println("Image(String filename, String imageType) called");
+   if (filename != null) {
+     System.out.println("reading " + filename);
+      File file = new File(filename);
+      // Read file contents into object.
+      if (imageType != null)
+        System.out.println("interpreting " + filename + " as storing a " +
+                            imageType + " image");
+     else
+        // Inspect image contents to learn image type.
+        ; // Empty statement is used to make if-else syntactically valid.
+   }
+   // Perform other initialization here.
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+// File Circle.java
+public class Circle {
+   public Circle() {
+     System.out.println("Circle() called");
+   }
+
+   public static void main(String[] args) {
+      new Circle();
+   }
+}
+
+// File Rectangle.java
+public class Rectangle {
+   public Rectangle() {
+     System.out.println("Rectangle() called");
+   }
+
+   public static void main(String[] args) {
+      new Rectangle();
+   }
+}
+
+// File Shapes.java
+public class Shapes {
+   public static void main(String[] args) {
+     Circle c = new Circle();
+     Rectangle r = new Rectangle();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java Circle
+java Rectangle
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Car {
+   // No ‘private’ here, because we want to access
+   // the field directly from outside. If not fom the same
+   // package, we have to prepend ‘public’
+   static int counter = 0;
+
+   public Car() {
+     counter++;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Cars {
+   public static void main(String[] args) {
+     System.out.println(Car.counter);
+      Car myCar = new Car();
+     System.out.println(Car.counter);
+      Car yourCar = new Car();
+     System.out.println(Car.counter); // direct field access
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Employee {
+   public final static int RETIREMENT_AGE = 65;
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Car {
+   String make;
+   String model;
+   int numDoors;
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Cars {
+   public static void main(String[] args) {
+      Car myCar = new Car();
+      myCar.make = "Toyota"; // because in-package access allowed
+      myCar.model = "Camry";
+      myCar.numDoors = 4;
+      System.out.println("Make = " + myCar.make);
+      System.out.println("Model = " + myCar.model);
+      System.out.println("Number of doors = " + myCar.numDoors);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Car {
+   String make;
+   String model;
+   int numDoors = 4;
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Car {
+   String make;
+   String model;
+   int numDoors;
+
+   public Car(String make, String model) {
+     this(make, model, 4);
+   }
+
+   public Car(String make, String model, int nDoors) {
+     this.make = make;
+     this.model = model;
+      numDoors = nDoors;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Cars {
+   public static void main(String[] args) {
+      Car myCar = new Car("Toyota", "Camry");
+     System.out.println("Make = " + myCar.make);
+     System.out.println("Model = " + myCar.model);
+     System.out.println("Number of doors = " + myCar.numDoors);
+     System.out.println();
+      Car yourCar = new Car("Mazda", "RX-8", 2);
+     System.out.println("Make = " + yourCar.make);
+     System.out.println("Model = " + yourCar.model);
+     System.out.println("Number of doors = " + yourCar.numDoors);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Employee {
+   final int RETIREMENT_AGE = 65;
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Employee {
+   final int ID;
+
+   static int counter;
+
+   Employee() {
+      ID = counter++;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+static return_type name(parameter_list) {
+   // statements to execute
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Utilities {
+   private static void dumpMatrix(float[][] matrix) {
+      for (int row = 0; row < matrix.length; row++) {
+        for (int col = 0; col < matrix[row].length; col++)
+           System.out.print(matrix[row][col] + " ");
+        System.out.print("\n");
+      }
+   }
+
+   public static void main(String[] args) {
+     float[][] temperatures = {
+                                  { 37.0f, 14.0f, -22.0f },
+                                  { 0.0f, 29.0f, -5.0f }
+                               };
+     dumpMatrix(temperatures);
+      System.out.println();
+     Utilities.dumpMatrix(temperatures);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+return_type name(parameter_list) {
+   // statements to execute
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Car {
+   private String make; // Because of ‘private’ access only from inside
+   private String model;
+   private int numDoors;
+
+   public Car(String make, String model) {
+     this(make, model, 4);
+   }
+
+   public Car(String make, String model, int nDoors) {
+     this.make = make;
+     this.model = model;
+     numDoors = nDoors;
+   }
+
+   public void printDetails() {
+     System.out.println("Make = " + make);
+     System.out.println("Model = " + model);
+     System.out.println("Number of doors = " + numDoors);
+      System.out.println();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Cars {
+   public static void main(String[] args) {
+      Car myCar = new Car("Toyota", "Camry");
+     myCar.printDetails();
+      Car yourCar = new Car("Mazda", "RX-8", 2);
+      yourCar.printDetails();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Employee {
+   private String name;
+
+   public Employee(String name) {
+      setName(name);
+   }
+
+   public void setName(String name) {
+      if (name == null) {
+         System.out.println("name cannot be null");
+         return;
+      } else
+         this.name = name;
+   }
+
+   public static void main(String[] args) {
+      Employee john = new Employee(null);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+static double divide(double dividend, double divisor) {
+   if (divisor == 0.0) {
+      System.out.println("cannot divide by zero");
+      return 0.0;
+   }
+   return dividend / divisor;
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class SavingsAccount {
+   private int balance;
+
+   SavingsAccount deposit(int amount) {
+      balance += amount;
+      return this;
+   }
+
+   public SavingsAccount printBalance() {
+      System.out.println(balance);
+            return this;
+   }
+
+   public static void main(String[] args) {
+      new SavingsAccount().deposit(1000).printBalance();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Employee emp = new Employee("John ");
+int recommendedAnnualSalaryIncrease = 1000;
+printReport(emp, recommendAnnualSalaryIncrease);
+printReport(new Employee("Cuifen"), 1500);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+static double sum(double... values) {
+   int total = 0;
+   for (int i = 0; i < values.length; i++)
+     total += values[i];
+   return total;
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+static int factorial(int n) {
+   int product = 1;
+   for (int i = 2; i <= n; i++)
+      product *= i;
+   return product;
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+static int factorial(int n) {
+   if (n == 1)
+     return 1; // base problem
+   else
+     return n * factorial(n - 1);
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+4 * factorial(3)
+3 * factorial(2)
+2 * factorial(1)
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class MO {
+   public int add(int a, int b){
+     System.out.println("add(int, int) called");
+     return a + b;
+   }
+
+   public int add(int a, int b, int c) {
+     System.out.println("add(int, int, int) called");
+     return a + b + c;
+   }
+
+   public double add(double a, double b) {
+     System.out.println("add(double, double) called");
+     return a + b;
+   }
+
+   public static void main(String[] args) {
+      MO mo = new MO();
+      int result = mo.add(10, 20);
+     System.out.println("Result = " + result);
+     result = mo.add(10, 20, 30);
+     System.out.println("Result = " + result);
+     double result2 = mo.add(5.0, 8.0);
+     System.out.println("Result2 = " + result2);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Employee {
+  private String name;
+
+   public Employee(String name) {
+     setName(name);
+   }
+
+   public void setName(String empName) {
+     name = empName; // Assign the empName argument to the name field.
+   }
+
+   public String getName() {
+     return name;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Employee {
+   private String firstName;
+   private String lastName;
+
+   public Employee(String name) {
+      setName(name);
+   }
+
+   public Employee(String firstName, String lastName) {
+      setName(firstName + " " + lastName);
+   }
+
+   public void setName(String name) {
+      // Assume that the first and last names are separated by a
+      // single space character. indexOf() locates a character in a
+      // string; substring() returns a portion of a string.
+      setFirstName(name.substring(0, name.indexOf(' ')));
+      setLastName(name.substring(name.indexOf(' ') + 1));
+   }
+
+   public String getName() {
+      return getFirstName() + " " + getLastName();
+   }
+
+   public void setFirstName(String empFirstName){
+      firstName = empFirstName;
+   }
+
+   public String getFirstName(){
+      return firstName;
+   }
+
+   public void setLastName(String empLastName){
+      lastName = empLastName;
+   }
+
+   public String getLastName(){
+      return lastName;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class PrivateAccess {
+   private int x;
+
+   PrivateAccess(int x) {
+      this.x = x;
+   }
+
+   boolean equalTo(PrivateAccess pa){
+      return pa.x == x;
+   }
+
+   public static void main(String[] args) {
+      PrivateAccess pa1 = new PrivateAccess(10);
+      PrivateAccess pa2 = new PrivateAccess(20);
+      PrivateAccess pa3 = new PrivateAccess(10);
+      System.out.println("pa1 equal to pa2: " + pa1.equalTo(pa2));
+      System.out.println("pa2 equal to pa3: " + pa2.equalTo(pa3));
+      System.out.println("pa1 equal to pa3: " + pa1.equalTo(pa3));
+      System.out.println(pa2.x);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class A {
+  static privateint invoiceNumberBase;
+
+   static {
+     invoiceNumberBase = …; // determine somehow
+     if(invoiceNumberBase < 10000) {
+          System.err.println("Invalid invoice number");
+     }
+   }
+  //...
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class C {
+  static {
+     System.out.println("class initializer 1");
+  }
+
+  static int counter = 1;
+
+  static {
+     System.out.println("class initializer 2");
+     System.out.println("counter = " + counter);
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Graphics {
+   private double[] sines;
+   private double[] cosines;
+
+  {
+     sines = new double[360];
+     cosines = new double[sines.length];
+      for (int degree = 0; degree < sines.length; degree++) {
+        sines[degree] = Math.sin(Math.toRadians(degree));
+        cosines[degree] = Math.cos(Math.toRadians(degree));
+      }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class C {
+  {
+     System.out.println("instance initializer 1");
+  }
+
+   int counter = 1;
+
+   {
+     System.out.println("instance initializer 2");
+     System.out.println("counter = " + counter);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+System.out.println(gradeLetters[0]); // Output the first grade letter.
+gradeLetters[0] = 'a'; // Perhaps you prefer lowercase grade letters.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+gradeLetters[0] = 'A';
+gradeLetters[1] = 'B';
+gradeLetters[2] = 'C';
+gradeLetters[3] = 'D';
+gradeLetters[4] = 'F';
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+for (int i = 0; i < gradeLetters.length; i++)
+   gradeLetters[i] = 'A' + i;
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Image[] imArray = new Image[] { new Image("image0.png"), new Image("image1.png"),
+                                new Image("image2.png") };
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+for (int i = 0; i < imArray.length; i++)
+   imArray[i] = new Image("image" + i + ".png"); // image0.png, image1.png, and so on
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+for (int row = 0; row < temperatures.length; row++)
+   for (int col = 0; col < temperatures[row].length; col++)
+      temperatures[row][col] = Math.random() * 100;
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+for (int row = 0; row < temperatures.length; row++) {
+   for (int col = 0; col < temperatures[row].length; col++)
+      System.out.print(temperatures[row][col] + " ");
+   System.out.println();
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+// Create the row array.
+double[][] temperatures = new double[3][]; // Note the extra empty pair of brackets.
+// Create a column array for each row.
+for (int row = 0; row < temperatures.length; row++)
+   temperatures[row] = new double[2]; // 2 columns per row
+
+
+

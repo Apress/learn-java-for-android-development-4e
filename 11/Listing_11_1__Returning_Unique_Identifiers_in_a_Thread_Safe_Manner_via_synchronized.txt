@@ -1,0 +1,6 @@
+public class ID {
+  private static long nextID = 0;
+  public static synchronized long getNextID() {
+     return nextID++;
+  }
+}

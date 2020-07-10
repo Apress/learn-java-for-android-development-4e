@@ -1,0 +1,14 @@
+public interface Colors {
+   int RED = 1;
+   int GREEN = 2;
+   int BLUE = 3;
+   int BLACK = 4;
+}
+
+public interface Drawable extends Colors {
+   void draw(int color);
+}
+
+public interface Fillable extends Colors {
+   void fill(int color);
+}

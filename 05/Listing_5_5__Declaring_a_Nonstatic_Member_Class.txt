@@ -1,0 +1,14 @@
+public class EnclosingClass {
+   private int i;
+
+   private void m() {
+      System.out.println(i);
+   }
+
+   public class EnclosedClass {
+      public void accessEnclosingClass() {
+         i = 1;
+         m();
+      }
+   }
+}

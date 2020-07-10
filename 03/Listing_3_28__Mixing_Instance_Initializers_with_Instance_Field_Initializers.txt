@@ -1,0 +1,12 @@
+public class C {
+  {
+     System.out.println("instance initializer 1");
+  }
+
+   int counter = 1;
+
+   {
+     System.out.println("instance initializer 2");
+     System.out.println("counter = " + counter);
+   }
+}

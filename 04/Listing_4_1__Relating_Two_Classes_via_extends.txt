@@ -1,0 +1,7 @@
+public class Vehicle {
+   // member declarations
+}
+
+public class Car extends Vehicle {
+   // member declarations
+}

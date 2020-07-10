@@ -1,0 +1,687 @@
+// ----- UNNUMBERED LISTING ------------------------------
+public class Vehicle {
+   // member declarations
+}
+
+public class Car extends Vehicle {
+   // member declarations
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Vehicle {
+  private String make;
+  private String model;
+  private int year;
+
+   public Vehicle(String make, String model, int year) {
+      this.make = make;
+     this.model = model;
+     this.year = year;
+   }
+
+   public String getMake() {
+     return make;
+   }
+
+   public String getModel() {
+     return model;
+   }
+
+   public int getYear() {
+     return year;
+   }
+}
+
+public class Car extends Vehicle {
+  private int numWheels;
+
+   public Car(String make, String model, int year, int numWheels) {
+     super(make, model, year);
+     this.numWheels = numWheels;
+   }
+
+   public static void main(String[] args) {
+      Car car = new Car("Ford", "Fiesta", 2009, 4);
+     System.out.println("Make = " + car.getMake());
+     System.out.println("Model = " + car.getModel());
+     System.out.println("Year = " + car.getYear());
+      // Normally, you cannot access a private field via an object
+      // reference. However, numWheels is being accessed from
+      // within a method (main()) that is part of the Car class.
+     System.out.println("Number of wheels = " + car.numWheels);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Make = Ford
+Model = Fiesta
+Year = 2009
+Number of wheels = 4
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Vehicle {
+  private String make;
+  private String model;
+  private int year;
+
+   public Vehicle(String make, String model, int year) {
+     this.make = make;
+     this.model = model;
+     this.year = year;
+   }
+
+   public void describe() {
+     System.out.println(year + " " + make + " " + model);
+   }
+}
+
+public class Car extends Vehicle {
+  private int numWheels;
+
+   public Car(String make, String model, int year, int numWheels) {
+     super(make, model, year);
+   }
+
+   public void describe() {
+               System.out.print("This car is a "); // Print without newline – see Chapter 1.
+     super.describe();
+   }
+
+   public static void main(String[] args) {
+      Car car = new Car("Ford", "Fiesta", 2009, 4);
+      car.describe();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public void describe(String owner) {
+   System.out.print("This car, which is owned by " + owner + ", is a ");
+   super.describe();
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+@Override
+public void describe() {
+   System.out.print("This car is a ");
+   super.describe();
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Bird {
+   public void describe() {
+      // code that outputs a description of a bird's appearance and behaviors
+   }
+}
+
+public class Horse {
+   public void describe() {
+      // code that outputs a description of a horse's appearance and behaviors
+   }
+}
+
+public class FlyingHorse extends Bird, Horse {
+   public static void main(String[] args) {
+     FlyingHorse pegasus = new FlyingHorse();
+     pegasus.describe();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Employee implements Cloneable {
+   String name;
+   int age;
+
+   public Employee(String name, int age) {
+     this.name = name;
+     this.age = age;
+   }
+
+   public static void main(String[] args) throws CloneNotSupportedException {
+     Employee e1 = new Employee("John Doe", 46);
+     Employee e2 = (Employee) e1.clone();
+      System.out.println(e1 == e2); // Output: false
+      System.out.println(e1.name == e2.name); // Output: true
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Point {
+  private int x, y;
+
+  public Point(int x, int y) {
+     this.x = x;
+     this.y = y;
+  }
+
+  public int getX() {
+     return x;
+  }
+
+  public int getY() {
+     return y;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+     if (!(o instanceof Point))
+         return false;
+     Point p = (Point) o;
+     return p.x == x && p.y == y;
+  }
+
+  public static void main(String[] args) {
+     Point p1 = new Point(10, 20);
+     Point p2 = new Point(20, 30);
+     Point p3 = new Point(10, 20);
+     // Test reflexivity
+     System.out.println(p1.equals(p1)); // Output: true
+     // Test symmetry
+     System.out.println(p1.equals(p2)); // Output: false
+     System.out.println(p2.equals(p1)); // Output: false
+     // Test transitivity
+     System.out.println(p2.equals(p3)); // Output: false
+     System.out.println(p1.equals(p3)); // Output: true
+     // Test nullability
+     System.out.println(p1.equals(null)); // Output: false
+     // Extra test to further prove the instanceof operator's usefulness.
+     System.out.println(p1.equals("abc")); // Output: false
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+@Override
+protected void finalize() throws Throwable {
+   try {
+      // Perform subclass cleanup.
+   } finally {
+      super.finalize();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+@Override
+public String toString() {
+   return "(" + x + ", " + y + ")";
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Car extends Vehicle {
+   private Engine engine; // bicycles don't have engines
+   private Wheel[] wheels; // boats don't have wheels
+   private SteeringWheel steeringWheel; // hang gliders don't have steering wheels
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Circle extends Point {
+   private int radius;
+
+   public Circle(int x, int y, int radius) {
+      super(x, y);
+      this.radius = radius;
+   }
+
+   public int getRadius() {
+      return radius;
+   }
+
+   @Override
+   public String toString() {
+      return "" + radius;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Circle c = new Circle(10, 20, 30);
+Point p = c;
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Point {
+   private int x, y;
+
+   public Point(int x, int y) {
+      this.x = x;
+      this.y = y;
+   }
+
+   public int getX() {
+      return x;
+   }
+
+   public int getY() {
+      return y;
+   }
+
+   @Override
+   public String toString() {
+      return "(" + x + ", " + y + ")";
+   }
+
+   public void draw() {
+      System.out.println("Point drawn at " + toString());
+   }
+}
+
+public class Circle extends Point {
+   private int radius;
+
+   public Circle(int x, int y, int radius) {
+      super(x, y);
+      this.radius = radius;
+   }
+
+   public int getRadius() {
+      return radius;
+   }
+
+   @Override
+   public String toString() {
+      return "" + radius;
+   }
+
+   @Override
+   public void draw() {
+      System.out.println("Circle drawn at " + super.toString() +
+                         " with radius " + toString());
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Graphics {
+   public static void main(String[] args) {
+                  Point[] points = new Point[] { new Point(10, 20), new Circle(10, 20, 30) };
+      for (int i = 0; i < points.length; i++)
+         points[i].draw();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Point drawn at (10, 20)
+Circle drawn at (10, 20) with radius 30
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Point {
+   …
+}
+
+public class ColoredPoint extends Point {
+   …
+}
+
+public class UpcastArrayDemo {
+   public static void main(String[] args) {
+     ColoredPoint[] cptArray = new ColoredPoint[] {
+      new ColoredPoint(10, 20, 5)};
+     Point[] ptArray = cptArray; // legal
+      
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Shape {
+   public void draw() {
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Graphics {
+   public static void main(String[] args) {
+      Shape[] shapes = new Shape[] { new Point(10, 20), new Circle(10, 20, 30),
+                                     new Rectangle(20, 30, 15, 25) };
+      for (int i = 0; i < shapes.length; i++)
+         shapes[i].draw();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Shape[] shapes = new Shape[] { new Point(10, 20), new Circle(10, 20, 30),
+                               new Rectangle(20, 30, 15, 25), new Shape() };
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+abstract public class Shape {
+   abstract public void draw(); // semicolon is required
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class A {
+}
+
+public class B extends A {
+   public void m() {
+   }
+}
+
+public class DowncastDemo {
+   public static void main(String[] args) {
+      A a = new A();
+      B b = (B) a;
+      b.m();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+if(a instanceof B) {
+   B b = (B) a;
+   b.m();
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+A a = new A();
+B b = new B();
+System.out.println(b instanceof A); // Output: true
+System.out.println(a instanceof A); // Output: true
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Point {
+   …
+}
+
+public class ColoredPoint extends Point {
+   …
+}
+
+public class DowncastArrayDemo {
+   public static void main(String[] args) {
+     ColoredPoint[] cptArray = new ColoredPoint[]{
+      new ColoredPoint(10, 20, 5)};
+     Point[] ptArray = cptArray;
+     System.out.println(ptArray[0].getX()); // Output: 10
+     System.out.println(ptArray[0].getY()); // Output: 20
+      if (ptArray instanceof ColoredPoint[]) {
+        ColoredPoint cp = (ColoredPoint) ptArray[0];
+        System.out.println(cp.getColor());
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class SuperReturnType {
+  @Override
+   public String toString() {
+     return "superclass return type";
+   }
+}
+
+public class SubReturnType extends SuperReturnType {
+  @Override
+   public String toString() {
+     return "subclass return type";
+   }
+}
+
+public class Superclass {
+   public SuperReturnType createReturnType() {
+     return new SuperReturnType();
+   }
+}
+
+public class Subclass extends Superclass {
+  @Override
+   public SubReturnType createReturnType() {
+     return new SubReturnType();
+   }
+}
+
+public class CovarDemo {
+   public static void main(String[] args) {
+     SuperReturnType suprt = new Superclass().createReturnType();
+     System.out.println(suprt); // Output: superclass return type
+     SubReturnType subrt = new Subclass().createReturnType();
+     System.out.println(subrt); // Output: subclass return type
+   }
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public interface Drawable {
+                       int RED = 1; // For simplicity, integer constants are used. // These constants are
+  int GREEN = 2; // not that descriptive, as you will see.
+  int BLUE = 3;
+  int BLACK = 4;
+  void draw(int color);
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Point implements Drawable {
+  private int x, y;
+
+  public Point(int x, int y) {
+     this.x = x;
+     this.y = y;
+  }
+
+  public int getX() {
+     return x;
+  }
+
+  public int getY() {
+     return y;
+  }
+
+  @Override
+  public String toString() {
+     return "(" + x + ", " + y + ")";
+  }
+
+  @Override
+  public void draw(int color) {
+     System.out.println("Point drawn at " + toString() + " in color " + color);
+  }
+}
+
+public class Circle extends Point implements Drawable {
+  private int radius;
+
+  public Circle(int x, int y, int radius) {
+     super(x, y);
+     this.radius = radius;
+  }
+
+  public int getRadius() {
+     return radius;
+  }
+
+  @Override
+  public String toString() {
+     return "" + radius;
+  }
+
+  @Override
+  public void draw(int color) {
+     System.out.println("Circle drawn at " + super.toString() +
+                         " with radius " + toString() + " in color " + color);
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public static void main(String[] args) {
+   Drawable[] drawables = new Drawable[] { new Point(10, 20), new Circle(10, 20, 30) };
+   for (int i = 0; i < drawables.length; i++)
+      drawables[i].draw(Drawable.RED);
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Point drawn at (10, 20) in color 1
+Circle drawn at (10, 20) with radius 30 in color 1
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public interface Fillable {
+   int RED = 1;
+   int GREEN = 2;
+   int BLUE = 3;
+   int BLACK = 4;
+   void fill(int color);
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public static void main(String[] args) {
+   Drawable[] drawables = new Drawable[] { new Point(10, 20),
+                                           new Circle(10, 20, 30) };
+   for (int i = 0; i < drawables.length; i++)
+      drawables[i].draw(Drawable.RED);
+   Fillable[] fillables = new Fillable[drawables.length];
+   for (int i = 0; i < drawables.length; i++) {
+      fillables[i] = (Fillable) drawables[i];
+      fillables[i].fill(Fillable.GREEN);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public interface Colors {
+   int RED = 1;
+   int GREEN = 2;
+   int BLUE = 3;
+   int BLACK = 4;
+}
+
+public interface Drawable extends Colors {
+   void draw(int color);
+}
+
+public interface Fillable extends Colors {
+   void fill(int color);
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public interface A {
+   int X = 1;
+}
+
+public interface B {
+   double X = 2.0;
+}
+
+public interface C extends A, B {
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Collision implements C {
+   public void output() {
+     System.out.println(X); // Which X is accessed?
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+ArrayList<String> arrayList = new ArrayList<String>();
+void dump(ArrayList<String> arrayList) {
+   // suitable code to dump out the arrayList
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+List<String> list = new ArrayList<String>();
+void dump(List<String> list) {
+   // suitable code to dump out the list
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Census {
+   public final static int SIZE = 4;
+   private String[] IDs;
+   private int[] counts;
+
+   public Census() {
+      IDs = new String[SIZE];
+      counts = new int[SIZE];
+   }
+
+   public String get(int index) {
+      return IDs[index] + " " + counts[index];
+   }
+
+   public void update(String ID) {
+      for (int i = 0; i < IDs.length; i++) {
+         // If ID not already stored in the IDs array (which is indicated by
+         // the first null entry that is found), store ID in this array, and
+         // also assign 1 to the associated element in the counts array, to
+         // initialize the census for that ID.
+         if (IDs[i] == null) {
+            IDs[i] = ID;
+            counts[i] = 1;
+            return;
+         }
+
+         // If a matching ID is found, increment the associated element in
+         // the counts array to update the census for that ID.
+         if (IDs[i].equals(ID)) {
+            counts[i]++;
+            return;
+         }
+      }
+   }
+}
+
+
+

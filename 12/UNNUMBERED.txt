@@ -1,0 +1,642 @@
+// ----- UNNUMBERED LISTING ------------------------------
+ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+FileOutputStream fos = new FileOutputStream("employee.dat");
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+FileInputStream fis = new FileInputStream("employee.dat");
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public transient char[] password;
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java RedirectIO RedirectIO.java out.txt err.txt
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.File;
+
+public class DumpRoots {
+  public static void main(String[] args) {
+     File[] roots = File.listRoots();
+     for (File root: roots)
+         System.out.println(root);
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+C:\
+D:\
+E:\
+F:\
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+File file1 = new File("/x/y");
+File file2 = new File("C:\\temp\\x.dat");
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.File;
+import java.io.IOException;
+
+public class PathnameInfo {
+  public static void main(final String[] args) throws IOException {
+     if (args.length != 1) {
+         System.err.println("usage: java PathnameInfo pathname");
+         return;
+     }
+     File file = new File(args[0]);
+     System.out.println("Absolute path = " + file.getAbsolutePath());
+     System.out.println("Canonical path = " + file.getCanonicalPath());
+     System.out.println("Name = " + file.getName());
+     System.out.println("Parent = " + file.getParent());
+     System.out.println("Path = " + file.getPath());
+     System.out.println("Is absolute = " + file.isAbsolute());
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Absolute path = C:\prj\dev\ljfad3\ch11\code\PathnameInfo\.
+Canonical path = C:\prj\dev\ljfad3\ch11\code\PathnameInfo
+Name = .
+Parent = null
+Path = .
+Is absolute = false
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.File;
+import java.io.IOException;
+
+import java.util.Date;
+
+public class FileDirectoryInfo {
+  public static void main(final String[] args) throws IOException {
+     if (args.length != 1) {
+         System.err.println("usage: java FileDirectoryInfo pathname");
+         return;
+     }
+     File file = new File(args[0]);
+     System.out.println("About " + file + ":");
+     System.out.println("Exists = " + file.exists());
+     System.out.println("Is directory = " + file.isDirectory());
+     System.out.println("Is file = " + file.isFile());
+     System.out.println("Is hidden = " + file.isHidden());
+     System.out.println("Last modified = " + new Date(file.lastModified()));
+     System.out.println("Length = " + file.length());
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+About x.dat:
+Exists = true
+Is directory = false
+Is file = true
+Is hidden = false
+Last modified = Mon Oct 14 15:31:04 CDT 2019
+Length = 3
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.File;
+import java.io.FilenameFilter;
+
+public class Dir {
+  public static void main(final String[] args) {
+     if (args.length != 2) {
+         System.err.println("usage: java Dir dirpath ext");
+         return;
+     }
+     File file = new File(args[0]);
+     FilenameFilter fnf = new FilenameFilter() {
+                      @Override
+                      public boolean accept(File dir, String name){
+                         return name.endsWith(args[1]);
+                      }
+                   };
+     String[] names = file.list(fnf);
+     for (String name: names)
+         System.out.println(name);
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+bfsvc.exe
+explorer.exe
+fveupdate.exe
+HelpPane.exe
+hh.exe
+notepad.exe
+regedit.exe
+splwow64.exe
+twunk_16.exe
+twunk_32.exe
+winhlp32.exe
+write.exe
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.File;
+import java.io.IOException;
+
+public class TempFileDemo {
+  public static void main(String[] args) throws IOException {
+     System.out.println(System.getProperty("java.io.tmpdir"));
+     File temp = File.createTempFile("text", ".txt");
+     System.out.println(temp);
+     temp.deleteOnExit();
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+C:\Users\Owner\AppData\Local\Temp\
+C:\Users\Owner\AppData\Local\Temp\text3173127870811188221.txt
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.File;
+
+public class Permissions {
+  public static void main(String[] args) {
+     if (args.length != 1) {
+         System.err.println("usage: java Permissions filespec");
+         return;
+     }
+     File file = new File(args[0]);
+     System.out.println("Checking permissions for " + args[0]);
+       System.out.println(" Execute = " + file.canExecute());
+       System.out.println(" Read = " + file.canRead());
+       System.out.println(" Write = " + file.canWrite());
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Checking permissions for x
+ Execute = true
+ Read = true
+ Write = false
+
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+String pathname = ... ; // Assume a legitimate pathname to an image.
+Bitmap bm = BitmapFactory.decodeFile(pathname);
+ByteArrayOutputStream baos = new ByteArrayOutputStream();
+if (bm.compress(Bitmap.CompressFormat.PNG, 100, baos)) {
+  byte[] imageBytes = baos.toByteArray();
+  // Do something with imageBytes.
+  bm = BitMapFactory.decodeStream(new ByteArrayInputStream(imageBytes));
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class Copy {
+  public static void main(String[] args) {
+     if (args.length != 2) {
+         System.err.println("usage: java Copy srcfile dstfile");
+         return;
+     }
+     FileInputStream fis = null;
+     FileOutputStream fos = null;
+     try {
+         fis = new FileInputStream(args[0]);
+         fos = new FileOutputStream(args[1]);
+         int b; // I chose b instead of byte because byte is a reserved word.
+         while ((b = fis.read()) != -1)
+            fos.write(b);
+     } catch (FileNotFoundException fnfe) {
+         System.err.println(args[0] + " could not be opened for input, or " +
+                            args[1] + " could not be created for output");
+     } catch (IOException ioe) {
+         System.err.println("I/O error: " + ioe.getMessage());
+     } finally {
+         if (fis != null)
+            try {
+               fis.close();
+            } catch (IOException ioe) {
+            }
+
+         if (fos != null)
+            try {
+               fos.close();
+            } catch (IOException ioe) {
+            }
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+PipedOutputStream pos = new PipedOutputStream();
+PipedInputStream pis = new PipedInputStream(pos);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+PipedInputStream pis = new PipedInputStream();
+PipedOutputStream pos = new PipedOutputStream(pis);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+PipedOutputStream pos = new PipedOutputStream();
+PipedInputStream pis = new PipedInputStream();
+// ...
+pos.connect(pis);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.IOException;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+
+public class PipedStreamsDemo {
+  public static void main(String[] args) throws IOException {
+     final PipedOutputStream pos = new PipedOutputStream();
+     final PipedInputStream pis = new PipedInputStream(pos);
+     Runnable senderTask = new Runnable() {
+                       final static int LIMIT = 10;
+                       @Override
+                       public void run() {
+                          try {
+                             for (int i = 0 ; i < LIMIT; i++)
+                               pos.write((byte) (Math.random() * 256));
+                          } catch (IOException ioe) {
+                            ioe.printStackTrace();
+                          } finally {
+                             try {
+                                pos.close();
+                             } catch (IOException ioe) {
+                               ioe.printStackTrace();
+                             }
+                          }
+                       }
+                    };
+     Runnable receiverTask = new Runnable() {
+                         @Override
+                         public void run() {
+                            try {
+                               int b;
+                               while ((b = pis.read()) != -1)
+                                  System.out.println(b);
+                            } catch (IOException ioe) {
+                              ioe.printStackTrace();
+                            } finally {
+                               try {
+                                  pis.close();
+                              } catch (IOException ioe) {
+                                 ioe.printStackTrace();
+                               }
+                            }
+                         }
+                      };
+     Thread sender = new Thread(senderTask);
+     Thread receiver = new Thread(receiverTask);
+     sender.start();
+     receiver.start();
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+93
+23
+125
+50
+126
+131
+210
+29
+150
+91
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.FilterOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+public class ScrambledOutputStream extends FilterOutputStream {
+  private int[] map;
+
+  public ScrambledOutputStream(OutputStream out, int[] map) {
+     super(out);
+     if (map == null)
+         throw new NullPointerException("map is null");
+     if (map.length != 256)
+         throw new IllegalArgumentException("map.length != 256");
+     this.map = map;
+  }
+
+  @Override
+  public void write(int b) throws IOException {
+     out.write(map[b]);
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+FileOutputStream fos = new FileOutputStream("employee.dat");
+BufferedOutputStream bos = new BufferedOutputStream(fos); // Chain bos to fos.
+bos.write(0); // Write to employee.dat through the buffer.
+// Additional write() method calls.
+bos.close(); // This method call internally calls fos's close() method.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+FileInputStream fis = new FileInputStream("employee.dat");
+BufferedInputStream bis = new BufferedInputStream(fis); // Chain bis to fis.
+int ch = bis.read(); // Read employee.dat through the buffer.
+// Additional read() method calls.
+bis.close(); // This method call internally calls fis's close() method.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+public class DataStreamsDemo {
+  private final static String FILENAME = "values.dat";
+
+  public static void main(String[] args) {
+     DataOutputStream dos = null;
+     DataInputStream dis = null;
+     try {
+         FileOutputStream fos = new FileOutputStream(FILENAME);
+         dos = new DataOutputStream(fos);
+         dos.writeInt(1995);
+         dos.writeUTF("Saving this String in modified UTF-8 format!");
+         dos.writeFloat(1.0F);
+         dos.close(); // Close underlying file output stream.
+         // The following null assignment prevents another close attempt on
+         // dos (which is now closed) should IOException be thrown from
+         // subsequent method calls.
+         dos = null;
+        FileInputStream fis = new FileInputStream(FILENAME);
+         dis = new DataInputStream(fis);
+         System.out.println(dis.readInt());
+         System.out.println(dis.readUTF());
+         System.out.println(dis.readFloat());
+     } catch (IOException ioe) {
+         System.err.println("I/O error: " + ioe.getMessage());
+     } finally {
+         if (dos != null)
+            try {
+               dos.close();
+            } catch (IOException ioe2) {
+            }
+         if (dis != null)
+            try {
+               dis.close();
+            } catch (IOException ioe2) {
+            }
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+1995
+Saving this String in modified UTF-8 format!
+1.0
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.Serializable;
+
+public class Employee implements Serializable {
+  private String name;
+  private int age;
+
+  public Employee(String name, int age) {
+     this.name = name;
+     this.age = age;
+  }
+
+  public String getName() { return name; }
+
+  public int getAge() { return age; }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+public class SerializationDemo {
+  final static String FILENAME = "employee.dat";
+
+  public static void main(String[] args) {
+     ObjectOutputStream oos = null;
+     ObjectInputStream ois = null;
+     try {
+         FileOutputStream fos = new FileOutputStream(FILENAME);
+         oos = new ObjectOutputStream(fos);
+         Employee emp = new Employee("John Doe", 36);
+         oos.writeObject(emp);
+         oos.close();
+         oos = null;
+         FileInputStream fis = new FileInputStream(FILENAME);
+         ois = new ObjectInputStream(fis);
+         emp = (Employee) ois.readObject(); // (Employee) cast is necessary.
+         ois.close();
+         System.out.println(emp.getName());
+         System.out.println(emp.getAge());
+      } catch (ClassNotFoundException cnfe) {
+         System.err.println(cnfe.getMessage());
+     } catch (IOException ioe) {
+         System.err.println(ioe.getMessage());
+     } finally {
+         if (oos != null)
+            try {
+               oos.close();
+            } catch (IOException ioe) {
+            }
+         if (ois != null)
+            try {
+               ois.close();
+            } catch (IOException ioe) {
+            }
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+John Doe
+36
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.PrintStream;
+
+public class RedirectIO {
+  public static void main(String[] args) throws IOException {
+     if (args.length != 3) {
+         System.err.println("usage: java RedirectIO stdinfile stdoutfile stderrfile");
+         return;
+     }
+
+     System.setIn(new FileInputStream(args[0]));
+     System.setOut(new PrintStream(args[1]));
+     System.setErr(new PrintStream(args[2]));
+
+     int ch;
+     while ((ch = System.in.read()) != -1)
+         System.out.print((char) ch);
+
+     System.err.println("Redirected error output");
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+FileOutputStream fos = new FileOutputStream("polish.txt");
+OutputStreamWriter osw = new OutputStreamWriter(fos, "8859_2");
+char ch = '\u0323'; // Accented N.
+osw.write(ch);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+FileInputStream fis = new FileInputStream("polish.txt");
+InputStreamReader isr = new InputStreamReader(fis, "8859_2");
+char ch = isr.read(ch);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+FileOutputStream fos = new FileOutputStream(pathname);
+OutputStreamWriter osw;
+osw = new OutputStreamWriter(fos, System.getProperty("file.encoding"));
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+package logging;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class File implements Logger {
+  private final static String LINE_SEPARATOR = System.getProperty("line.separator");
+
+  private String dstName;
+  private FileWriter fw;
+
+  public File(String dstName) {
+     this.dstName = dstName;
+  }
+
+  public boolean connect() {
+     if (dstName == null)
+         return false;
+     try {
+          fw = new FileWriter(dstName);
+     } catch (IOException ioe) {
+         return false;
+     }
+     return true;
+  }
+
+  public boolean disconnect() {
+     if (fw == null)
+         return false;
+     try {
+         fw.close();
+     } catch (IOException ioe) {
+         return false;
+     }
+     return true;
+  }
+
+  public boolean log(String msg) {
+     if (fw == null)
+          return false;
+     try {
+         fw.write(msg + LINE_SEPARATOR);
+     } catch (IOException ioe) {
+         return false;
+     }
+     return true;
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+FileInputStream fis = new FileInputStream(pathname);
+InputStreamReader isr;
+isr = new InputStreamReader(fis, System.getProperty("file.encoding"));
+
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+
+
+
+
+

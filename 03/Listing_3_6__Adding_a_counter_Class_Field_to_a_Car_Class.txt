@@ -1,0 +1,10 @@
+public class Car {
+   // No ‘private’ here, because we want to access
+   // the field directly from outside. If not fom the same
+   // package, we have to prepend ‘public’
+   static int counter = 0;
+
+   public Car() {
+     counter++;
+   }
+}

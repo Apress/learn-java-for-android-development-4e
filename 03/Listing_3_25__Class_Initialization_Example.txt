@@ -1,0 +1,11 @@
+public class A {
+  static privateint invoiceNumberBase;
+
+   static {
+     invoiceNumberBase = …; // determine somehow
+     if(invoiceNumberBase < 10000) {
+          System.err.println("Invalid invoice number");
+     }
+   }
+  //...
+}

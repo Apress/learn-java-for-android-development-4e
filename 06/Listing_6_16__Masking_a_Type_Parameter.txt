@@ -1,0 +1,4 @@
+public class EnclosingClass<T> {
+   static public class EnclosedClass<T extends Comparable<T>> {
+   }
+}

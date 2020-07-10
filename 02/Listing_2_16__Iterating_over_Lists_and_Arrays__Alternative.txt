@@ -1,0 +1,14 @@
+import java.util.*;
+public class DumpMatrix {
+   public static void main(String[] args) {
+      int[] a = {1, 2, 3, 7};
+      for (int i : a) {
+          System.out.println(i);
+      }
+
+      List<String> l = Arrays.asList("Hello", "there");
+      for (String s : l) {
+          System.out.println(s);
+      }
+   }
+}

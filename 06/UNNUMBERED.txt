@@ -1,0 +1,854 @@
+// ----- UNNUMBERED LISTING ------------------------------
+<formal_type_parameter_list> return_type identifier(parameter_list)
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+@Override
+public void draw(int color) {
+   // drawing code
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+@Deprecated
+public Date(int year, int month, int date) {
+    this(year, month, date, 0, 0, 0);
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Employee {
+   /**
+    * Employee's name
+    * @deprecated New version uses firstName and lastName fields.
+    */
+   @Deprecated
+   String name;
+   String firstName;
+   String lastName;
+
+   public static void main(String[] args) {
+      Employee emp = new Employee();
+      emp.name = "John Doe";
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Employee {
+  /**
+   * Employee's name
+   * @deprecated New version uses firstName and lastName fields.
+           * <= do not confuse, this is for javadoc
+   */
+  @Deprecated
+  String name;
+  String firstName;
+  String lastName;
+}
+
+public class UseEmployee {
+  public static void main(String[] args) {
+     Employee emp = new Employee();
+     emp.name = "John Doe";
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Note: UseEmployee.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Employee.java:18: warning: [deprecation] name in Employee has been deprecated
+      emp.name = "John Doe";
+         ^
+1 warning
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class UseEmployee {
+   @SuppressWarnings("deprecation")
+   public static void main(String[] args) {
+      Employee emp = new Employee();
+      emp.name = "John Doe";
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public @interface Stub {
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Deck // Describes a deck of cards.{
+   @Stub
+   public void shuffle() {
+      // This method is empty and will presumably be filled in with appropriate
+      // code at some later date.
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public @interface Stub {
+   int id(); // A semicolon must terminate an element declaration.
+   String dueDate();
+   String developer() default "unassigned";
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Deck {
+  @Stub(
+     id = 1,
+     dueDate = "12/21/2012"
+  )
+  public void shuffle() {
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Deck {
+   @Stub(value = "1,12/21/2012,unassigned")
+   public void shuffle() {
+   }
+
+   @Stub("2,12/21/2012,unassigned")
+   public Card[] deal(int ncards) {
+      return null;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+@Target(value={TYPE,FIELD,METHOD,PARAMETER,CONSTRUCTOR,LOCAL_VARIABLE})
+@Retention(value=SOURCE)
+public @interface SuppressWarnings
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+@Stub("1,12/21/2012,unassigned")
+public class Deck {
+  @Stub("2,12/21/2012,unassigned")
+  private Card[] cardsRemaining = new Card[52];
+
+  @Stub("3,12/21/2012,unassigned")
+  public Deck(){
+  }
+
+  @Stub("4,12/21/2012,unassigned")
+  public void shuffle() {
+  }
+
+  @Stub("5,12/21/2012,unassigned")
+  public Card[] deal(@Stub("5,12/21/2012,unassigned") int ncards) {
+     return null;
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Deck.java:1: error: annotation type not applicable to this kind of declaration
+@Stub("1,12/21/2012,unassigned")
+^
+Deck.java:4: error: annotation type not applicable to this kind of declaration
+  @Stub("2,12/21/2012,unassigned")
+  ^
+Deck.java:18: error: annotation type not applicable to this kind of declaration
+  public Card[] deal(@Stub("5,12/21/2012,unassigned") int ncards)
+                      ^
+3 errors
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+@Target({ElementType.METHOD, ElementType.CONSTRUCTOR})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Stub {
+  String value();
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.lang.reflect.Method;
+
+public class StubFinder {
+   public static void main(String[] args) throws Exception {
+      if (args.length != 1) {
+        System.err.println("usage: java StubFinder classfile");
+        return;
+      }
+     Method[] methods = Class.forName(args[0]).getMethods();
+      for (int i = 0; i < methods.length; i++)
+        if (methods[i].isAnnotationPresent(Stub.class)){
+           Stub stub = methods[i].getAnnotation(Stub.class);
+           String[] components = stub.value().split(",");
+           System.out.println("Stub ID = " + components[0]);
+           System.out.println("Stub Date = " + components[1]);
+           System.out.println("Stub Developer = " + components[2]);
+           System.out.println();
+        }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Stub ID = 1
+Stub Date = 12/21/2012
+Stub Developer = unassigned
+
+Stub ID = 2
+Stub Date = 12/21/2012
+Stub Developer = unassigned
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Employee {
+  private String name;
+
+   public Employee(String name) {
+     this.name = name;
+   }
+
+   public String getName() {
+     return name;
+   }
+}
+
+public class TypeSafety {
+   public static void main(String[] args){
+     List<Employee> employees = new ArrayList<Employee>();
+      // or List<Employee> employees = new ArrayList<>();
+     employees.add(new Employee("John Doe"));
+     employees.add(new Employee("Jane Smith"));
+     employees.add("Jack Frost"); // Illegal
+     Iterator<Employee> iter = employees.iterator();
+     while (iter.hasNext()) {
+        Employee emp = iter.next();
+         System.out.println(emp.getName());
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+class identifier<formal_type_parameter_list> {}
+interface identifier<formal_type_parameter_list> {}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Queue<E> {
+  private E[] elements;
+  private int head, tail;
+
+  @SuppressWarnings("unchecked")
+   public Queue(int size) {
+      if (size < 2)
+        throw new IllegalArgumentException("" + size);
+     elements = (E[]) new Object[size];
+     head = 0;
+     tail = 0;
+   }
+
+   public void insert(E element) throws QueueFullException {
+      if (isFull())
+        throw new QueueFullException();
+     elements[tail] = element;
+     tail = (tail + 1) % elements.length;
+   }
+
+   public E remove() throws QueueEmptyException {
+      if (isEmpty())
+        throw new QueueEmptyException();
+      E element = elements[head];
+     head = (head + 1) % elements.length;
+     return element;
+   }
+
+   public boolean isEmpty() {
+     return head == tail;
+   }
+
+   public boolean isFull(){
+     return (tail + 1) % elements.length == head;
+   }
+
+   public static void main(String[] args)
+     throws QueueFullException, QueueEmptyException
+   {
+     Queue<String> queue = new Queue<String>(6);
+     System.out.println("Empty: " + queue.isEmpty());
+     System.out.println("Full: " + queue.isFull());
+     System.out.println("Adding A");
+     queue.insert("A");
+     System.out.println("Adding B");
+     queue.insert("B");
+     System.out.println("Adding C");
+     queue.insert("C");
+     System.out.println("Adding D");
+      queue.insert("D");
+      System.out.println("Adding E");
+      queue.insert("E");
+      System.out.println("Empty: " + queue.isEmpty());
+     System.out.println("Full: " + queue.isFull());
+     System.out.println("Removing " + queue.remove());
+     System.out.println("Empty: " + queue.isEmpty());
+     System.out.println("Full: " + queue.isFull());
+     System.out.println("Adding F");
+     queue.insert("F");
+     while (!queue.isEmpty())
+        System.out.println("Removing " + queue.remove());
+     System.out.println("Empty: " + queue.isEmpty());
+     System.out.println("Full: " + queue.isFull());
+   }
+}
+
+public class QueueEmptyException extends Exception {
+}
+
+public class QueueFullException extends Exception {
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Empty: true
+Full: false
+Adding A
+Adding B
+Adding C
+Adding D
+Adding E
+Empty: false
+Full: true
+Removing A
+Empty: false
+Full: false
+Adding F
+Removing B
+Removing C
+Removing D
+Removing E
+Removing F
+Empty: true
+Full: false
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+abstract public class Shape {
+}
+
+public class Circle extends Shape implements Comparable<Circle> {
+  private double x, y, radius;
+
+  public Circle(double x, double y, double radius) {
+     this.x = x;
+     this.y = y;
+     this.radius = radius;
+  }
+
+  @Override
+  public int compareTo(Circle circle) {
+     if (radius < circle.radius)
+         return -1;
+     else
+     if (radius > circle.radius)
+         return 1;
+     else
+         return 0;
+  }
+
+  @Override
+  public String toString() {
+     return "(" + x + ", " + y + ", " + radius + ")";
+  }
+}
+
+public class SortedShapesList<S extends Shape & Comparable<S>> {
+  @SuppressWarnings("unchecked")
+  private S[] shapes = (S[]) new Shape[2];
+  private int index = 0;
+
+  public void add(S shape) {
+     shapes[index++] = shape;
+     if (index < 2)
+         return;
+     System.out.println("Before sort: " + this);
+     sort();
+     System.out.println("After sort: " + this);
+  }
+
+  private void sort() {
+     if (index == 1)
+         return;
+     if (shapes[0].compareTo(shapes[1]) > 0) {
+         S shape = (S) shapes[0];
+         shapes[0] = shapes[1];
+         shapes[1] = shape;
+     }
+  }
+
+  @Override
+  public String toString() {
+     return shapes[0].toString() + " " + shapes[1].toString();
+  }
+}
+
+public class SortedShapesListDemo {
+  public static void main(String[] args) {
+     SortedShapesList<Circle> ssl = new SortedShapesList<Circle>();
+     ssl.add(new Circle(100, 200, 300));
+     ssl.add(new Circle(10, 20, 30));
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Before sort: (100.0, 200.0, 300.0) (10.0, 20.0, 30.0)
+After sort: (10.0, 20.0, 30.0) (100.0, 200.0, 300.0)
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class EnclosingClass<T> {
+   static public class EnclosedClass<T extends Comparable<T>> {
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.ArrayList;
+import java.util.List;
+
+public class OutputList {
+   public static void main(String[] args) {
+     List<String> ls = new ArrayList<String>();
+     ls.add("first");
+     ls.add("second");
+     ls.add("third");
+     outputList(ls);
+   }
+
+   static public void outputList(List<Object> list) {
+      for (int i = 0; i < list.size(); i++)
+        System.out.println(list.get(i));
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+OutputList.java:12: error: method outputList in class OutputList cannot be applied to given types;
+     outputList(ls);
+      ^
+ required: List<Object>
+  found: List<String>
+  reason: actual argument List<String> cannot be converted to List<Object> by method invocation conversion
+1 error
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+List<String> ls = new ArrayList<String>();
+List<Object> lo = ls;
+Lo.add(new Employee());
+String s = ls.get(0);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+static void copyList(List<?> src, List<?> dest) {
+   for (int i = 0; i < src.size(); i++)
+      dest.add(src.get(i));
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+CopyList.java:19: error: no suitable method found for add(Object)
+         dest.add(src.get(i));
+             ^
+    method List.add(int,CAP#1) is not applicable
+      (actual and formal argument lists differ in length)
+    method List.add(CAP#1) is not applicable
+      (actual argument Object cannot be converted to CAP#1 by method invocation conversion)
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Object from capture of ?
+1 error
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.ArrayList;
+import java.util.List;
+
+public class Circle {
+  private double x, y, radius;
+
+   public Circle(double x, double y, double radius) {
+     this.x = x;
+     this.y = y;
+     this.radius = radius;
+   }
+
+  @Override
+   public String toString() {
+     return "(" + x + ", " + y + ", " + radius + ")";
+   }
+}
+
+public class CopyList {
+   public static void main(String[] args) {
+     List<String> ls = new ArrayList<String>();
+     ls.add("A");
+     ls.add("B");
+     ls.add("C");
+     outputList(ls);
+     List<String> lsCopy = new ArrayList<String>();
+     copyList(ls, lsCopy);
+     outputList(lsCopy);
+     List<Circle> lc = new ArrayList<Circle>();
+     lc.add(new Circle(10.0, 20.0, 30.0));
+     lc.add(new Circle (5.0, 4.0, 16.0));
+     outputList(lc);
+     List<Circle> lcCopy = new ArrayList<Circle>();
+     copyList(lc, lcCopy);
+     outputList(lcCopy);
+   }
+
+   static <T> public void copyList(List<T> src, List<T> dest) {
+      for (int i = 0; i < src.size(); i++)
+        dest.add(src.get(i));
+   }
+
+   static public void outputList(List<?> list) {
+      for (int i = 0; i < list.size(); i++)
+        System.out.println(list.get(i));
+     System.out.println();
+   }
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+A
+B
+C
+
+A
+B
+C
+
+(10.0, 20.0, 30.0)
+(5.0, 4.0, 16.0)
+
+(10.0, 20.0, 30.0)
+(5.0, 4.0, 16.0)
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Point {
+   public int x, y;
+}
+
+public class ColoredPoint extends Point {
+   public int color;
+}
+
+public class ReificationDemo {
+   public static void main(String[] args) {
+        // ColoredPoint[] cptArray = new Point[1]; // illegal
+     ColoredPoint[] cptArray = new ColoredPoint[1];
+     Point[] ptArray = cptArray;
+      ptArray[0] = new Point();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+List<Employee>[] empListArray = new ArrayList<Employee>[1];
+List<String> strList = new ArrayList<String>();
+strList.add("string");
+Object[] objArray = empListArray;
+objArray[0] = strList;
+Employee e = empListArray[0].get(0);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Coin {
+  final static int PENNY = 0;
+  final static int NICKEL = 1;
+  final static int DIME = 2;
+  final static int QUARTER = 3;
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Weekday {
+  final static int SUNDAY = 0;
+  final static int MONDAY = 1;
+  final static int TUESDAY = 2;
+  final static int WEDNESDAY = 3;
+  final static int THURSDAY = 4;
+  final static int FRIDAY = 5;
+  final static int SATURDAY = 6;
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public enum Coin { PENNY, NICKEL, DIME, QUARTER }
+public enum Weekday { SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY }
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class EnhancedSwitch {
+   public enum Coin { PENNY, NICKEL, DIME, QUARTER }
+
+   public static void main(String[] args) {
+     Coin coin = Coin.NICKEL;
+     switch (coin) {
+          case PENNY : System.out.println("1 cent"); break;
+        case NICKEL : System.out.println("5 cents"); break;
+           case DIME : System.out.println("10 cents"); break;
+        case QUARTER: System.out.println("25 cents"); break;
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public enum Coin {
+  PENNY(1),
+  NICKEL(5),
+  DIME(10),
+  QUARTER(25);
+
+  private final int denomValue;
+
+  public Coin(int denomValue) {
+     this.denomValue = denomValue;
+  }
+
+  public int denomValue() {
+     return denomValue;
+  }
+
+  public int toDenomination(int numPennies) {
+     return numPennies / denomValue;
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Coins {
+  public static void main(String[] args) {
+     if (args.length == 1) {
+         int numPennies = Integer.parseInt(args[0]);
+         System.out.println(numPennies + " pennies is equivalent to:");
+         int numQuarters = Coin.QUARTER.toDenomination(numPennies);
+         System.out.println(numQuarters + " " + Coin.QUARTER.toString() +
+                            (numQuarters != 1 ? "s," : ","));
+         numPennies -= numQuarters * Coin.QUARTER.denomValue();
+         int numDimes = Coin.DIME.toDenomination(numPennies);
+         System.out.println(numDimes + " " + Coin.DIME.toString() +
+                            (numDimes != 1 ? "s, " : ","));
+         numPennies -= numDimes * Coin.DIME.denomValue();
+         int numNickels = Coin.NICKEL.toDenomination(numPennies);
+         System.out.println(numNickels + " " + Coin.NICKEL.toString() +
+                            (numNickels != 1 ? "s, " : ", and"));
+         numPennies -= numNickels*Coin.NICKEL.denomValue();
+         System.out.println(numPennies + " " + Coin.PENNY.toString() +
+                            (numPennies != 1 ? "s" : ""));
+     }
+     System.out.println();
+     System.out.println("Denomination values:");
+     for (int i = 0; i < Coin.values().length; i++)
+        System.out.println(Coin.values()[i].denomValue());
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+119 pennies is equivalent to:
+4 QUARTERs,
+1 DIME,
+1 NICKEL, and
+4 PENNYs
+
+Denomination values:
+1
+5
+10
+25
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public enum Token {
+  IDENTIFIER("ID"),
+  INTEGER("INT"),
+   LPAREN("("),
+   RPAREN(")"),
+   COMMA(",");
+
+   private final String tokValue;
+
+  public Token(String tokValue) {
+     this.tokValue = tokValue;
+  }
+
+  @Override
+  public String toString() {
+     return tokValue;
+  }
+
+  public static void main(String[] args) {
+     System.out.println("Token values:");
+     for (int i = 0; i < Token.values().length; i++)
+        System.out.println(Token.values()[i].name() + " = " +
+                            Token.values()[i]);
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Token values:
+IDENTIFIER = ID
+INTEGER = INT
+LPAREN = (
+RPAREN = )
+COMMA = ,
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public enum TempConversion {
+  C2F("Celsius to Fahrenheit") {
+     @Override
+     public double convert(double value) {
+         return value * 9.0 / 5.0 + 32.0;
+     }
+  },
+
+  F2C("Fahrenheit to Celsius") {
+     @Override
+     public double convert(double value) {
+         return (value - 32.0) * 5.0 / 9.0;
+     }
+  };
+
+  public TempConversion(String desc) {
+     this.desc = desc;
+  }
+
+  private String desc;
+
+  @Override
+  public String toString() {
+     return desc;
+  }
+
+  abstract public double convert(double value);
+
+  public static void main(String[] args) {
+     System.out.println(C2F + " for 100.0 degrees = " + C2F.convert(100.0));
+     System.out.println(F2C + " for 98.6 degrees = " + F2C.convert(98.6));
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Celsius to Fahrenheit for 100.0 degrees = 212.0
+Fahrenheit to Celsius for 98.6 degrees = 37.0
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public final class Coin extends Enum<Coin> {
+   public static final Coin PENNY = new Coin("PENNY", 0);
+   public static final Coin NICKEL = new Coin("NICKEL", 1);
+   public static final Coin DIME = new Coin("DIME", 2);
+   public static final Coin QUARTER = new Coin("QUARTER", 3);
+  private static final Coin[] $VALUES = { PENNY, NICKEL, DIME, QUARTER };
+
+   public static Coin[] values() {
+     return Coin.$VALUES.clone();
+   }
+
+   public static Coin valueOf(String name) {
+     return Enum.valueOf(Coin.class, "Coin");
+   }
+
+  private Coin(String name, int ordinal) {
+     super(name, ordinal);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.Date;
+
+public class CallOverloadedNGMethodFromGMethod {
+   public static void someOverloadedMethod(Object o) {
+      System.out.println("call to someOverloadedMethod(Object o)");
+   }
+   public static void someOverloadedMethod(Date d) {
+      System.out.println("call to someOverloadedMethod(Date d)");
+   }
+   public static <T> void methodCaller(T t) {
+      someOverloadedMethod(t);
+   }
+   public static void main(String[] args) {
+      methodCaller(new Date());
+   }
+}
+
+
+

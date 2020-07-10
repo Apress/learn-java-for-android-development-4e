@@ -1,0 +1,40 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class A {
+  public static void main(String[] args) {
+    List<String> list = Arrays.asList("Orange", "Apple", "Banana", "Car");
+
+    Stream<String> s1 = list.stream();
+    s1.forEach(System.out::println);
+
+    Stream<String> s2 = Stream.of("Orange", "Apple", "Banana", "Car");
+    s2.forEach(System.out::println);
+
+    // Beware, this is not a stream of ints, but a stream with
+    // an int array as its only element!
+    Stream<int[]> s3 = Stream.of(new int[] { 3, 7, 23, 59, -2});
+    s3.forEach(System.out::println);
+
+    // This is a stream of ints
+    IntStream s4 = IntStream.of(new int[] { 3, 7, 23, 59, -2});
+    s4.forEach(System.out::println);
+
+    // The same, as a stream of Integer objects
+    Stream<Integer> s5 = IntStream.of(new int[] { 3, 7, 23, 59, -2}).boxed();
+    s5.forEach(System.out::println);
+
+    Supplier<Double> rndDouble = () -> Math.random();
+    Stream<Double> s6 = Stream.generate(rndDouble);
+    // This is an infinite stream! For diagnostic output, we have to limit it
+    s6.limit(4).forEach(System.out::println);
+
+    UnaryOperator<String> addX = (s) -> s + "x";
+    Stream<String> s7 = Stream.iterate("0", addX);
+    s7.limit(4).forEach(System.out::println);
+  }
+}

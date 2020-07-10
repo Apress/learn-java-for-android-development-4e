@@ -1,0 +1,19 @@
+public final class Coin extends Enum<Coin> {
+   public static final Coin PENNY = new Coin("PENNY", 0);
+   public static final Coin NICKEL = new Coin("NICKEL", 1);
+   public static final Coin DIME = new Coin("DIME", 2);
+   public static final Coin QUARTER = new Coin("QUARTER", 3);
+  private static final Coin[] $VALUES = { PENNY, NICKEL, DIME, QUARTER };
+
+   public static Coin[] values() {
+     return Coin.$VALUES.clone();
+   }
+
+   public static Coin valueOf(String name) {
+     return Enum.valueOf(Coin.class, "Coin");
+   }
+
+  private Coin(String name, int ordinal) {
+     super(name, ordinal);
+   }
+}

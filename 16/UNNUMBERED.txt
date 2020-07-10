@@ -1,0 +1,946 @@
+// ----- UNNUMBERED LISTING ------------------------------
+<r:title h:style="font-family: sans-serif;">
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+XMLReader xmlr = XMLReaderFactory.createXMLReader();
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java SAXDemo svg-examples.xml
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java SAXDemo svg-examples.xml
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java SAXDemo svg-examples.xml v
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+DocumentBuilder db = dbf.newDocumentBuilder();
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java DOMDemo article.xml
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java DOMDemo recipe.xml
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+                                                                            { "name" : “Linda Green”, "id” : 746, "rank" : 36.7, "active" : true, "children" : [ 747, 748 ], "address" : { “country” : "US", "state" : "Texas", “city” : "Austin" }, "plan" : null }
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+                  URL url = new URL(“http://example.com/example”); JsonReader rdr = Json.createReader(url.openStream()); ...
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+<recipe>
+  <title>
+     Grilled Cheese Sandwich
+  </title>
+  <ingredients>
+     <ingredient qty="2">
+         bread slice
+     </ingredient>
+     <ingredient>
+         cheese slice
+     </ingredient>
+     <ingredient qty="2">
+         margarine pat
+     </ingredient>
+  </ingredients>
+  <instructions>
+     Place frying pan on element and select medium heat. For each bread slice, smear
+     one pat of margarine on one side of bread slice. Place cheese slice between bread
+     slices with margarine-smeared sides away from the cheese. Place sandwich in frying
+     pan with one margarine-smeared side in contact with pan. Fry for a couple of
+     minutes and flip. Fry other side for a minute and serve.
+  </instructions>
+</recipe>
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<movie>
+  <name>Le Fabuleux Destin d'Amélie Poulain</name>
+  <language>français</language>
+</movie>
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+<?xml version="1.0"?>
+<article title="The Rebirth of JavaFX" lang="en">
+  <abstract>
+     JavaFX 2.0 marks a significant milestone in the history of JavaFX. Now that
+     Sun Microsystems has passed the torch to Oracle, we have seen the demise of
+     JavaFX Script and the emerge of Java APIs (such as
+     <code-inline>javafx.application.Application</code-inline>) for interacting
+     with this technology. This article introduces you to this new flavor of
+     JavaFX, where you learn about JavaFX 2.0 architecture and key APIs.
+  </abstract>
+  <body>
+  </body>
+</article>
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+<?xml version="1.0"?>
+<svg-examples>
+  <example>
+     The following Scalable Vector Graphics document describes a blue-filled and
+     black-stroked rectangle.
+     <![CDATA[<svg width="100%" height="100%" version="1.1"
+          xmlns="http://www.w3.org/2000/svg">
+         <rect width="300" height="100"
+               style="fill:rgb(0,0,255);stroke-width:1; stroke:rgb(0,0,0)"/>
+     </svg>]]>
+  </example>
+</svg-examples>
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+<?xml version="1.0"?>
+<h:html xmlns:h="http://www.w3.org/1999/xhtml"
+       xmlns:r="http://www.tutortutor.ca/">
+   <h:head>
+     <h:title>
+         Recipe
+     </h:title>
+  </h:head>
+  <h:body>
+  <r:recipe>
+     <r:title>
+         Grilled Cheese Sandwich
+     </r:title>
+     <r:ingredients>
+         <h:ul>
+         <h:li>
+         <r:ingredient qty="2">
+            bread slice
+         </r:ingredient>
+         </h:li>
+         <h:li>
+         <r:ingredient>
+            cheese slice
+         </r:ingredient>
+         </h:li>
+         <h:li>
+         <r:ingredient qty="2">
+            margarine pat
+         </r:ingredient>
+         </h:li>
+         </h:ul>
+     </r:ingredients>
+     <h:p>
+     <r:instructions>
+         Place frying pan on element and select medium heat. For each bread slice, smear
+         one pat of margarine on one side of bread slice. Place cheese slice between
+         bread slices with margarine-smeared sides away from the cheese. Place sandwich
+         in frying pan with one margarine-smeared side in contact with pan. Fry for a
+        couple of minutes and flip. Fry other side for a minute and serve.
+     </r:instructions>
+     </h:p>
+  </r:recipe>
+  </h:body>
+</h:html>
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+<?xml version="1.0"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:r="http://www.tutortutor.ca/">
+  <head>
+     <title>
+         Recipe
+     </title>
+  </head>
+  <body>
+  <r:recipe>
+     <r:title>
+         Grilled Cheese Sandwich
+     </r:title>
+     <r:ingredients>
+         <ul>
+         <li>
+         <r:ingredient qty="2">
+            bread slice
+         </r:ingredient>
+         </li>
+         <li>
+         <r:ingredient>
+            cheese slice
+         </r:ingredient>
+         </li>
+         <li>
+         <r:ingredient qty="2">
+            margarine pat
+         </r:ingredient>
+         </li>
+         </ul>
+     </r:ingredients>
+     <p>
+     <r:instructions>
+         Place frying pan on element and select medium heat. For each bread slice, smear
+         one pat of margarine on one side of bread slice. Place cheese slice between
+         bread slices with margarine-smeared sides away from the cheese. Place sandwich
+         in frying pan with one margarine-smeared side in contact with pan. Fry for a
+        couple of minutes and flip. Fry other side for a minute and serve.
+     </r:instructions>
+     </p>
+  </r:recipe>
+  </body>
+</html>
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+xmlr.setFeature("http://xml.org/sax/features/validation", true);
+xmlr.setProperty("http://xml.org/sax/properties/lexical-handler",
+                 new LexicalHandler() { /* … */ });
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.FileReader;
+import java.io.IOException;
+
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+
+import org.xml.sax.helpers.XMLReaderFactory;
+
+public class SAXDemo {
+  public static void main(String[] args) {
+     if (args.length < 1 || args.length > 2) {
+         System.err.println("usage: java SAXDemo xmlfile [v]");
+         return;
+           } try {
+         XMLReader xmlr = XMLReaderFactory.createXMLReader();
+         if (args.length == 2 && args[1].equals("v"))
+           xmlr.setFeature("http://xml.org/sax/features/validation", true);
+        xmlr.setFeature("http://xml.org/sax/features/namespace-prefixes",
+                         true);
+         Handler handler = new Handler();
+         xmlr.setContentHandler(handler);
+         xmlr.setDTDHandler(handler);
+         xmlr.setEntityResolver(handler);
+         xmlr.setErrorHandler(handler);
+        xmlr.setProperty("http://xml.org/sax/properties/lexical-handler", handler);
+         xmlr.parse(new InputSource(new FileReader(args[0])));
+     } catch (IOException ioe) {
+         System.err.println("IOE: " + ioe);
+     } catch (SAXException saxe) {
+         System.err.println("SAXE: " + saxe);
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.Locator;
+import org.xml.sax.SAXParseException;
+
+import org.xml.sax.ext.DefaultHandler2;
+
+public class Handler extends DefaultHandler2 {
+  private Locator locator;
+
+  @Override
+  public void characters(char[] ch, int start, int length) {
+     System.out.print("characters() [");
+     for (int i = start; i < start + length; i++)
+         System.out.print(ch[i]);
+     System.out.println("]");
+  }
+
+  @Override
+  public void comment(char[] ch, int start, int length) {
+     System.out.print("characters() [");
+     for (int i = start; i < start + length; i++)
+         System.out.print(ch[i]);
+     System.out.println("]");
+  }
+
+  @Override
+  public void endCDATA() {
+     System.out.println("endCDATA()");
+  }
+
+  @Override
+  public void endDocument() {
+     System.out.println("endDocument()");
+  }
+
+  @Override
+  public void endDTD() {
+     System.out.println("endDTD()");
+  }
+
+  @Override
+  public void endElement(String uri, String localName, String qName) {
+     System.out.print("endElement() ");
+      System.out.print("uri=[" + uri + "], ");
+      System.out.print("localName=[" + localName + "], ");
+     System.out.println("qName=[" + qName + "]");
+  }
+
+  @Override
+  public void endEntity(String name) {
+     System.out.print("endEntity() ");
+     System.out.println("name=[" + name + "]");
+  }
+
+  @Override
+  public void endPrefixMapping(String prefix) {
+     System.out.print("endPrefixMapping() ");
+     System.out.println("prefix=[" + prefix + "]");
+  }
+
+  @Override
+  public void error(SAXParseException saxpe) {
+     System.out.println("error() " + saxpe);
+  }
+
+  @Override
+  public void fatalError(SAXParseException saxpe) {
+     System.out.println("fatalError() " + saxpe);
+  }
+
+  @Override
+  public void ignorableWhitespace(char[] ch, int start, int length) {
+     System.out.print("ignorableWhitespace() [");
+     for (int i = start; i < start + length; i++)
+         System.out.print(ch[i]);
+     System.out.println("]");
+  }
+
+  @Override
+  public void notationDecl(String name, String publicId, String systemId) {
+     System.out.print("notationDecl() ");
+     System.out.print("name=[" + name + "]");
+     System.out.print("publicId=[" + publicId + "]");
+     System.out.println("systemId=[" + systemId + "]");
+  }
+
+  @Override
+  public void processingInstruction(String target, String data) {
+     System.out.print("processingInstruction() [");
+     System.out.println("target=[" + target + "]");
+     System.out.println("data=[" + data + "]");
+  }
+
+  @Override
+  public InputSource resolveEntity(String publicId, String systemId) {
+     System.out.print("resolveEntity() ");
+     System.out.print("publicId=[" + publicId + "]");
+     System.out.println("systemId=[" + systemId + "]");
+     // Do not perform a remapping.
+     InputSource is = new InputSource();
+     is.setPublicId(publicId);
+     is.setSystemId(systemId);
+     return is;
+  }
+
+  @Override
+  public void setDocumentLocator(Locator locator) {
+     System.out.print("setDocumentLocator() ");
+     System.out.println("locator=[" + locator + "]");
+     this.locator = locator;
+  }
+
+  @Override
+  public void skippedEntity(String name) {
+     System.out.print("skippedEntity() ");
+     System.out.println("name=[" + name + "]");
+  }
+
+  @Override
+  public void startCDATA() {
+     System.out.println("startCDATA()");
+  }
+
+  @Override
+  public void startDocument() {
+     System.out.println("startDocument()");
+  }
+
+  @Override
+  public void startDTD(String name, String publicId, String systemId) {
+     System.out.print("startDTD() ");
+     System.out.print("name=[" + name + "]");
+     System.out.print("publicId=[" + publicId + "]");
+     System.out.println("systemId=[" + systemId + "]");
+  }
+
+  @Override
+  public void startElement(String uri, String localName, String qName,
+                            Attributes attributes)
+  {
+     System.out.print("startElement() ");
+     System.out.print("uri=[" + uri + "], ");
+      System.out.print("localName=[" + localName + "], ");
+     System.out.println("qName=[" + qName + "]");
+     for (int i = 0; i < attributes.getLength(); i++)
+           System.out.println(" Attribute: " + attributes.getLocalName(i) + ", " +
+                           attributes.getValue(i));
+     System.out.println("Column number=[" + locator.getColumnNumber() + "]");
+     System.out.println("Line number=[" + locator.getLineNumber() + "]");
+  }
+
+  @Override
+  public void startEntity(String name) {
+     System.out.print("startEntity() ");
+     System.out.println("name=[" + name + "]");
+  }
+
+  @Override
+  public void startPrefixMapping(String prefix, String uri) {
+     System.out.print("startPrefixMapping() ");
+     System.out.print("prefix=[" + prefix + "]");
+     System.out.println("uri=[" + uri + "]");
+   }
+
+  @Override
+  public void unparsedEntityDecl(String name, String publicId,
+                                  String systemId, String notationName)
+  {
+     System.out.print("unparsedEntityDecl() ");
+     System.out.print("name=[" + name + "]");
+     System.out.print("publicId=[" + publicId + "]");
+     System.out.print("systemId=[" + systemId + "]");
+     System.out.println("notationName=[" + notationName + "]");
+  }
+
+  @Override
+  public void warning(SAXParseException saxpe) {
+     System.out.println("warning() " + saxpe);
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+setDocumentLocator() locator=[com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser$LocatorProxy@1395ddba]
+startDocument()
+startElement() uri=[], localName=[svg-examples], qName=[svg-examples]
+Column number=[15]
+Line number=[2]
+characters() [
+  ]
+startElement() uri=[], localName=[example], qName=[example]
+Column number=[13]
+Line number=[3]
+characters() [
+     The following Scalable Vector Graphics document describes a blue-filled and ]
+characters() [
+     black-stroked rectangle.
+     ]
+startCDATA()
+characters() [<svg width="100%" height="100%" version="1.1"
+          xmlns="http://www.w3.org/2000/svg">
+         <rect width="300" height="100"
+              style="fill:rgb(0,0,255);stroke-width:1; stroke:rgb(0,0,0)"/>
+     </svg>]
+endCDATA()
+characters() [
+  ]
+endElement() uri=[], localName=[example], qName=[example]
+characters() [
+]
+endElement() uri=[], localName=[svg-examples], qName=[svg-examples]
+endDocument()
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+characters() [
+  ]
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+<!DOCTYPE svg-examples [
+<!ELEMENT svg-examples (example+)>
+<!ELEMENT example (#PCDATA)>
+]>
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+setDocumentLocator() locator=[com.sun.org.apache.xerces.internal.parsers.AbstractSAXParser$LocatorProxy@540fe861]
+startDocument()
+startDTD() name=[svg-examples]publicId=[null]systemId=[null]
+endDTD()
+startElement() uri=[], localName=[svg-examples], qName=[svg-examples]
+Column number=[15]
+Line number=[6]
+ignorableWhitespace() [
+  ]
+startElement() uri=[], localName=[example], qName=[example]
+Column number=[13]
+Line number=[7]
+characters() [
+     The following Scalable Vector Graphics document describes a blue-filled and
+     black-stroked rectangle.]
+characters() [
+     ]
+startCDATA()
+characters() [<svg width="100%" height="100%" version="1.1"
+          xmlns="http://www.w3.org/2000/svg">
+         <rect width="300" height="100"
+              style="fill:rgb(0,0,255);stroke-width:1; stroke:rgb(0,0,0)"/>
+     </svg>]
+endCDATA()
+characters() [
+  ]
+endElement() uri=[], localName=[example], qName=[example]
+ignorableWhitespace() [
+]
+endElement() uri=[], localName=[svg-examples], qName=[svg-examples]
+endDocument()
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+characters() [
+  ]
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+error() org.xml.sax.SAXParseException; lineNumber: 2; columnNumber: 14; Document is invalid: no grammar found.
+error() org.xml.sax.SAXParseException; lineNumber: 2; columnNumber: 14; Document root element "svg-examples", must match DOCTYPE root "null".
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+// Parse an XML document into a DOM tree.
+DocumentBuilder parser =
+  DocumentBuilderFactory.newInstance().newDocumentBuilder();
+Document document = parser.parse(new File("instance.xml"));
+// Create a SchemaFactory capable of understanding W3C XML Schema (WXS).
+SchemaFactory factory =
+  SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+// Load a WXS schema, represented by a Schema instance.
+Source schemaFile = new StreamSource(new File("mySchema.xsd"));
+Schema schema = factory.newSchema(schemaFile);
+// Create a Validator instance, which is used to validate an XML document.
+Validator validator = schema.newValidator();
+// Validate the DOM tree.
+try {
+  validator.validate(new DOMSource(document));
+  } catch (SAXException saxe) {
+  // XML document is invalid!
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.IOException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+
+public class DOMDemo {
+  public static void main(String[] args) {
+     if (args.length != 1) {
+         System.err.println("usage: java DOMDemo xmlfile");
+         return;
+     }
+     try {
+         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+         dbf.setNamespaceAware(true);
+         DocumentBuilder db = dbf.newDocumentBuilder();
+         Document doc = db.parse(args[0]);
+         System.out.printf("Version = %s%n", doc.getXmlVersion());
+         System.out.printf("Encoding = %s%n", doc.getXmlEncoding());
+         System.out.printf("Standalone = %b%n%n", doc.getXmlStandalone());
+         if (doc.hasChildNodes()) {
+            NodeList nl = doc.getChildNodes();
+            for (int i = 0; i < nl.getLength(); i++) {
+               Node node = nl.item(i);
+               if (node.getNodeType() == Node.ELEMENT_NODE)
+                  dump((Element) node);
+            }
+         }
+     } catch (Exception e) {
+         e.printStackTrace(System.err);
+     }
+  }
+
+  private static void dump(Element e) {
+     System.out.printf("Element: %s, %s, %s, %s%n", e.getNodeName(),
+                        e.getLocalName(), e.getPrefix(), e.getNamespaceURI());
+     NamedNodeMap nnm = e.getAttributes();
+     if (nnm != null)
+         for (int i = 0; i < nnm.getLength(); i++) {
+            Node node = nnm.item(i);
+            Attr attr = e.getAttributeNode(node.getNodeName());
+              System.out.printf(" Attribute %s = %s%n", attr.getName(),
+                              attr.getValue());
+         }
+     NodeList nl = e.getChildNodes();
+     for (int i = 0; i < nl.getLength(); i++) {
+         Node node = nl.item(i);
+         if (node instanceof Element)
+           dump((Element) node);
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Version = 1.0
+Encoding = null
+Standalone = false
+
+Element: article, article, null, null
+ Attribute lang = en
+ Attribute title = The Rebirth of JavaFX
+Element: abstract, abstract, null, null
+Element: code-inline, code-inline, null, null
+Element: body, body, null, null
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Version = 1.0
+Encoding = null
+Standalone = false
+
+Element: h:html, html, h, http://www.w3.org/1999/xhtml
+ Attribute xmlns:h = http://www.w3.org/1999/xhtml
+ Attribute xmlns:r = http://www.tutortutor.ca/
+Element: h:head, head, h, http://www.w3.org/1999/xhtml
+Element: h:title, title, h, http://www.w3.org/1999/xhtml
+Element: h:body, body, h, http://www.w3.org/1999/xhtml
+Element: r:recipe, recipe, r, http://www.tutortutor.ca/
+Element: r:title, title, r, http://www.tutortutor.ca/
+Element: r:ingredients, ingredients, r, http://www.tutortutor.ca/
+Element: h:ul, ul, h, http://www.w3.org/1999/xhtml
+Element: h:li, li, h, http://www.w3.org/1999/xhtml
+Element: r:ingredient, ingredient, r, http://www.tutortutor.ca/
+ Attribute qty = 2
+Element: h:li, li, h, http://www.w3.org/1999/xhtml
+Element: r:ingredient, ingredient, r, http://www.tutortutor.ca/
+Element: h:li, li, h, http://www.w3.org/1999/xhtml
+Element: r:ingredient, ingredient, r, http://www.tutortutor.ca/
+  Attribute qty = 2
+Element: h:p, p, h, http://www.w3.org/1999/xhtml
+Element: r:instructions, instructions, r, http://www.tutortutor.ca/
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
+
+public class DOMDemo {
+  public static void main(String[] args) {
+     try {
+         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+         DocumentBuilder db = dbf.newDocumentBuilder();
+         Document doc = db.newDocument();
+         // Create the root element.
+         Element root = doc.createElement("movie");
+         doc.appendChild(root);
+         // Create name child element and add it to the root.
+         Element name = doc.createElement("name");
+         root.appendChild(name);
+         // Add a text element to the name element.
+         Text text = doc.createTextNode("Le Fabuleux Destin d'Amélie Poulain");
+         name.appendChild(text);
+         // Create language child element and add it to the root.
+         Element language = doc.createElement("language");
+         root.appendChild(language);
+         // Add a text element to the language element.
+         text = doc.createTextNode("français");
+         language.appendChild(text);
+         System.out.printf("Version = %s%n", doc.getXmlVersion());
+         System.out.printf("Encoding = %s%n", doc.getXmlEncoding());
+         System.out.printf("Standalone = %b%n%n", doc.getXmlStandalone());
+         NodeList nl = doc.getChildNodes();
+         for (int i = 0; i < nl.getLength(); i++) {
+           Node node = nl.item(i);
+            if (node.getNodeType() == Node.ELEMENT_NODE)
+               dump((Element) node);
+         }
+     } catch (Exception e) {
+         e.printStackTrace(System.err);
+     }
+  }
+
+  private static void dump(Element e) {
+     System.out.printf("Element: %s, %s, %s, %s%n", e.getNodeName(),
+                        e.getLocalName(), e.getPrefix(), e.getNamespaceURI());
+     NodeList nl = e.getChildNodes();
+     for (int i = 0; i < nl.getLength(); i++) {
+         Node node = nl.item(i);
+         if (node instanceof Element)
+            dump((Element) node);
+         else if (node instanceof Text)
+            System.out.printf("Text: %s%n", ((Text) node).getWholeText());
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Version = 1.0
+Encoding = null
+Standalone = false
+
+Element: movie, null, null, null
+Element: name, null, null, null
+Text: Le Fabuleux Destin d'Amélie Poulain
+Element: language, null, null, null
+Text: français
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javax.json:javax.json-api:1.1
+org.glassfish:javax.json:1.1 javax.json.bind:javax.json.bind-api:1.0
+org.eclipse:yasson:1.0.1
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Map<String, Object> properties = new HashMap<String, Object>() {{
+    put(JsonGenerator.PRETTY_PRINTING, true);
+}};
+JsonGeneratorFactory jgf = Json.createGeneratorFactory(properties);
+StringWriter sw = new StringWriter(); JsonGenerator jg = jgf.createGenerator(sw);
+
+jg.writeStartObject()
+    .write("name", "Linda Green")
+    .write("id", 746)
+    .write("rank", 36.7)
+    .write("active", true)
+    .writeStartArray("children")
+        .write(747)
+        .write(748)
+    .writeEnd()
+    .writeStartObject("address")
+        .write("country", "US")
+        .write("state", "Texas")
+        .write("city", "Austin")
+    .writeEnd()
+    .writeNull("plan")
+.writeEnd()
+.close();
+
+System.out.println(sw.toString());
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+{
+   "name": "Linda Green",
+   "id": 746,
+   "rank": 36.7,
+   "active": true,
+   "children": [
+       747,
+       748
+   ],
+   "address": {
+       "country": "US",
+       "state": "Texas",
+       "city": "Austin"
+   },
+   "plan": null
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Car {
+static public class Manufacturer {
+public String name;
+public String country;
+}
+public long id;
+public int make;
+public String name;
+public BigDecimal price;
+public double weightPds;
+public Manufacturer manufacturer;
+}
+
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Car c = new Car() {{
+id = 25;
+make = 2004;
+name = "Angelwing";
+price = new BigDecimal("35999.00");
+weightPds = 4500.0;
+manufacturer = new Manufacturer() {{
+name = "Frog Cars";
+country = "Argentine";
+}};
+}};
+
+String carJson = JsonbBuilder.create(
+new JsonbConfig().withFormatting(true)).toJson(c);
+System.out.println(carJson);
+
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+{
+   "id":
+   25,
+   "make":
+   2004,
+   "manufacturer":
+   {
+       "country":
+       "Argentine",
+       "name":
+       "Frog Cars"
+   },
+   "name":
+   "Angelwing",
+   "price":
+   35999.00,
+   "weightPds":
+   4500.0
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Car {
+static public class Manufacturer {
+public String name;
+public String country;
+}
+@JsonbTransient public long id;
+public int make;
+@JsonbProperty("carName") public String name;
+public BigDecimal price;
+public double weightPds;
+public Manufacturer manufacturer;
+}
+
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+String json = "{\n" +
+    " \"carName\": \n" +
+    " \"Angelwing\",\n" +
+    " \"make\": \n" +
+    " 2004,\n" +
+    " \"manufacturer\": \n" +
+    " {\n" +
+        " \"country\": \n" +
+        " \"Argentine\",\n" +
+        " \"name\": \n" +
+        " \"Frog Cars\"\n" +
+    " },\n" +
+    " \"price\": \n" +
+    " 35999.00,\n" +
+    " \"weightPds\": \n" +
+    " 4500.0\n" +
+"}";
+try {
+   JsonReader rdr = Json.createReader(new StringReader(json));
+   JsonObject obj = rdr.readObject();
+  System.out.print(obj.getString("carName"));
+}catch(Exception e) {
+   e.printStackTrace(System.err);
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Car {
+static public class Manufacturer {
+public String name;
+public String country;
+}
+@JsonbTransient public long id;
+public int make;
+@JsonbProperty("carName") public String name;
+public BigDecimal price;
+public double weightPds;
+public Manufacturer manufacturer;
+} ...
+String json = "{\n" +
+    " \"carName\": \n" +
+    " \"Angelwing\",\n" +
+    " \"make\": \n" +
+    " 2004,\n" +
+    " \"manufacturer\": \n" +
+    " {\n" +
+        " \"country\": \n" +
+        " \"Argentine\",\n" +
+        " \"name\": \n" +
+        " \"Frog Cars\"\n" +
+    " },\n" +
+    " \"price\": \n" +
+    " 35999.00,\n" +
+    " \"weightPds\": \n" +
+    " 4500.0\n" +
+"}";
+try {
+   Jsonb jsonb = JsonbBuilder.create();
+   Car car = jsonb.fromJson(new StringReader(json), Car.class);
+   System.out.print(car.name);
+}catch(Exception e) {
+   e.printStackTrace(System.err);
+}
+
+
+

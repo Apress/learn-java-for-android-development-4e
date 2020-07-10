@@ -1,0 +1,15 @@
+public abstract class Bird extends Animal {
+   public Bird(String kind, String appearance){
+      super(kind, appearance);
+   }
+
+   @Override
+   public void eat() {
+      System.out.println("eats seeds and insects");
+   }
+
+   @Override
+   public void move() {
+      System.out.println("flies through the air");
+   }
+}

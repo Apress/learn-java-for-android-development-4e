@@ -1,0 +1,629 @@
+// ----- UNNUMBERED LISTING ------------------------------
+java -classpath \;. TestLogger
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+jar tf logger.jar
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java -classpath logger.jar;. TestLogger
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import static packagespec . classname . ( staticmembername | * );
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+   import static java.lang.Math.*; // Import all static members from Math.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+System.out.println(cos(PI));
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+        try { // some code which might throw exceptions } catch(Exception e) { e,printStacktrace(System.err); }
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    catch( IOException | SQLException e) { … }
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class EnclosingClass {
+   private static int i;
+
+   private static void m1() {
+      System.out.println(i);
+   }
+
+   static void m2() {
+     EnclosedClass.accessEnclosingClass();
+   }
+
+   static public class EnclosedClass {
+      static public void accessEnclosingClass() {
+         i = 1;
+         m1();
+      }
+
+      public void accessEnclosingClass2() {
+         m2();
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class SMCDemo {
+   public static void main(String[] args) {
+     EnclosingClass.EnclosedClass.accessEnclosingClass(); // Output: 1
+      EnclosingClass.EnclosedClass ec = new EnclosingClass.EnclosedClass();
+      ec.accessEnclosingClass2(); // Output: 1
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+abstract public class Rectangle {
+   abstract public double getX();
+   abstract public double getY();
+   abstract public double getWidth();
+   abstract publc double getHeight();
+
+   static public class Double extends Rectangle {
+      private double x, y, width, height;
+
+      public Double(double x, double y, double width, double height) {
+         this.x = x;
+         this.y = y;
+         this.width = width;
+         this.height = height;
+      }
+
+      public double getX() { return x; }
+      public double getY() { return y; }
+      public double getWidth() { return width; }
+      public double getHeight() { return height; }
+   }
+
+   static public class Float extends Rectangle {
+      private float x, y, width, height;
+
+      public Float(float x, float y, float width, float height) {
+         this.x = x;
+         this.y = y;
+         this.width = width;
+         this.height = height;
+      }
+
+      public double getX() { return x; }
+      public double getY() { return y; }
+      public double getWidth() { return width; }
+       public double getHeight() { return height; }
+   }
+
+   // Prevent subclassing. Use the type-specific Double and Float
+   // implementation subclass classes to instantiate.
+   private Rectangle() {}
+
+   public boolean contains(double x, double y) {
+      return (x >= getX() && x < getX() + getWidth()) &&
+             (y >= getY() && y < getY() + getHeight());
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class SMCDemo {
+   public static void main(String[] args) {
+      Rectangle r = new Rectangle.Double(10.0, 10.0, 20.0, 30.0);
+      System.out.println("x = " + r.getX());
+      System.out.println("y = " + r.getY());
+      System.out.println("width = " + r.getWidth());
+      System.out.println("height = " + r.getHeight());
+      System.out.println("contains(15.0, 15.0) = " + r.contains(15.0, 15.0));
+      System.out.println("contains(0.0, 0.0) = " + r.contains(0.0, 0.0));
+      System.out.println();
+      r = new Rectangle.Float(10.0f, 10.0f, 20.0f, 30.0f);
+      System.out.println("x = " + r.getX());
+      System.out.println("y = " + r.getY());
+      System.out.println("width = " + r.getWidth());
+      System.out.println("height = " + r.getHeight());
+      System.out.println("contains(15.0, 15.0) = " + r.contains(15.0, 15.0));
+      System.out.println("contains(0.0, 0.0) = " + r.contains(0.0, 0.0));
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+x = 10.0
+y = 10.0
+width = 20.0
+height = 30.0
+contains(15.0, 15.0) = true
+contains(0.0, 0.0) = false
+
+x = 10.0
+y = 10.0
+width = 20.0
+height = 30.0
+contains(15.0, 15.0) = true
+contains(0.0, 0.0) = false
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class EnclosingClass {
+   private int i;
+
+   private void m() {
+      System.out.println(i);
+   }
+
+   public class EnclosedClass {
+      public void accessEnclosingClass() {
+         i = 1;
+         m();
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class NSMCDemo {
+   public static void main(String[] args) {
+      EnclosingClass ec = new EnclosingClass();
+      ec.new EnclosedClass().accessEnclosingClass(); // Output: 1
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+abstract public class Speaker {
+  abstract void speak();
+}
+
+public class ACDemo {
+   public static void main(final String[] args) {
+      new Speaker() {
+        String msg = (args.length == 1) ? args[0] : "nothing to say";
+ 
+       @Override
+        void speak() {
+           System.out.println(msg);
+         }
+     }.speak();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public interface Speakable {
+   void speak();
+}
+
+public class ACDemo {
+   public static void main(final String[] args) {
+      new Speakable(){
+        String msg = (args.length == 1) ? args[0] : "nothing to say";
+
+        @Override
+        public void speak() {
+           System.out.println(msg);
+         }
+     }.speak();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+String[] list = new File(directory).list(new FilenameFilter()
+               {
+                   @Override
+                   public boolean accept(File f, String s) {
+                      return s.endsWith(".java");
+                   }
+               });
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class EnclosingClass {
+   void m(final int x) {
+     final int y = x * 2;
+     class LocalClass {
+        int a = x;
+        int b = y;
+      }
+     LocalClass lc = new LocalClass();
+     System.out.println(lc.a);
+     System.out.println(lc.b);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class LCDemo {
+   public static void main(String[] args) {
+     EnclosingClass ec = new EnclosingClass();
+     ec.m(10);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+10
+20
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class X {
+  interface A {
+  }
+
+  static interface B {
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+package logging;
+
+public interface Logger {
+  boolean connect();
+  boolean disconnect();
+  boolean log(String msg);
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+package logging;
+
+public abstract class LoggerFactory {
+   public final static int CONSOLE = 0;
+   public final static int FILE = 1;
+
+   public static Logger newLogger(int dstType, String... dstName) {
+     switch (dstType) {
+                               case CONSOLE: return new Console(dstName.length == 0 ? null : dstName[0]);
+                                  case FILE : return new File(dstName.length == 0 ? null : dstName[0]);
+             default : return null;
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+package logging;
+
+class Console implements Logger {
+  private String dstName;
+
+   public Console(String dstName) {
+     this.dstName = dstName;
+   }
+
+  @Override
+   public boolean connect() {
+     return true;
+   }
+
+  @Override
+   public boolean disconnect() {
+     return true;
+   }
+
+  @Override
+   public boolean log(String msg) {
+     System.out.println(msg);
+     return true;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+package logging;
+
+class File implements Logger {
+  private String dstName;
+
+   public File(String dstName) {
+     this.dstName = dstName;
+   }
+
+  @Override
+   public boolean connect() {
+      if (dstName == null)
+        return false;
+     System.out.println("opening file " + dstName);
+     return true;
+   }
+
+  @Override
+   public boolean disconnect() {
+      if (dstName == null)
+        return false;
+     System.out.println("closing file " + dstName);
+     return true;
+   }
+
+  @Override
+   public boolean log(String msg) {
+      if (dstName == null)
+        return false;
+     System.out.println("writing "+msg+" to file " + dstName);
+     return true;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import logging.Logger;
+import logging.LoggerFactory;
+
+public class TestLogger {
+   public static void main(String[] args) {
+     Logger logger = LoggerFactory.newLogger(LoggerFactory.CONSOLE);
+      if (logger.connect()) {
+        logger.log("test message #1");
+        logger.disconnect();
+      } else
+        System.out.println("cannot connect to console-based logger");
+     logger = LoggerFactory.newLogger(LoggerFactory.FILE, "x.txt");
+      if (logger.connect()) {
+        logger.log("test message #2");
+        logger.disconnect();
+      } else
+        System.out.println("cannot connect to file-based logger");
+      logger = LoggerFactory.newLogger(LoggerFactory.FILE);
+      if (logger.connect()) {
+        logger.log("test message #3");
+        logger.disconnect();
+      } else
+        System.out.println("cannot connect to file-based logger");
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+test message #1
+opening file x.txt
+writing test message #2 to file x.txt
+closing file x.txt
+cannot connect to file-based logger
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+  import static java.lang.Math.PI; // Import the PI static field only.
+import static java.lang.Math.cos; // Import the cos() static method only.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+package media;
+
+public class InvalidMediaFormatException extends Exception {
+  private String expectedFormat;
+  private String existingFormat;
+
+   public InvalidMediaFormatException(String expectedFormat,
+                                      String existingFormat) {
+     super("Expected format: " + expectedFormat + ", Existing format: " +
+           existingFormat);
+     this.expectedFormat = expectedFormat;
+     this.existingFormat = existingFormat;
+   }
+
+   public String getExpectedFormat() {
+     return expectedFormat;
+   }
+
+   public String getExistingFormat() {
+     return existingFormat;
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+package media;
+
+import java.io.IOException;
+
+public class Media {
+   public static void convert(String srcName, String dstName)
+     throws InvalidMediaFormatException, IOException {
+      if (srcName == null)
+        throw new NullPointerException(srcName + " is null");
+      if (dstName == null)
+        throw new NullPointerException(dstName + " is null");
+      // Code to access source file and verify that its format matches the
+      // format implied by its file extension.
+      //
+      // Assume that the source file's extension is RM (for Real Media) and
+      // that the file's internal signature suggests that its format is
+      // Microsoft WAVE.
+     String expectedFormat = "RM";
+     String existingFormat = "WAVE";
+     throw new InvalidMediaFormatException(expectedFormat, existingFormat);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+try {
+   int x = 1 / 0;
+} catch (ArithmeticException ae) {
+  System.out.println("attempt to divide by zero");
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import media.InvalidMediaFormatException;
+import media.Media;
+
+public class Converter {
+   public static void main(String[] args) {
+      if (args.length != 2) {
+        System.err.println("usage: java Converter srcfile dstfile");
+        return;
+      }
+      try {
+        Media.convert(args[0], args[1]);
+      } catch (InvalidMediaFormatException imfe) {
+        System.out.println("Unable to convert " + args[0] + " to " + args[1]);
+        System.out.println("Expecting " + args[0] + " to conform to " +
+                           imfe.getExpectedFormat() + " format.");
+         System.out.println("However, " + args[0] + " conformed to " +
+                           imfe.getExistingFormat() + " format.");
+                 } catch (FileNotFoundException fnfe) { fnfe.printStackTrace(System.err);
+                 } catch (IOException ioe){ ice.printStackTrace(System.err);
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Unable to convert A to B
+Expecting A to conform to RM format.
+However, A conformed to WAVE format.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+catch (IOException ioe) {
+   throw new ReportCreationException(ioe);
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+catch (FileNotFoundException fnfe) {
+  logger.log(fnfe);
+   throw fnfe; // Rethrow the exception here.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.IOException;
+
+public class Copy {
+   public static void main(String[] args) {
+      if (args.length != 2) {
+        System.err.println("usage: java Copy srcFile dstFile");
+        return;
+      }
+
+      int fileHandleSrc = 0;
+      int fileHandleDst = 1;
+      try {
+        fileHandleSrc = open(args[0]);
+        fileHandleDst = create(args[1]);
+        copy(fileHandleSrc, fileHandleDst);
+      } catch (IOException ioe) {
+        System.err.println("I/O error: " + ioe.getMessage());
+        return;
+      } finally {
+        close(fileHandleSrc);
+        close(fileHandleDst);
+      }
+   }
+
+   static public int open(String filename) {
+     return 1; // Assume that filename is mapped to integer.
+   }
+
+   static public int create(String filename) {
+     return 2; // Assume that filename is mapped to integer.
+   }
+
+   static public void close(int fileHandle) {
+     System.out.println("closing file: " + fileHandle);
+   }
+
+              static public void copy(int fileHandleSrc, int fileHandleDst) throws IOException) {
+     System.out.println("copying file " + fileHandleSrc + " to file " +
+                         fileHandleDst);
+      if (Math.random() < 0.5)
+        throw new IOException("unable to copy file");
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+copying file 1 to file 2
+closing file: 1
+closing file: 2
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+copying file 1 to file 2
+I/O error: unable to copy file
+closing file: 1
+closing file: 2
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+FileInputStream fis = null;
+try {
+    fis = new FileInputStream(new File("someFile.txt"));
+    …
+} catch(Exception e) {
+   e.printStackTrace(System.err);
+} finally {
+   if(fis != null) {
+       try {
+           fis.close();
+       }catch(Exception e2) {
+        }
+    }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+try( FileInputStream fis = new FileInputStream(new File("someFile.txt")) ) {
+    …
+} catch(Exception e) {
+   e.printStackTrace(System.err);
+}
+
+
+

@@ -1,0 +1,29 @@
+// File Circle.java
+public class Circle {
+   public Circle() {
+     System.out.println("Circle() called");
+   }
+
+   public static void main(String[] args) {
+      new Circle();
+   }
+}
+
+// File Rectangle.java
+public class Rectangle {
+   public Rectangle() {
+     System.out.println("Rectangle() called");
+   }
+
+   public static void main(String[] args) {
+      new Rectangle();
+   }
+}
+
+// File Shapes.java
+public class Shapes {
+   public static void main(String[] args) {
+     Circle c = new Circle();
+     Rectangle r = new Rectangle();
+   }
+}

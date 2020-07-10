@@ -1,0 +1,50 @@
+public class Point implements Drawable {
+  private int x, y;
+
+  public Point(int x, int y) {
+     this.x = x;
+     this.y = y;
+  }
+
+  public int getX() {
+     return x;
+  }
+
+  public int getY() {
+     return y;
+  }
+
+  @Override
+  public String toString() {
+     return "(" + x + ", " + y + ")";
+  }
+
+  @Override
+  public void draw(int color) {
+     System.out.println("Point drawn at " + toString() + " in color " + color);
+  }
+}
+
+public class Circle extends Point implements Drawable {
+  private int radius;
+
+  public Circle(int x, int y, int radius) {
+     super(x, y);
+     this.radius = radius;
+  }
+
+  public int getRadius() {
+     return radius;
+  }
+
+  @Override
+  public String toString() {
+     return "" + radius;
+  }
+
+  @Override
+  public void draw(int color) {
+     System.out.println("Circle drawn at " + super.toString() +
+                         " with radius " + toString() + " in color " + color);
+  }
+}

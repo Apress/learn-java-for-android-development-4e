@@ -1,0 +1,16 @@
+public class Point {
+   …
+}
+
+public class ColoredPoint extends Point {
+   …
+}
+
+public class UpcastArrayDemo {
+   public static void main(String[] args) {
+     ColoredPoint[] cptArray = new ColoredPoint[] {
+      new ColoredPoint(10, 20, 5)};
+     Point[] ptArray = cptArray; // legal
+      
+   }
+}

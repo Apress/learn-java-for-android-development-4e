@@ -1,0 +1,13 @@
+import java.util.ArrayDeque;
+import java.util.Deque; import java.util.Arrays;
+
+public class ArrayDequeDemo {
+   public static void main(String[] args) {
+
+      Deque<String> stack = new ArrayDeque<>( Arrays.asList(
+           "Sunday", "Monday", "Tuesday", "Wednesday",
+           "Thursday", "Friday", "Saturday" ) );
+      while (stack.peek() != null)
+         System.out.println(stack.pop());
+   }
+}

@@ -1,0 +1,278 @@
+// ----- UNNUMBERED LISTING ------------------------------
+... .stream().filter( elem -> some boolean ) ...
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+... .limit(10). ...
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+IntStream.range(0, 10).forEach(System.out.println); // -> 0,...,9
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+R collect(Collector<? super T,A,R> collector)
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Stream.iterate(0, i -> i+1).limit( i -> someMethod(i) == true )
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Stream<Integer> s = StreamUtils.takeWhile(Stream.iterate(0, i -> i+1), i -> i <= 10);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    List<String> l = Arrays.asList( "Helllo", "World" );
+List<String> newList = new ArrayList<>();
+  for( String s : l )
+    newList.add( s + "*" );
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+List<String> l = ...;
+List<String> newList = l.applyToEach( add-*-to-value );
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+List<String> l = ...;
+List<String> newList = l.stream().map( v -> v + "*" ).collect(Collectors.toList());
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Function<Integer,String> f1 = (Integer i) -> "_" + i + "_";
+Function<Integer,String> f2 = (i) -> "_" + i + "_";
+Function<Integer,String> f3 = i -> "_" + i + "_";
+Function<Integer,String> f4 = i -> { return "_" + i + "_"; };
+BiFunction<String, String, Integer> bf1 = (str1, str2) -> (str1+str2).length();
+Supplier<String> sp1 = () -> "Hello";
+Consumer<String> c1 = s -> { System.out.println(s); };
+Consumer<String> c2 = s -> System.out.println(s);
+Stream<Integer> strm1 = Arrays.asList(1,2,3,4).stream().filter( i -> i < 2 );
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class A {
+  public static void main(String[] args) {
+    List<String> list = Arrays.asList("Orange", "Apple", "Banana", "Car");
+
+    Stream<String> s1 = list.stream();
+    s1.forEach(System.out::println);
+
+    Stream<String> s2 = Stream.of("Orange", "Apple", "Banana", "Car");
+    s2.forEach(System.out::println);
+
+    // Beware, this is not a stream of ints, but a stream with
+    // an int array as its only element!
+    Stream<int[]> s3 = Stream.of(new int[] { 3, 7, 23, 59, -2});
+    s3.forEach(System.out::println);
+
+    // This is a stream of ints
+    IntStream s4 = IntStream.of(new int[] { 3, 7, 23, 59, -2});
+    s4.forEach(System.out::println);
+
+    // The same, as a stream of Integer objects
+    Stream<Integer> s5 = IntStream.of(new int[] { 3, 7, 23, 59, -2}).boxed();
+    s5.forEach(System.out::println);
+
+    Supplier<Double> rndDouble = () -> Math.random();
+    Stream<Double> s6 = Stream.generate(rndDouble);
+    // This is an infinite stream! For diagnostic output, we have to limit it
+    s6.limit(4).forEach(System.out::println);
+
+    UnaryOperator<String> addX = (s) -> s + "x";
+    Stream<String> s7 = Stream.iterate("0", addX);
+    s7.limit(4).forEach(System.out::println);
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
+
+...
+class Record {
+  int id;
+  String name;
+  Collection<String> items;
+  Record(int id, String name, String... items) {
+    this.id = id; this.name = name;
+    this.items = Arrays.asList(items);
+  }
+}
+
+List<Record> records = Arrays.asList(
+  new Record(1, "rec01", "Blue", "Red", "Yellow"),
+  new Record(2, "rec02", "Whale", "Cat"),
+  new Record(3, "rec03", "John", "Linda", "Angie", "Cat")
+);
+
+List<Integer> ids = records.stream().
+  map( r -> r.id ).
+  collect(Collectors.toList());
+List<Integer> nameLens = records.stream().
+  map( r -> r.name.length() ).
+  collect(Collectors.toList());
+List<String> allItems = records.stream().
+  flatMap( r -> r.items.stream() ).
+  collect(Collectors.toList());
+Set<String> distinctItems = records.stream().
+  flatMap( r -> r.items.stream() ).
+  collect(Collectors.toSet());
+...
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+List<String> allItems = records.stream().
+  flatMap( r -> r.items.stream() ).
+  filter( itm -> !(itm.equals("Cat")) ).
+  collect(Collectors.toList());
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+  List<String> allItems = records.stream().
+        flatMap( r -> r.items.stream() ).
+        filter( itm -> !(itm.equals("Cat")) );
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Stream.of(1, 2, 6, 3, -4).
+      forEach( theInt -> System.out.println(theInt) );
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Stream.of(1, 2, 6, 3, -4).
+      forEach( System.out::println );
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class Invoice {
+  BigDecimal amount = BigDecimal.ZERO;
+  // ... more fields
+  public Invoice() { }
+  public Invoice(BigDecimal amount) {
+    this.amount = amount;
+  }
+}
+
+List<Invoice> invl = Arrays.asList(
+  new Invoice(new BigDecimal("1.99")),
+  new Invoice(new BigDecimal("7.00")),
+  new Invoice(new BigDecimal("13.98"))
+);
+
+Invoice master = invl.stream().
+    reduce(new Invoice(),
+        (inv1,inv2) ->
+            new Invoice(inv1.amount.add(inv2.amount) ) );
+
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Arrays.asList("Orange", "Apple", "Banana", "Car").stream().
+      collect(Collectors.joining(","));
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+R collect(Supplier<R> supplier,
+    BiConsumer<R,? super T> accumulator,
+    BiConsumer<R,R> combiner)
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+class MyStats {
+  List<Double> l = new ArrayList<>();
+  void add(double d) { l.add(d); }
+  int count() { return l.size(); }
+  double avg() {
+    return l.stream().collect(Collectors.summingDouble(d -> d)); }
+  double stddev() {
+    double a = avg();
+    return Math.sqrt(
+        l.stream().collect(Collectors.summingDouble(d -> (d-a) * (d-a)))
+            / (l.size()-1) );
+  }
+}
+
+MyStats stat = DoubleStream.of(4.6, 3.2, 9.6, 27.0).collect(MyStats::new,
+    (bas, inj) -> { bas.add(inj); },
+       (bas1, bas2) -> { bas2.l.stream().forEach( d -> bas1.add(d) ); });
+System.out.println("Count = " + stat.count() +
+    ", Average = " + stat.avg() +
+    ", StdDev = " + stat.stddev());
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class MyStats {
+  List<Double> l = new ArrayList<>();
+  void add(double d) { l.add(d); }
+  int count;
+  double avg;
+  double stddev;
+  MyStats finish() {
+    count = l.size();
+    avg = l.stream().collect(Collectors.summingDouble(d -> d));
+    stddev = Math.sqrt(
+      l.stream().collect(Collectors.summingDouble(d -> (d-avg) * (d-avg)))
+        / (count-1) );
+    return this;
+  }
+  static MyStats merge(MyStats s1, MyStats s2) {
+    s2.l.stream().forEach( d -> s1.add(d) );
+    return s1;
+  }
+}
+
+...
+
+Collector<Double,MyStats,MyStats> statsCollector = Collector.of(
+  MyStats::new,
+  MyStats::add,
+  MyStats::merge,
+  MyStats::finish
+);
+MyStats stat = Stream.of(4.6, 3.2, 9.6, 27.0).collect(statsCollector);
+System.out.println("Count = " + stat.count + ", Average = " + stat.avg + ", StdDev = " + stat.stddev);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+<dependency>
+    <groupId>com.codepoetics</groupId>
+    <artifactId>protonpack</artifactId>
+    <version>1.16</version>
+</dependency>
+
+
+

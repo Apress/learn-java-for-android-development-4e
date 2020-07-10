@@ -1,0 +1,16 @@
+public class Point {
+   public int x, y;
+}
+
+public class ColoredPoint extends Point {
+   public int color;
+}
+
+public class ReificationDemo {
+   public static void main(String[] args) {
+        // ColoredPoint[] cptArray = new Point[1]; // illegal
+     ColoredPoint[] cptArray = new ColoredPoint[1];
+     Point[] ptArray = cptArray;
+      ptArray[0] = new Point();
+   }
+}

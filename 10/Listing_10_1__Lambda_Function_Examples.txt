@@ -1,0 +1,10 @@
+
+Function<Integer,String> f1 = (Integer i) -> "_" + i + "_";
+Function<Integer,String> f2 = (i) -> "_" + i + "_";
+Function<Integer,String> f3 = i -> "_" + i + "_";
+Function<Integer,String> f4 = i -> { return "_" + i + "_"; };
+BiFunction<String, String, Integer> bf1 = (str1, str2) -> (str1+str2).length();
+Supplier<String> sp1 = () -> "Hello";
+Consumer<String> c1 = s -> { System.out.println(s); };
+Consumer<String> c2 = s -> System.out.println(s);
+Stream<Integer> strm1 = Arrays.asList(1,2,3,4).stream().filter( i -> i < 2 );

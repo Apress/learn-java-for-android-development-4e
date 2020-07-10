@@ -1,0 +1,655 @@
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.Date;
+
+public class DateDemo {
+   public static void main(String[] args) {
+     Date now = new Date();
+     System.out.println(now);
+     Date later = new Date(now.getTime() + 86400);
+     System.out.println(later);
+     System.out.println(now.after(later));
+     System.out.println(now.before(later));
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac DateDemo.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java DateDemo
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.Calendar;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+
+public class CalendarDemo {
+   public static void main(String[] args) {
+      if (args.length < 2) {
+        System.err.println("usage: java CalendarDemo yyyy mm [f|F]");
+        return;
+      }
+      try {
+        int year = Integer.parseInt(args[0]);
+        int month = Integer.parseInt(args[1]);
+        Locale locale = Locale.US;
+        if (args.length == 3 && args[2].equalsIgnoreCase("f"))
+           locale = Locale.FRANCE;
+        showPage(year, month, locale);
+      } catch (NumberFormatException nfe) {
+        System.err.print(nfe);
+      }
+   }
+
+   private static void showPage(int year, int month, Locale locale) {
+      if (month < 1 || month > 12)
+        throw new IllegalArgumentException("month [" + month + "] out of " +
+                                           "range [1, 12]");
+     Calendar cal = Calendar.getInstance(locale);
+     cal.set(Calendar.YEAR, year);
+     cal.set(Calendar.MONTH, --month);
+     cal.set(Calendar.DAY_OF_MONTH, 1);
+     displayMonthAndYear(cal, locale);
+     displayWeekdayNames(cal, locale);
+      int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+      int firstRowGap = cal.get(Calendar.DAY_OF_WEEK)-1; // 0 = Sunday
+      for (int i = 0; i < firstRowGap; i++)
+           System.out.print(" ");
+      for (int i = 1; i <= daysInMonth; i++) {
+        if (i < 10)
+           System.out.print(' ');
+        System.out.print(i);
+        if ((firstRowGap + i) % 7 == 0)
+           System.out.println();
+        else
+           System.out.print(' ');
+      }
+     System.out.println();
+   }
+
+   private static void displayMonthAndYear(Calendar cal, Locale locale) {
+     System.out.println(cal.getDisplayName(Calendar.MONTH, Calendar.LONG,
+                                           locale) + " " +
+                                           cal.get(Calendar.YEAR));
+   }
+
+   private static void displayWeekdayNames(Calendar cal, Locale locale) {
+     Map<String, Integer> weekdayNamesMap;
+     weekdayNamesMap = cal.getDisplayNames(Calendar.DAY_OF_WEEK,
+                                           Calendar.SHORT, locale);
+     String[] names = new String[weekdayNamesMap.size()];
+     int[] indexes = new int[weekdayNamesMap.size()];
+     Set<Map.Entry<String, Integer>> weekdayNamesEntries;
+     weekdayNamesEntries = weekdayNamesMap.entrySet();
+     Iterator<Map.Entry<String, Integer>> iter;
+     iter = weekdayNamesEntries.iterator();
+     while (iter.hasNext()) {
+        Map.Entry<String, Integer> entry = iter.next();
+        names[entry.getValue() - 1] = entry.getKey();
+        indexes[entry.getValue() - 1] = entry.getValue();
+      }
+      for (int i = 0; i < names.length; i++)
+        for (int j = i; j < names.length; j++)
+            if (indexes[j] == i + 1){
+              System.out.print(names[j].substring(0, 2) + " ");
+              continue;
+           }
+     System.out.println();
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac CalendarDemo.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java CalendarDemo 2014 01
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java CalendarDemo 2014 01 f
+java CalendarDemo 2014 01 F
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.text.DateFormat;
+
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
+public class DateFormatDemo {
+   public static void main(String[] args) {
+     Date d = new Date(0); // Unix epoch
+     System.out.println(d);
+     DateFormat df = DateFormat.getDateTimeInstance(DateFormat.LONG,
+                                                    DateFormat.LONG,
+                                                     Locale.US);
+     System.out.println("Default format: " + df.format(d));
+     df.setTimeZone(TimeZone.getTimeZone("UTC"));
+     System.out.println("Taking UTC into account: " + df.format(d));
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac DateFormatDemo.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java DateFormatDemo
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+
+public class ParseDemo {
+   public static void main(String[] args) throws ParseException {
+      if (args.length != 1) {
+        System.err.println("usage: java ParseDemo yyyy-MM-dd HH:mm:ss z");
+        return;
+      }
+     SimpleDateFormat sdf;
+      sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
+     System.out.println(sdf.parse(args[0]));
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac ParseDemo.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java ParseDemo "2014-01-04 11:21:00 CST"
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+  import java.time.*;
+
+  // current day in the default time zone
+  LocalDate ld1 = LocalDate.now();
+
+  // "Now" corresponds to different days in different
+  // time zones. The following allows to specify a
+  // different time zone
+  ZoneId z2 = ZoneId.of("UTC+01");
+  LocalDate ld2 = LocalDate.now(z2);
+
+  LocalDate ld3 = LocalDate.of(2018, Month.MARCH, 27);
+  LocalDate ld4 = LocalDate.of(2018, 3, 27); // the same
+
+  LocalTime lt1 = LocalTime.now();
+  LocalTime lt2 = LocalTime.now(z2); // different time zone
+  LocalTime lt3 = LocalTime.of(23, 27, 55); // 23:27:55
+
+  LocalDateTime ldt1 = LocalDateTime.now();
+  LocalDateTime ldt2 = LocalDateTime.now(z2);
+  LocalDateTime ldt3 = LocalDateTime.of(
+               2018, Month.APRIL, 23,
+               23, 44, 12);
+  // <- 2018-04-23T23:44:12
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+    import java.time.format.*;
+
+    // Parse ISO-8601
+    LocalDate ld1 = LocalDate.parse("2019-02-13");
+
+    // Parse other formats. For the format specification,
+    // see API documentation of class DateTimeFormatter.
+    DateTimeFormatter formatter1 =
+         DateTimeFormatter.ofPattern("yyyy MM dd");
+    LocalDate ld2 = LocalDate.parse("2019 02 13", formatter1);
+
+
+    LocalTime lt1 = LocalTime.parse("21:17:23");
+    LocalTime lt2 = LocalTime.parse("21:17:23.3734");
+
+    DateTimeFormatter formatter2 =
+         DateTimeFormatter.ofPattern("HH|mm|ss");
+    LocalTime lt3 = LocalTime.parse("21|17|23", formatter2);
+
+
+    val ldt1 = LocalDateTime.parse("2019-02-13T21:17:23")
+    val ldt2 = LocalDateTime.parse(
+          "2019-02-13T21:17:23.3734")
+
+    DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern(
+          "yyyy.MM.dd.HH.mm.ss");
+    LocalTime ldt3 = LocalTime.parse("2019.04.23.17.45.23",
+          formatter3);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+    import java.time.format.*;
+
+    String s1 = LocalDate.now().format(
+       DateTimeFormatter.ofPattern("yyyy|MM|dd"));
+    System.out.println("s1 = " + s1); // -> 2019|01|14
+
+    String s2 = LocalDate.now().format(
+        DateTimeFormatter.ISO_LOCAL_DATE);
+    System.out.println("s2 = " + s2); // -> 2019-01-14
+
+
+    String s3 = LocalTime.now().format(
+        DateTimeFormatter.ofPattern("HH mm ss"));
+    System.out.println("s3 = " + s3); // -> 14 46 20
+
+    String s4 = LocalTime.now().format(
+        DateTimeFormatter.ISO_LOCAL_TIME);
+    System.out.println("s4 = " + s4); // 14:46:20.503
+
+
+    String s5 = LocalDateTime.now().format(
+        DateTimeFormatter.ofPattern(
+        "yyyy MM dd - HH mm ss"));
+    System.out.println("s5 = " + s5); // -> 2019 01 14 - 14 46 20
+
+    String s6 = LocalDateTime.now().format(
+        DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+    System.out.println("s6 = " + s6); // -> 2019-01-14T14:46:20.505
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+    import java.time.temporal.*;
+
+    LocalDate ld = LocalDate.now();
+    LocalTime lt = LocalTime.now();
+    LocalDateTime ldt = LocalDateTime.now();
+
+    LocalDate ld2 = ld.minusDays(7L);
+    LocalDate ld3 = ld.plusWeeks(2L);
+    LocalDate ld4 = ld.with(ChronoField.MONTH_OF_YEAR, 11L);
+
+    LocalTime lt2 = lt.plus(Duration.of(2L, ChronoUnit.SECONDS));
+    LocalTime lt3 = lt.plusSeconds(2L); // same
+  
+    LocalDateTime ldt2 = ldt.plusWeeks(2L).minusHours(2L);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+
+    LocalDateTime ldt = ...
+    long secs = ldt.toEpochSecond(ZoneOffset.of("+01:00"));
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+
+    Instant inz1 = Instant.now(); // default timezone
+
+    // Specify timezone
+    Instant inz2 = Instant.now(Clock.system(
+         ZoneId.of("America/Buenos_Aires")));
+
+    Long secondsSince1970 = 1_000_000_000L;
+     Long nanoAdjustment = 300_000_000; // 300ms
+    Instantt inz3 = Instant.ofEpochSecond(
+        secondsSince1970, nanoAdjustment);
+
+    // "Z" is UTC ("Zulu" time)
+    Instant inz4 = Instant.parse("2018-01-23T23:33:14.513Z");
+
+    // Uniform converter, for the ZonedDateTime class
+    // see below
+    Instant inz5 = Instant.from(
+          ZonedDateTime.parse(
+          "2019-02-13T21:17:23+01:00[Europe/Paris]"));
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+ import java.time.*;
+ import java.time.format.DateTimeFormatter;
+
+ // Get now ------------------------------------------
+
+ // System clock, default timezone
+ OffsetTime ot1 = OffsetTime.now();
+ OffsetDateTime odt1 = OffsetDateTime.now();
+
+ // Use a different clock
+ Clock clock = ...
+ OffsetTime ot2 = OffsetTime.now(clock);
+ OffsetDateTime odt2 = OffsetDateTime.now(clock);
+    
+ // Use a different timezone
+ OffsetTime ot3 = OffsetTime.now(
+      ZoneId.of("America/Buenos_Aires"));
+ OffsetDateTime odt3 = OffsetDateTime.now(
+      ZoneId.of("America/Buenos_Aires"));
+
+ // From time details --------------------------------
+
+ OffsetTime ot4 = OffsetTime.of(23, 17, 3, 500_000_000,
+       ZoneOffset.of("-02:00"));
+ OffsetDateTime odt4 = OffsetDateTime.of(
+                             1985, 4, 23, // 1985-04-23
+         23, 17, 3, 500_000_000, //23:17:03.5
+       ZoneOffset.of("+02:00"));
+
+ // Parsed -------------------------------------------
+
+ OffsetTime ot5 = OffsetTime.parse("16:15:30+01:00");
+ OffsetDateTime odt5 = OffsetDateTime.parse(
+       "2007-12-03T17:15:30-08:00");
+ OffsetTime ot6 = OffsetTime.parse("16 15 +00:00",
+        DateTimeFormatter.ofPattern("HH mm XXX"));
+ OffsetDateTime odt6 = OffsetDateTime.parse(
+       "20181115 - 231644 +02:00",
+       DateTimeFormatter.ofPattern(
+         "yyyyMMdd - HHmmss XXX"));
+
+ // From other objects -------------------------------
+
+ LocalTime lt = LocalTime.parse("16:14:27.235");
+ LocalDate ld = LocalDate.parse("2018-05-24");
+ Instant inz = Instant.parse("2018-01-23T23:33:14.513Z");
+ OffsetTime ot7 = OffsetTime.of(lt,
+     ZoneOffset.of("+02:00"));
+ OffsetDateTime odt7 = OffsetDateTime.of(ld, lt,
+      ZoneOffset.of("+02:00"));
+ OffsetTime ot8 = OffsetTime.ofInstant(inz,
+      ZoneId.of("America/Buenos_Aires"));
+ OffsetDateTime odt8 = OffsetDateTime.ofInstant(inz,
+      ZoneId.of("America/Buenos_Aires"));
+
+ ZonedDateTime zdt = ZonedDateTime.of( // see below
+                  2018, 2, 27, // 2018-02-27
+                23, 27, 33, 0, // 23:27:33.0
+        ZoneId.of("Pacific/Tahiti"));
+ OffsetDateTime odt9 = zdt.toOffsetDateTime();
+
+ // uniform converter
+ OffsetTime ot10 = OffsetTime.from(zdt);
+ OffsetDateTime odt10 = OffsetDateTime.from(zdt);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+
+    OffsetTime ot = OffsetTime.parse("16:15:30+01:00");
+    LocalTime lt = ot.toLocalTime();
+
+    OffsetDateTime odt = OffsetDateTime.parse(
+          "2007-12-03T17:15:30-08:00");
+    LocalDateTime ldt = odt.toLocalDateTime();
+     LocalTime lt2 = odt.toLocalTime();
+    LocalDate ld2 = odt.toLocalDate();
+    OffsetTime ot2 = odt.toOffsetTime();
+
+    ZonedDateTime zdt = odt.toZonedDateTime();
+    // see below for class ZonedDateTime
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+
+    // Get "now" using the system clock and the default
+    // time-zone from your operating system.
+    ZonedDateTime zdt1 = ZonedDateTime.now();
+
+    // Get "now" using a time-zone. To list all available
+    // predefined zone IDs, try
+        // for(ZoneId zi : ZoneId.getAvailableZoneIds())
+                 // System.out.println( zi );
+    ZoneId z2 = ZoneId.of("UTC+01");
+    ZonedDateTime zdt2 = ZonedDateTime.now(z2);
+
+    // Get "now" using an instance of Clock
+    Clock clock3 = Clock.systemUTC();
+    ZonedDateTime zdt3 = ZonedDateTime.now(clock3);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+
+    val z4 = ZoneId.of("Pacific/Tahiti");
+    val zdt4 = ZonedDateTime.of(
+                      2018, 2, 27, // 2018-02-27
+                    23, 27, 33, 0, // 23:27:33.0
+          z4);
+    // The 7th par is nanoseconds, so for
+    // 23:27:33.5 you have to enter
+    // 500_000_000 here
+
+    LocalDate localDate = LocalDate.parse("2018-02-27");
+    LocalTime localTime = LocalTime.parse("23:44:55");
+    ZonedDateTime zdt5 = ZonedDateTime.of(localDate, localTime,
+         ZoneId.of("America/Buenos_Aires"));
+   
+    LocalDateTime ldt = LocalDateTime.parse("2018-02-27T23:44:55.3");
+    ZonedDateTime zdt6 = ZonedDateTime.of(ldt,
+         ZoneId.of("America/Buenos_Aires"));
+    
+    Instant inz = Instant.parse("2018-01-23T23:33:14.513Z");
+    ZonedDateTime zdt7 = ZonedDateTime.ofInstant(inz,
+          ZoneId.of("America/Buenos_Aires"));
+    
+    ZonedDateTime zdt8 = ZonedDateTime.parse(
+          "2018-01-23T23:33:14Z[America/Buenos_Aires]");
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+    import java.time.format.DateTimeFormatter;
+
+    ZonedDateTime zdt1 = ZonedDateTime.parse(
+          "2007-12-03T10:15:30+01:00[Europe/Paris]");
+
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern(
+        "HH:mm:ss.SSS");
+    // See DateTimeFormatter API docs for more options
+    String str = zdt1.format(formatter);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+
+    LocalDateTime ldt = LocalDateTime.parse("2018-02-27T23:44:55.3");
+    ZonedDateTime zdt = ZonedDateTime.of(ldt,
+         ZoneId.of("America/Buenos_Aires"));
+
+    LocalDateTime ldt2 = zdt.toLocalTime();
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+    import java.time.temporal.ChronoUnit;
+
+    LocalDateTime ldt1 = LocalDateTime.parse("2018-01-23T17:23:00");
+    LocalDateTime ldt2 = LocalDateTime.parse("2018-01-24T16:13:10");
+    LocalDateTime ldt3 = LocalDateTime.parse("2020-01-24T16:13:10");
+
+    // Getting a duration: ------------------------------
+
+    Duration d1 = Duration.between(ldt1, ldt2);
+    // Note: this works also for Instant and ZonedDateTime
+    // objects
+
+    Duration d2 = Duration.of(27L, ChronoUnit.HOURS); // 27hours
+
+    Duration d3 = Duration.ZERO.
+                 plusDays(3L).
+                 plusHours(4L).
+                 minusMinutes(78L);
+
+    Duration d4 = Duration.parse("P2DT3H4M");
+    // <- 2 days, 3 hrs, 4 minutes
+    // For more specifiers, see the API documentation
+    // of Duration.parse()
+
+    // Getting a period: --------------------------------
+
+    LocalDate ld1 = LocalDate.parse("2018-04-23");
+    LocalDate ld2 = LocalDate.parse("2018-08-16");
+    
+    Period p1 = Period.between(ld1, ld2);
+    // Note, end date not inclusive
+
+    Period p2 = Period.of(2, 3, -1);
+    // <- 2 years + 3 months - 1 day
+
+    Period p3 = Period.parse("P1Y2M-3D");
+    // <- 1 year + 2 months - 3 days
+    // For more specifiers, see the API documentation
+    // of Period.parse()
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+
+    // Duration operations: ------------------------------
+
+    Duration d = Duration.parse("P2DT3H4M");
+    // <- 2 days, 3 hrs, 4 minutes
+
+    Duration d2 = d.plusDays(3L);
+     // also: .minusDays(33L)
+              // or .plusHours(2L) or .minusHours(1L)
+         // or .plusMinutes(77L) or .minusMinutes(7L)
+         // or .plusSeconds(23L) or .minusSeconds(5L)
+            // or .plusMillis(11L) or .minusMillis(55L)
+         // or .plusNanos(1000L) or .minusNanos(5_000_000L)
+
+              Duration d3 = d.abs(); // make positive
+          Duration d4 = d.negated(); // swap sign
+       Duration d5 = d.multipliedBy(3L); // three times a long
+          Duration d6 = d.dividedBy(2L); // half as long
+
+    // Period operations: --------------------------------
+
+    Period p = Period.of(2, 3, -1);
+    // <- 2 years + 3 months - 1 day
+
+    Period p2 = p.normalized();
+    // <- possibly adjusts the year to make the month lie
+    // inside [-11;+11]
+
+    Period p3 = p.negated();
+
+    Period p4 = p.minusYears(11L);
+      // also: .plusYears(3L)
+            // or .minusMonths(4L) or .plusMonths(2L)
+             // or .minusDays(40L) or .plusDays(5L)
+
+      Period p5 = p.multipliedBy(5); // 5 times as long
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+
+    Duration d = Duration.parse("P2DT3H4M");
+
+    Period p = Period.of(2, 3, -1);
+    // <- 2 years + 3 months - 1 day
+
+    LocalDate ld = LocalDate.parse("2018-04-23");
+    LocalTime lt = LocalTime.parse("17:13:12");
+    LocalDateTime ldt = LocalDateTime.of(ld, lt);
+    ZonedDateTime zdt = ZonedDateTime.parse(
+          "2007-12-03T10:15:30+01:00[Europe/Paris]");
+    Instant inz = Instant.parse("2018-01-23T23:33:14.513Z");
+
+    // ---- Using a LocalDate
+      LocalDate ld2 = ld.plus(p); // or .minus(p)
+    // LocalDate ld3 = ld.plus(d); // -> exception
+    // LocalDate ld4 = ld.minus(d); // -> exception
+
+    // ---- Using a LocalTime
+      LocalTime lt2 = lt.plus(d); // or .minus(d)
+    // LocalTime lt3 = lt.minus(p); // -> exception
+    // LocalTime lt4 = lt.plus(p); // -> exception
+
+    // ---- Using a LocalDateTime
+      LocalDateTime ldt2 = ldt.plus(d); // or .minus(d)
+      LocalDateTime ldt3 = ldt.plus(p); // or .minus(p)
+
+    // ---- Using a ZonedDateTime
+      ZonedDateTime zdt2 = zdt.plus(d); // or .minus(d)
+      ZonedDateTime zdt3 = zdt.plus(p); // or .minus(p)
+
+    // ---- Using an Instant
+      Instant inz2 = inz.plus(d); // or .minus(d)
+    // Instant inz3 = inz.minus(p); // -> exception
+    // Instant inz4 = inz.plus(p); // -> exception
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+
+    Clock clock = ...
+    LocalDateTime ldt = LocalDateTime.now(clock);
+    ZonedDateTime zdt = ZonedDateTime.now(clock);
+    Instant inz = Instant.now(clock);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+    import java.time.*;
+
+    Clock myClock = new Clock() {
+       public Clock withZone(ZoneId zone) {
+            // Supposed to return a copy of this clock
+            // with a different time zone
+            return this;
+        }
+
+        public ZoneId getZone() {
+          // Supposed to return the zone ID
+          return ZoneId.of("Z");
+        }
+
+        public Instant instant() {
+          // This is the engine of the clock. It must
+          // provide an Instant
+          return Instant.parse("2018-01-23T23:33:14Z");
+        }
+    };
+    ... use myClock
+
+
+

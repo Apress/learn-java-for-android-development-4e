@@ -1,0 +1,7 @@
+public class X {
+  interface A {
+  }
+
+  static interface B {
+  }
+}

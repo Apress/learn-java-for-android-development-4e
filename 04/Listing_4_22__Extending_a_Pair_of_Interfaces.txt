@@ -1,0 +1,10 @@
+public interface A {
+   int X = 1;
+}
+
+public interface B {
+   double X = 2.0;
+}
+
+public interface C extends A, B {
+}

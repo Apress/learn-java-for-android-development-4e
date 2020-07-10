@@ -1,0 +1,22 @@
+public class EnclosingClass {
+   private static int i;
+
+   private static void m1() {
+      System.out.println(i);
+   }
+
+   static void m2() {
+     EnclosedClass.accessEnclosingClass();
+   }
+
+   static public class EnclosedClass {
+      static public void accessEnclosingClass() {
+         i = 1;
+         m1();
+      }
+
+      public void accessEnclosingClass2() {
+         m2();
+      }
+   }
+}

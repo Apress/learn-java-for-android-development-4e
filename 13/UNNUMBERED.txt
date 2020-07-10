@@ -1,0 +1,480 @@
+// ----- UNNUMBERED LISTING ------------------------------
+java EchoClient "This is a test."
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+jar:file:///C:/path/to/some.jar!//some/package/SomeClass.class
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java ListResource http://example.com
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+String encode(String s, String enc)
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+String decode(String s, String enc)
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+[scheme:]scheme-specific-part[#fragment]
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+CookieHandler.setDefault(new CookieManager());
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Socket socket = new Socket("localhost", 9999);
+InputStream is = socket.getInputStream();
+OutputStream os = socket.getOutputStream();
+// Do some work with the socket.
+socket.close();
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+ServerSocket ss = new ServerSocket(9999);
+while (true) {
+  Socket socket = ss.accept();
+    // obtain socket input/output streams and communicate with socket
+  socket.close();
+}
+
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+ServerSocket ss = new ServerSocket(9999);
+while (true) {
+  final Socket s = ss.accept();
+  new Thread(new Runnable() {
+         @Override
+           public void run() {
+            // obtain socket input/output streams and communicate with socket
+            try { s.close(); } catch (IOException ioe) {}
+         }
+     }).start();
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class EchoClient {
+  public static void main(String[] args) {
+     if (args.length != 1) {
+           System.err.println("usage : java EchoClient message");
+         System.err.println("example: java EchoClient \"This is a test.\"");
+        return;
+     }
+     try {
+         Socket socket = new Socket("localhost", 9999);
+         OutputStream os = socket.getOutputStream();
+         OutputStreamWriter osw = new OutputStreamWriter(os);
+         PrintWriter pw = new PrintWriter(osw);
+         pw.println(args[0]);
+         pw.flush();
+         InputStream is = socket.getInputStream();
+         InputStreamReader isr = new InputStreamReader(is);
+         BufferedReader br = new BufferedReader(isr);
+         System.out.println(br.readLine());
+     } catch (UnknownHostException uhe) {
+         System.err.println("unknown host: " + uhe.getMessage());
+     } catch (IOException ioe) {
+         System.err.println("I/O error: " + ioe.getMessage());
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class EchoServer {
+  public static void main(String[] args) throws IOException {
+     System.out.println("Starting echo server...");
+     ServerSocket ss = new ServerSocket(9999);
+     while (true) {
+         Socket s = ss.accept();
+         try {
+            InputStream is = s.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String msg = br.readLine();
+            System.out.println(msg);
+            OutputStream os = s.getOutputStream();
+            OutputStreamWriter osw = new OutputStreamWriter(os);
+            PrintWriter pw = new PrintWriter(osw);
+            pw.println(msg);
+            pw.flush();
+         } catch (IOException ioe) {
+            System.err.println("I/O error: " + ioe.getMessage());
+         } finally {
+           try {
+               s.close();
+            } catch (IOException ioe) {
+            }
+         }
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+byte[] buffer = new byte[100];
+DatagramPacket dgp = new DatagramPacket(buffer, buffer.length);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.IOException;
+
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
+
+public class DGServer{
+  final static int PORT = 10000;
+
+  public static void main(String[] args) throws SocketException{
+     System.out.println("Server is starting");
+     DatagramSocket dgs = new DatagramSocket(PORT);
+     try {
+         System.out.println("Send buffer size = " + dgs.getSendBufferSize());
+         System.out.println("Receive buffer size = " +
+                           dgs.getReceiveBufferSize());
+         byte[] data = new byte[100];
+         DatagramPacket dgp = new DatagramPacket(data, data.length);
+         while (true) {
+            dgs.receive(dgp);
+            System.out.println(new String(data));
+            dgs.send(dgp);
+         }
+     } catch (IOException ioe) {
+         System.err.println("I/O error: " + ioe.getMessage());
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Server is starting
+Send buffer size = 8192
+Receive buffer size = 8192
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.IOException;
+
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+
+public class DGClient {
+  final static int PORT = 10000;
+  final static String ADDR = "localhost";
+
+  public static void main(String[] args) throws SocketException {
+     System.out.println("client is starting");
+     DatagramSocket dgs = new DatagramSocket();
+     try {
+         byte[] buffer;
+         buffer = "Send me a datagram".getBytes();
+         InetAddress ia = InetAddress.getByName(ADDR);
+         DatagramPacket dgp = new DatagramPacket(buffer, buffer.length, ia,
+                                                PORT);
+         dgs.send(dgp);
+         byte[] buffer2 = new byte[100];
+         dgp = new DatagramPacket(buffer2, buffer.length, ia, PORT);
+         dgs.receive(dgp);
+         System.out.println(new String(dgp.getData()));
+     } catch (IOException ioe) {
+         System.err.println("I/O error: " + ioe.getMessage());
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+client is starting
+Send me a datagram
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+URL url = null; try {
+  url = new URL("http://example.com");
+} catch (MalformedURLException murle) {
+  // handle the exception
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+InputStream is = url.openStream();
+int ch;
+while ((ch = is.read()) != -1)
+  System.out.print((char) ch);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.InputStream;
+import java.io.IOException;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class ListResource {
+   public static void main(String[] args) {
+      if (args.length != 1) {
+        System.err.println("usage: java ListResource url");
+         return;
+      } try {
+         URL url = new URL(args[0]);
+         InputStream is = url.openStream();
+         try {
+            int ch;
+            while ((ch = is.read()) != -1)
+              System.out.print((char) ch);
+         } finally {
+            is.close();
+         }
+      } catch (MalformedURLException murle) {
+        System.err.println("invalid URL");
+      } catch (IOException ioe) {
+         System.err.println("I/O error: " + ioe.getMessage());
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+URLConnection urlc = url.openConnection();
+urlc.setDoOutput(true);
+OutputStream os = urlc.getOutputStream();
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.UnsupportedEncodingException;
+
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
+public class ED{
+  public static void main(String[] args) throws UnsupportedEncodingException {
+     String encodedData = URLEncoder.encode("string ü@foo-bar", "UTF-8");
+     System.out.println(encodedData);
+     System.out.println(URLDecoder.decode(encodedData, "UTF-8"));
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+string+%C3%BC%40foo-bar
+string ü@foo-bar
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.net.NetworkInterface;
+import java.net.SocketException;
+
+import java.util.Collections;
+import java.util.Enumeration;
+
+public class NetInfo {
+  public static void main(String[] args) throws SocketException {
+     Enumeration<NetworkInterface> eni;
+     eni = NetworkInterface.getNetworkInterfaces();
+     for (NetworkInterface ni: Collections.list(eni)) {
+         System.out.println("Name = " + ni.getName());
+         System.out.println("Display Name = " + ni.getDisplayName());
+         System.out.println("Loopback = " + ni.isLoopback());
+         System.out.println("Up and running = " + ni.isUp());
+         System.out.println("MTU = " + ni.getMTU());
+         System.out.println("Supports multicast = " + ni.supportsMulticast());
+        System.out.println("Sub-interfaces");
+         Enumeration<NetworkInterface> eni2;
+         eni2 = ni.getSubInterfaces();
+         for (NetworkInterface ni2: Collections.list(eni2))
+               System.out.println(" " + ni2);
+         System.out.println();
+      }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Name = lo
+Display Name = Software Loopback Interface 1
+Loopback = true
+Up and running = true
+MTU = -1
+Supports multicast = true
+Sub-interfaces
+
+Name = net0
+Display Name = WAN Miniport (SSTP)
+Loopback = false
+Up and running = false
+MTU = -1
+Supports multicast = true
+Sub-interfaces
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.net.InterfaceAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.List;
+
+public class NetInfo {
+  public static void main(String[] args) throws SocketException {
+     Enumeration<NetworkInterface> eni;
+     eni = NetworkInterface.getNetworkInterfaces();
+     for (NetworkInterface ni: Collections.list(eni)) {
+         System.out.println("Name = " + ni.getName());
+         List<InterfaceAddress> ias = ni.getInterfaceAddresses();
+         Iterator<InterfaceAddress> iter = ias.iterator();
+         while (iter.hasNext())
+            System.out.println(iter.next());
+         System.out.println();
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Name = lo
+/127.0.0.1/8 [/127.255.255.255]
+/0:0:0:0:0:0:0:1/128 [null]
+
+Name = net0
+
+Name = net1
+
+Name = net2
+
+Name = ppp0
+
+Name = eth0
+
+Name = eth1
+
+Name = eth2
+
+Name = ppp1
+
+Name = net3
+
+Name = eth3
+/192.xxx.xxx.xxx/xx [/192.xxx.xxx.xxx]
+/fe80:0:0:0:xxxx:xxxx:xxxx:xxxx%xx/xx [null]
+
+Name = net4
+/fe80:0:0:0:0:xxxx:xxxx:xxxx%xx/xxx [null]
+
+Name = net5
+/2001:0:xxxx:xxxx:xxxx:xxxx:xxxx:xxxx/x [null]
+/fe80:0:0:0:xxxx:xxxx:xxxx:xxxx%xx/xx [null]
+
+Name = eth4
+
+Name = eth5
+
+Name = eth6
+
+Name = eth7
+
+Name = eth8
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.io.IOException;
+
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
+import java.net.HttpCookie;
+import java.net.URL;
+
+import java.util.List;
+
+public class ListAllCookies {
+  public static void main(String[] args) throws IOException {
+     if (args.length != 1) {
+          System.err.println("usage: java ListAllCookies url");
+          return;
+     }
+     CookieManager cm = new CookieManager();
+     cm.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+     CookieHandler.setDefault(cm);
+     new URL(args[0]).openConnection().getContent();
+     List<HttpCookie> cookies = cm.getCookieStore().getCookies();
+     for (HttpCookie cookie: cookies) {
+           System.out.println("Name = " + cookie.getName());
+           System.out.println("Value = " + cookie.getValue());
+           System.out.println("Lifetime (seconds) = " + cookie.getMaxAge());
+           System.out.println("Path = " + cookie.getPath());
+           System.out.println();
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Name = SESS374e8db54ec3033c25a586b1d093b1d1
+Value = irhqtiemls4cp0vf5pe1p0oeo7
+Lifetime (seconds) = 2000000
+Path = /
+
+
+

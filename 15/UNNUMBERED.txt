@@ -1,0 +1,423 @@
+// ----- UNNUMBERED LISTING ------------------------------
+CREATE TABLE EMPLOYEES(NAME VARCHAR(30), PHOTO BLOB);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Mon Apr 06 11:27:25 CEST 2020 : Apache Derby Network Server - 10.15.2.0 - (1873585) started and ready to accept connections on port 1527
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+CREATE TABLE EMPLOYEES(NAME VARCHAR(30), PHOTO BLOB);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+DUKE|
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+jdbc:derby:databaseName;URLAttributes
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+jdbc:derby://host:port/databaseName;URLAttributes
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Connection con = DriverManager.getConnection("jdbc:derby:testdb;create=true");
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+jdbc:sqlite:databaseName
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Connection con = DriverManager.getConnection("jdbc:sqlite::memory:");
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Connection con = DriverManager.getConnection("jdbc:sqlite:");
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+[ schemaName .] SQL92Identifier
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+[{ IN | OUT | INOUT }] [ parameter-Name ] DataType
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+C:\db>ij
+ij version 10.8
+ij> connect 'jdbc:derby:employees;create=true';
+ij> run 'create_emp_schema.sql';
+ij>
+ij> disconnect;
+ij> exit;
+C:>\db>
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+C:\db>dblook -d jdbc:derby:employees
+-- Timestamp: 2012-11-25 16:13:42.693
+-- Source database is: employees
+-- Connection URL is: jdbc:derby:employees
+-- appendLogs: false
+
+-- ----------------------------------------------
+-- DDL Statements for tables
+-- ----------------------------------------------
+
+CREATE TABLE "APP"."EMPLOYEES" ("NAME" VARCHAR(30), "PHOTO" BLOB(2147483647));
+
+C:\db>
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Connection conn = null; // ... more database objects like statements, prepared statements, // resultsets.
+try {
+  Properties props = new Properties(); // connection properties
+  // providing a user name and password is optional in the embedded mode
+  props.put("user", "user1");
+  props.put("password", "user1");
+
+  String dbName = "derbyDB"; // the name of the database
+            conn = DriverManager.getConnection("jdbc:derby:" + dbName + ";create=true", props); // ... from here start working with the connection
+  } catch (SQLException sqle) { // handle the exception
+      } finally { // close everything (statements, resultsets, connections) // ... try {
+    if (conn != null) conn.close();
+  } catch (SQLException sqle) { }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+INSERT INTO EMPLOYEES VALUES('Duke', null);
+SELECT * FROM EMPLOYEES;
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Connection con;
+con = DriverManager.getConnection("jdbc:derby://xyz:8500/testdb;create=true");
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Connection con1 = DriverManager.getConnection("jdbc:sqlite:sample.db");
+Connection con2 = DriverManager.getConnection("jdbc:sqlite:C:/temp/sample.db");
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+         public class JDBCDemo { // Running Derby in embedded mode. For client-server mode, you’d // use something like // jdbc:derby://localhost:1527/employee;create=true
+  final static String URL1 = "jdbc:derby:employee;create=true";
+  final static String URL2 = "jdbc:sqlite:employee";
+
+  public static void main(String[] args) {
+     String url = null;
+     if (args.length != 1) {
+         System.err.println("usage 1: java JDBCDemo javadb");
+         System.err.println("usage 2: java JDBCDemo sqlite");
+         return;
+     }
+     if (args[0].equals("javadb"))
+         url = URL1;
+     else
+     if (args[0].equals("sqlite"))
+         url = URL2;
+     else {
+         System.err.println("invalid command-line argument");
+         return;
+     }
+     Connection con = null;
+     try {
+         if (args[0].equals("sqlite"))
+           Class.forName("org.sqlite.JDBC");
+         con = DriverManager.getConnection(url);
+         Statement stmt = null;
+         try {
+            stmt = con.createStatement();
+            String sql = "CREATE TABLE EMPLOYEES(ID INTEGER, NAME VARCHAR(30))";
+            stmt.executeUpdate(sql);
+            sql = "INSERT INTO EMPLOYEES VALUES(1, 'John Doe')";
+            stmt.executeUpdate(sql);
+            sql = "INSERT INTO EMPLOYEES VALUES(2, 'Sally Smith')";
+            stmt.executeUpdate(sql);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLOYEES");
+            while (rs.next())
+              System.out.println(rs.getInt("ID") + " " + rs.getString("NAME"));
+            stmt.executeUpdate("DROP TABLE EMPLOYEES");
+         } catch (SQLException sqlex) {
+            while (sqlex != null) {
+               System.err.println("SQL error : " + sqlex.getMessage());
+               System.err.println("SQL state : " + sqlex.getSQLState());
+               System.err.println("Error code: " + sqlex.getErrorCode());
+               System.err.println("Cause: " + sqlex.getCause());
+               sqlex = sqlex.getNextException();
+            }
+         } finally {
+            if (stmt != null)
+               try {
+                  stmt.close();
+               } catch (SQLException sqle) {
+              }
+         }
+     } catch (ClassNotFoundException cnfe) {
+         System.err.println("unable to load sqlite driver");
+     } catch (SQLException sqlex) {
+         while (sqlex != null) {
+            System.err.println("SQL error : " + sqlex.getMessage());
+            System.err.println("SQL state : " + sqlex.getSQLState());
+            System.err.println("Error code: " + sqlex.getErrorCode());
+            System.err.println("Cause: " + sqlex.getCause());
+            sqlex = sqlex.getNextException();
+         }
+     } finally {
+         if (con != null)
+            try {
+               con.close();
+            } catch (SQLException sqle) {
+            }
+     }
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+1 John Doe
+2 Sally Smith
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class JDBCDemo {
+   final static String URL1 = "jdbc:derby:employee;create=true";
+   final static String URL2 = "jdbc:sqlite:employee";
+
+   public static void main(String[] args) {
+      String url = null;
+      if (args.length != 1) {
+         System.err.println("usage 1: java JDBCDemo derby");
+        System.err.println("usage 2: java JDBCDemo sqlite");
+         return;
+      }
+      if (args[0].equals("derby"))
+         url = URL1;
+      else if (args[0].equals("sqlite"))
+         url = URL2;
+      else {
+         System.err.println("invalid command-line argument");
+         return;
+      }
+      Connection con = null;
+      try {
+         if (args[0].equals("sqlite"))
+           Class.forName("org.sqlite.JDBC");
+         con = DriverManager.getConnection(url);
+         Statement stmt = null;
+         try {
+            stmt = con.createStatement();
+            String sql = "CREATE TABLE EMPLOYEES(ID INTEGER, NAME VARCHAR(30))";
+            stmt.executeUpdate(sql);
+            PreparedStatement pstmt = null;
+            try {
+               pstmt = con.prepareStatement("INSERT INTO EMPLOYEES VALUES(?, ?)");
+               String[] empNames = { "John Doe", "Sally Smith" };
+               for (int i = 0; i < empNames.length; i++) {
+                  pstmt.setInt(1, i+1);
+                  pstmt.setString(2, empNames[i]);
+                  pstmt.executeUpdate();
+               }
+               ResultSet rs = stmt.executeQuery("SELECT * FROM EMPLOYEES");
+               while (rs.next())
+                 System.out.println(rs.getInt("ID") + " " + rs.getString("NAME"));
+               stmt.executeUpdate("DROP TABLE EMPLOYEES");
+            } catch (SQLException sqlex) {
+               while (sqlex != null) {
+                  System.err.println("SQL error : " + sqlex.getMessage());
+                  System.err.println("SQL state : " + sqlex.getSQLState());
+                 System.err.println("Error code: " + sqlex.getErrorCode());
+                 System.err.println("Cause: " + sqlex.getCause());
+                  sqlex = sqlex.getNextException();
+               }
+             } finally {
+               if (pstmt != null)
+                  try {
+                     pstmt.close();
+                  } catch (SQLException sqle) {
+                     sqle.printStackTrace();
+                  }
+            }
+         } catch (SQLException sqlex) {
+            while (sqlex != null) {
+               System.err.println("SQL error : " + sqlex.getMessage());
+               System.err.println("SQL state : " + sqlex.getSQLState());
+               System.err.println("Error code: " + sqlex.getErrorCode());
+               System.err.println("Cause: " + sqlex.getCause());
+               sqlex = sqlex.getNextException();
+            }
+         } finally {
+            if (stmt != null)
+               try {
+                  stmt.close();
+               } catch (SQLException sqle) {
+               }
+         }
+      } catch (ClassNotFoundException cnfe) {
+         System.err.println("unable to load sqlite driver");
+      } catch (SQLException sqlex) {
+         while (sqlex != null) {
+            System.err.println("SQL error : " + sqlex.getMessage());
+            System.err.println("SQL state : " + sqlex.getSQLState());
+            System.err.println("Error code: " + sqlex.getErrorCode());
+            System.err.println("Cause: " + sqlex.getCause());
+            sqlex = sqlex.getNextException();
+         }
+      } finally {
+         if (con != null)
+            try {
+               con.close();
+            } catch (SQLException sqle) {
+            }
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+CREATE PROCEDURE procedure-name ([ procedure-parameter [, procedure-parameter ] ]*)
+[ procedure-element ]*
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+{
+| [ DYNAMIC ] RESULT SETS INTEGER
+| LANGUAGE { JAVA }
+| DeterministicCharacteristic
+| EXTERNAL NAME string
+| PARAMETER STYLE JAVA
+| EXTERNAL SECURITY { DEFINER | INVOKER }
+| { NO SQL | MODIFIES SQL DATA | CONTAINS SQL | READS SQL DATA }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+CallableStatement cstmt = null;
+try {
+  cstmt = con.prepareCall("{ call FIRE(?)}"))
+  cstmt.setInt(1, 2);
+  cstmt.execute();
+} catch (SQLException sqle) {
+  // handle the exception
+} finally {
+  // close the callable statement
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class JDBCDemo {
+  public static void main(String[] args) {
+     String url = "jdbc:derby:employee;create=true";
+     Connection con = null;
+     try {
+         con = DriverManager.getConnection(url);
+         dump(con.getMetaData());
+     } catch (SQLException sqlex) {
+         while (sqlex != null) {
+            System.err.println("SQL error : " + sqlex.getMessage());
+            System.err.println("SQL state : " + sqlex.getSQLState());
+            System.err.println("Error code: " + sqlex.getErrorCode());
+            System.err.println("Cause: " + sqlex.getCause());
+            sqlex = sqlex.getNextException();
+         }
+     } finally {
+         if (con != null)
+            try {
+               con.close();
+            } catch (SQLException sqle) {
+            }
+     }
+  }
+
+  private static void dump(DatabaseMetaData dbmd) throws SQLException {
+     System.out.println("DB Major Version = " + dbmd.getDatabaseMajorVersion());
+     System.out.println("DB Minor Version = " + dbmd.getDatabaseMinorVersion());
+     System.out.println("DB Product = " + dbmd.getDatabaseProductName());
+     System.out.println("Driver Name = " + dbmd.getDriverName());
+     System.out.println("Numeric function names for escape clause = " +
+                         dbmd.getNumericFunctions());
+     System.out.println("String function names for escape clause = " +
+                        dbmd.getStringFunctions());
+     System.out.println("System function names for escape clause = " +
+                         dbmd.getSystemFunctions());
+     System.out.println("Time/date function names for escape clause = " +
+                        dbmd.getTimeDateFunctions());
+     System.out.println("Catalog term: " + dbmd.getCatalogTerm());
+     System.out.println("Schema term: " + dbmd.getSchemaTerm());
+      System.out.println();
+      System.out.println("Catalogs");
+      System.out.println("--------");
+      ResultSet rsCat = dbmd.getCatalogs();
+     while (rsCat.next())
+        System.out.println(rsCat.getString("TABLE_CAT"));
+     System.out.println();
+      System.out.println("Schemas");
+      System.out.println("-------");
+      ResultSet rsSchem = dbmd.getSchemas();
+      while (rsSchem.next())
+        System.out.println(rsSchem.getString("TABLE_SCHEM"));
+     System.out.println();
+     System.out.println("Schema/Table");
+     System.out.println("------------");
+     rsSchem = dbmd.getSchemas();
+     while (rsSchem.next()) {
+         String schem = rsSchem.getString("TABLE_SCHEM");
+         ResultSet rsTab = dbmd.getTables(null, schem, "%", null);
+         while (rsTab.next())
+            System.out.println(schem + " " + rsTab.getString("TABLE_NAME"));
+     }
+  }
+}
+
+
+

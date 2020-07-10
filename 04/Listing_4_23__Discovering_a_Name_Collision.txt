@@ -1,0 +1,5 @@
+public class Collision implements C {
+   public void output() {
+     System.out.println(X); // Which X is accessed?
+   }
+}

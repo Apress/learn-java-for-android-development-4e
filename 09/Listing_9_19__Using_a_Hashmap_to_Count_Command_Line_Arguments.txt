@@ -1,0 +1,13 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class HashMapDemo {
+   public static void main(String[] args) {
+      Map<String, Integer> argMap = new HashMap<>();
+      for (String arg: args) {
+         argMap.merge(arg, 1, Integer::sum);
+      }
+      System.out.println(argMap);
+      System.out.println("Number of distinct arguments = " + argMap.size());
+   }
+}

@@ -1,0 +1,3 @@
+public class Employee {
+   public final static int RETIREMENT_AGE = 65;
+}

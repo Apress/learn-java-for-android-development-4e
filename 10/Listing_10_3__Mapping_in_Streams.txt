@@ -1,0 +1,36 @@
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
+
+...
+class Record {
+  int id;
+  String name;
+  Collection<String> items;
+  Record(int id, String name, String... items) {
+    this.id = id; this.name = name;
+    this.items = Arrays.asList(items);
+  }
+}
+
+List<Record> records = Arrays.asList(
+  new Record(1, "rec01", "Blue", "Red", "Yellow"),
+  new Record(2, "rec02", "Whale", "Cat"),
+  new Record(3, "rec03", "John", "Linda", "Angie", "Cat")
+);
+
+List<Integer> ids = records.stream().
+  map( r -> r.id ).
+  collect(Collectors.toList());
+List<Integer> nameLens = records.stream().
+  map( r -> r.name.length() ).
+  collect(Collectors.toList());
+List<String> allItems = records.stream().
+  flatMap( r -> r.items.stream() ).
+  collect(Collectors.toList());
+Set<String> distinctItems = records.stream().
+  flatMap( r -> r.items.stream() ).
+  collect(Collectors.toSet());
+...

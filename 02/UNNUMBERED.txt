@@ -1,0 +1,714 @@
+// ----- UNNUMBERED LISTING ------------------------------
+javac X.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java X
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java X arg1 arg2 arg3 ...
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java X "These words constitute a single argument."
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+double x = Math.sqrt(10 * 10 + 20 * 20); // Distance from (0, 0) to (10, 20).
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javadoc DumpArgs.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+int x, y[], z;
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java SimpleExpressions
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac SimpleExpressions.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java SimpleExpressions
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac CompoundExpressions.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java CompoundExpressions
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+byte b = (byte) c;
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+System.out.println((n & 1) == 1 ? "odd" : "even");
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac GradeLetters.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java GradeLetters
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac DumpMatrix.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java DumpMatrix
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+for (String line; (line = readLine()) != null; System.out.println(line));
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+javac EmployeeSearch.java
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+java EmployeeSearch
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+employee 912 exists
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class X {
+   public static void main(String[] args) {
+      ...
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+/*
+   A year is a leap year when it's divisible by 400, or divisible by 4 and
+   not also divisible by 100.
+*/
+System.out.println(year % 400 == 0 || (year % 4 == 0 && year % 100 != 0));
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+/**
+  * Application entry point
+ *
+  * @param args array of command-line arguments passed to this method
+ */
+public static void main(String[] args) {
+   // TODO code application logic here }
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+/**
+  * Dump all command-line arguments to standard output. *
+ * @author Jeff Friesen
+ */
+public class DumpArgs {
+   /**
+    * Application entry point.
+    *
+    * @param args array of command-line arguments.
+    */
+   public static void main(String[] args) {
+      System.out.println("Passed arguments:");
+      for (int i = 0; i < args.length; i++)
+         System.out.println(args[i]);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+                             abstract assert boolean break byte
+                                      case catch char class const
+                                 continue default do double else
+                                   enum extends false final finally
+                                          float for goto if implements
+                            import instanceof int interface long
+                                    native new null package private
+                              protected public return short static
+                        strictfp super switch synchronized this
+                                throw throws transient true try
+                void volatile while
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+         int counter; // Declare integer variable counter.
+  double temperature; // Declare double precision floating-point variable temperature.
+    String firstName; // Declare String variable firstName.
+          int[] ages; // Declare one-dimensional integer array variable ages.
+char gradeLetters[]; // Declare one-dimensional character array variable gradeLetters.
+   float[][] matrix; // Declare two-dimensional floating-point array variable matrix.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class SimpleExpressions {
+   public static void main(String[] args) {
+      int counter = 10;
+      double temperature = 98.6; // Assume Fahrenheit scale.
+      String firstName = "Mark";
+      int[] ages = { 52, 28, 93, 16 };
+      char gradeLetters[] = { 'A', 'B', 'C', 'D', 'F' };
+      float[][] matrix = { { 1.0F, 2.0F, 3.0F }, { 4.0F, 5.0F, 6.0F }};
+      int x = 1, y[] = { 1, 2, 3 }, z = 3;
+      double pi = 3.14159;
+      System.out.println(counter);
+      System.out.println(temperature);
+      System.out.println(ages.length);
+      System.out.println(gradeLetters.length);
+      System.out.println(matrix.length);
+      System.out.println(x);
+      System.out.println(y.length);
+      System.out.println(z);
+      System.out.println(pi);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+1.0F 2.0F 3.0F
+4.0F 5.0F 6.0F
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+                int counter2 = counter; // Assign previous counter variable value to counter2.
+    boolean isLeap = isLeapYear(2012); // Assign Boolean result of calling isLeapYear(2012) to isLeap.
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class SimpleExpressions {
+   public static void main(String[] args) {
+      int counter = 30;
+      int counter2 = counter;
+      System.out.println(counter);
+
+      short s = 20;
+      System.out.println(s);
+      int i = s;
+      System.out.println(i);
+
+      // short s2 = 40000; // possible loss of precision error
+
+      int i2 = -1;
+      double d = i2;
+      System.out.println(d);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class CompoundExpressions {
+   public static void main(String[] args) {
+      int age = 65;
+      System.out.println(age + 32);
+      System.out.println(++age);
+      System.out.println(age--);
+      System.out.println("A" + "B");
+      System.out.println("A" + 5);
+      short x = 32767;
+      System.out.println(++x);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class CompoundExpressions {
+   public static void main(String[] args) {
+      int[] ages = { 52, 28, 93, 16 };
+      char gradeLetters[] = { 'A', 'B', 'C', 'D', 'F' };
+      float[][] matrix = { { 1.0F, 2.0F, 3.0F }, { 4.0F, 5.0F, 6.0F }};
+      System.out.println(ages[0]);
+      System.out.println(gradeLetters[2]);
+      System.out.println(matrix[1][2]);
+      System.out.println(ages['\u0002']);
+      ages[1] = 19;
+      System.out.println(ages[1]);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class CompoundExpressions {
+   public static void main(String[] args) {
+      System.out.println(~181);
+      System.out.println(26 & 183);
+      System.out.println(26 ^ 183);
+     System.out.println(26 | 183);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+00000000000000000000000000011010
+&
+00000000000000000000000010110111
+--------------------------------
+00000000000000000000000000010010
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+00000000000000000000000000011010
+^
+00000000000000000000000010110111
+--------------------------------
+00000000000000000000000010101101
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+00000000000000000000000000011010
+|
+00000000000000000000000010110111
+--------------------------------
+00000000000000000000000010111111
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+char c = 'A';
+byte b = c;
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class CompoundExpressions {
+   public static void main(String[] args) {
+      short s = (short) 1.65 + 3;
+      System.out.println(s);
+
+      char c = 'A';
+      byte b = (byte) c;
+      System.out.println(b);
+
+      b = 100;
+      System.out.println(b);
+
+      s = 'A';
+      System.out.println(s);
+
+      s = (short) '\uac00';
+      System.out.println(s);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+boolean b = true;
+int i = b ? 1 : 0; // 1 assigns to i
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class CompoundExpressions {
+   public static void main(String[] args) {
+      int age = 65;
+      boolean stillWorking = true;
+      System.out.println(age > 64 && stillWorking);
+      age--;
+      System.out.println(age > 64 && stillWorking);
+      int value = 30;
+      System.out.println(value < 20 || value > 40);
+      value = 10;
+      System.out.println(value < 20 || value > 40);
+      int numEmployees = 6;
+      age = 65;
+      System.out.println(age > 64 && ++numEmployees > 5);
+      System.out.println("numEmployees = " + numEmployees);
+      age = 63;
+      System.out.println(age > 64 && ++numEmployees > 5);
+      System.out.println("numEmployees = " + numEmployees);
+      boolean b = true;
+      int i = b ? 1 : 0; // 1 assigns to i
+      System.out.println("i = " + i);
+      b = false;
+      i = b ? 1 : 0; // 0 assigns to i
+      System.out.println("i = " + i);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class CompoundExpressions {
+   public static void main(String[] args) {
+      System.out.println(!false);
+      int age = 65;
+      boolean stillWorking = true;
+      System.out.println(age > 64 & stillWorking);
+      System.out.println();
+      
+      boolean result = true & true;
+      System.out.println("true & true: " + result);
+      result = true & false;
+      System.out.println("true & false: " + result);
+      result = false & true;
+      System.out.println("false & true: " + result);
+      result = false & false;
+      System.out.println("false & false: " + result);
+      System.out.println();
+
+      result = true | true;
+      System.out.println("true | true: " + result);
+      result = true | false;
+      System.out.println("true | false: " + result);
+      result = false | true;
+      System.out.println("false | true: " + result);
+      result = false | false;
+      System.out.println("false | false: " + result);
+      System.out.println();
+
+      result = true ^ true;
+      System.out.println("true ^ true: " + result);
+      result = true ^ false;
+      System.out.println("true ^ false: " + result);
+      result = false ^ true;
+      System.out.println("false ^ true: " + result);
+      result = false ^ false;
+      System.out.println("false ^ false: " + result);
+      System.out.println();
+
+      int numEmployees = 1;
+      age = 65;
+      System.out.println(age > 64 & ++numEmployees > 2);
+      System.out.println(numEmployees);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class CompoundExpressions {
+   public static void main(String[] args) {
+      short age = 65;
+      System.out.println(age * 1000);
+      System.out.println(1.0 / 0.0);
+     System.out.println(10 % 4);
+      System.out.println(3 / 0);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class CompoundExpressions {
+   public static void main(String[] args) {
+      System.out.println(2 << 3);
+     System.out.println(16 >> 3);
+     System.out.println(-4 >> 1);
+     System.out.println(-4 >>> 1);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+ public class CompoundExpressions {
+   public static void main(String[] args) {
+      System.out.println(60 + 3 * 6);
+     System.out.println(2 * ((60 + 3) * 6));
+     System.out.println(9 * 4 / 3);
+      int x, y, z;
+      x = y = z = 100;
+     System.out.println(x);
+      System.out.println(y);
+      System.out.println(z);
+
+      int i = 0x12345678;
+      byte b = (byte) (i & 255);
+      System.out.println(b);
+     System.out.println("b == 0x78: " + (b == 0x78));
+      b = (byte) ((i >> 8) & 255);
+      System.out.println(b);
+      System.out.println("b == 0x56: " + (b == 0x56));
+      b = (byte) ((i >> 16) & 255);
+      System.out.println(b);
+      System.out.println("b == 0x34: " + (b == 0x34));
+      b = (byte) ((i >> 24) & 255);
+      System.out.println(b);
+      System.out.println("b == 0x12: " + (b == 0x12));
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+x = 10;
+ages[0] = 25;
+counter += 10;
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+if (Boolean expression)
+   statement
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+if (numMonthlySales > 100)
+   wage += bonus;
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+if (Boolean expression)
+   statement1
+else
+   statement2
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+if ((n & 1) == 1)
+   System.out.println("odd");
+else
+   System.out.println("even");
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+if ((n & 1) == 1)
+   odd();
+else
+   even();
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+if (Boolean expression1)
+   statement1
+else if (Boolean expression2)
+   statement2
+else if (…)
+   …
+else
+   statementN
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class GradeLetters {
+   public static void main(String[] args) {
+      int testMark = 69;
+      char gradeLetter;
+
+      if (testMark >= 90) {
+        gradeLetter = 'A';
+        System.out.println("You aced the test.");
+       } else if (testMark >= 80) {
+        gradeLetter = 'B';
+        System.out.println("You did very well on this test.");
+      } else if (testMark >= 70) {
+        gradeLetter = 'C';
+        System.out.println("You'll need to study more for future tests.");
+      } else if (testMark >= 60) {
+        gradeLetter = 'D';
+        System.out.println("Your test result suggests that you need a tutor.");
+      } else {
+        gradeLetter = 'F';
+        System.out.println("Your fail and need to attend summer school.");
+      }
+
+     System.out.println("Your grade is " + gradeLetter + ".");
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+switch (selector expression) {
+   case value1: statement1 [;break;]
+   case value2: statement2 [;break;]
+   …
+   case valueN: statementN [;break;]
+   [default: statement]
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+switch (direction) {
+    case 0: System.out.println("You are travelling north."); break;
+    case 1: System.out.println("You are travelling east."); break;
+    case 2: System.out.println("You are travelling south."); break;
+    case 3: System.out.println("You are travelling west."); break;
+   default: System.out.println("You are lost.");
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+for ([initialize]; [test]; [update])
+   statement
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public static void main(String[] args) {
+   for (int i = 0; i < args.length; i++)
+      System.out.println(args[i]);
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class DumpMatrix {
+   public static void main(String[] args) {
+      float[][] matrix = { { 1.0F, 2.0F, 3.0F }, { 4.0F, 5.0F, 6.0F }};
+      for (int row = 0; row < matrix.length; row++) {
+         for (int col = 0; col < matrix[row].length; col++)
+            System.out.print(matrix[row][col] + " ");
+         System.out.print("\n");
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.*;
+public class DumpMatrix {
+   public static void main(String[] args) {
+      int[] a = {1, 2, 3, 7};
+      for (int i : a) {
+          System.out.println(i);
+      }
+
+      List<String> l = Arrays.asList("Hello", "there");
+      for (String s : l) {
+          System.out.println(s);
+      }
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+while (Boolean expression)
+   statement
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+int ch = 0;
+while (ch != 'C' && ch != 'c') {
+   System.out.println("Press C or c to continue.");
+   ch = System.in.read();
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+do
+   statement
+while (Boolean expression);
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+int ch;
+do {
+   System.out.println("Press C or c to continue.");
+   ch = System.in.read();
+} while (ch != 'C' && ch != 'c');
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+int ch;
+while (true) {
+   System.out.println("Press C or c to continue.");
+   ch = System.in.read();
+   if (ch == 'C' || ch == 'c')
+      break;
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class EmployeeSearch {
+   public static void main(String[] args) {
+      int[] employeeIDs = { 123, 854, 567, 912, 224 };
+      int employeeSearchID = 912;
+      boolean found = false;
+      for (int i = 0; i < employeeIDs.length; i++)
+         if (employeeSearchID == employeeIDs[i]) {
+            found = true;
+            break;
+         }
+      System.out.println((found) ? "employee " + employeeSearchID + " exists"
+                                 : "no employee ID matches " + employeeSearchID);
+   }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+String line;
+while ((line = readLine()) != null) {
+   if (isBlank(line))
+      continue;
+   processLine(line);
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+String line;
+while ((line = readLine()) != null) {
+   if (!isBlank(line))
+      processLine(line);
+}
+
+
+

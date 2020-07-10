@@ -1,0 +1,17 @@
+public class Image {
+   public Image(String filename) {
+     this(filename, null);
+     System.out.println("Image(String filename) called");
+   }
+
+   public Image(String filename, String imageType) {
+     System.out.println("Image(String filename, String imageType) called");
+      if (filename != null) {
+        System.out.println("reading " + filename);
+        if (imageType != null)
+           System.out.println("interpreting " + filename + " as storing a " +
+                               imageType + " image");
+      }
+      // Perform other initialization here.
+   }
+}

@@ -1,0 +1,69 @@
+// ----- UNNUMBERED LISTING ------------------------------
+  Executor executor = ...; // ... represents some executor creation
+executor.execute(new RunnableTask());
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+  ExecutorService executor = Executors.newFixedThreadPool(4); // some executor creation
+    Future<String[]> taskFuture = executor.submit( new Callable<String[]>() {
+       @Override
+       public String[] call() {
+            String[] entries = ...;
+            // Access online dictionaries
+            // with search word and populate
+            // entries with their resulting
+            // entries.
+            return entries;
+       }
+   });
+// Do stuff.
+String entries = taskFuture.get();
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+Lock l = ...; // ... is a placeholder for code that obtains the lock
+l.lock();
+  try {
+  // access the resource protected by this lock
+  } catch (Exception ex) {
+  // ...
+  } finally {
+   l.unlock();
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class ID {
+  private static long nextID = 0;
+  public static long getNextID() {
+     return nextID++;
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+public class ID {
+  private static long nextID = 0;
+  public static synchronized long getNextID() {
+     return nextID++;
+  }
+}
+
+
+
+// ----- UNNUMBERED LISTING ------------------------------
+import java.util.concurrent.atomic.AtomicLong;
+
+public class ID {
+  private static AtomicLong nextID = new AtomicLong(0);
+  public static long getNextID() {
+     return nextID.getAndIncrement();
+  }
+}
+
+
+
